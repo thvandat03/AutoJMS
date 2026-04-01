@@ -17,8 +17,8 @@ namespace AutoJMS
 
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
@@ -36,9 +36,11 @@ namespace AutoJMS
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
@@ -80,6 +82,7 @@ namespace AutoJMS
             guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
             btn_ZaloChat_batDau = new Guna.UI2.WinForms.Guna2Button();
             guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
+            guna2Panel5 = new Guna.UI2.WinForms.Guna2Panel();
             customButton1 = new AutoJMS.CustomControl.CustomButton();
             guna2CirclePictureBox2 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             linkLabel2 = new LinkLabel();
@@ -175,6 +178,7 @@ namespace AutoJMS
             guna2Panel1.SuspendLayout();
             guna2Panel2.SuspendLayout();
             guna2Panel3.SuspendLayout();
+            guna2Panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox2).BeginInit();
             panel_Main_act.SuspendLayout();
             pnl_ZaloChatz.SuspendLayout();
@@ -541,14 +545,14 @@ namespace AutoJMS
             guna2GradientPanel1.Controls.Add(guna2Panel1);
             guna2GradientPanel1.Controls.Add(guna2Panel2);
             guna2GradientPanel1.Controls.Add(guna2Panel3);
-            guna2GradientPanel1.CustomizableEdges = customizableEdges18;
+            guna2GradientPanel1.CustomizableEdges = customizableEdges20;
             guna2GradientPanel1.Dock = DockStyle.Fill;
             guna2GradientPanel1.FillColor = Color.FromArgb(128, 128, 255);
             guna2GradientPanel1.FillColor2 = Color.FromArgb(255, 192, 192);
             guna2GradientPanel1.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
             guna2GradientPanel1.Location = new Point(0, 0);
             guna2GradientPanel1.Name = "guna2GradientPanel1";
-            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges19;
+            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges21;
             guna2GradientPanel1.Size = new Size(386, 674);
             guna2GradientPanel1.TabIndex = 0;
             // 
@@ -705,12 +709,16 @@ namespace AutoJMS
             guna2ComboBox1.BorderRadius = 15;
             guna2ComboBox1.CustomizableEdges = customizableEdges9;
             guna2ComboBox1.DrawMode = DrawMode.OwnerDrawFixed;
+            guna2ComboBox1.DropDownHeight = 200;
             guna2ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            guna2ComboBox1.DropDownWidth = 160;
             guna2ComboBox1.FocusedColor = Color.FromArgb(94, 148, 255);
             guna2ComboBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             guna2ComboBox1.Font = new Font("Segoe UI", 10F);
             guna2ComboBox1.ForeColor = Color.FromArgb(68, 88, 112);
+            guna2ComboBox1.IntegralHeight = false;
             guna2ComboBox1.ItemHeight = 30;
+            guna2ComboBox1.Items.AddRange(new object[] { "Đăng ký chuyển hoàn", "Giao lại hàng", "Quét phát hàng" });
             guna2ComboBox1.Location = new Point(197, 72);
             guna2ComboBox1.Name = "guna2ComboBox1";
             guna2ComboBox1.ShadowDecoration.CustomizableEdges = customizableEdges10;
@@ -743,39 +751,51 @@ namespace AutoJMS
             guna2Panel3.BorderColor = Color.White;
             guna2Panel3.BorderRadius = 15;
             guna2Panel3.BorderThickness = 3;
-            guna2Panel3.Controls.Add(customButton1);
+            guna2Panel3.Controls.Add(guna2Panel5);
             guna2Panel3.Controls.Add(guna2CirclePictureBox2);
             guna2Panel3.Controls.Add(linkLabel2);
             guna2Panel3.Controls.Add(label13);
-            guna2Panel3.CustomizableEdges = customizableEdges16;
+            guna2Panel3.CustomizableEdges = customizableEdges18;
             guna2Panel3.Dock = DockStyle.Top;
             guna2Panel3.Location = new Point(0, 0);
             guna2Panel3.Name = "guna2Panel3";
-            guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges17;
+            guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges19;
             guna2Panel3.Size = new Size(386, 53);
             guna2Panel3.TabIndex = 1;
             // 
+            // guna2Panel5
+            // 
+            guna2Panel5.BackColor = Color.FromArgb(128, 128, 255);
+            guna2Panel5.Controls.Add(customButton1);
+            guna2Panel5.CustomizableEdges = customizableEdges15;
+            guna2Panel5.Location = new Point(276, 7);
+            guna2Panel5.Name = "guna2Panel5";
+            guna2Panel5.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            guna2Panel5.Size = new Size(86, 36);
+            guna2Panel5.TabIndex = 11;
+            // 
             // customButton1
             // 
-            customButton1.BackColor = Color.FromArgb(128, 128, 255);
-            customButton1.ForeColor = Color.White;
-            customButton1.Location = new Point(286, 16);
+            customButton1.AutoSize = true;
+            customButton1.FlatAppearance.BorderSize = 0;
+            customButton1.FlatStyle = FlatStyle.Flat;
+            customButton1.Location = new Point(9, 8);
             customButton1.MinimumSize = new Size(45, 22);
             customButton1.Name = "customButton1";
             customButton1.OffBackColor = Color.FromArgb(224, 224, 224);
-            customButton1.OffToggleColor = Color.FromArgb(255, 128, 0);
+            customButton1.OffToggleColor = Color.Gray;
             customButton1.OnBackColor = Color.FromArgb(192, 255, 192);
             customButton1.OnToggleColor = Color.FromArgb(0, 192, 0);
-            customButton1.Size = new Size(47, 22);
-            customButton1.TabIndex = 11;
-            customButton1.UseVisualStyleBackColor = false;
+            customButton1.Size = new Size(45, 22);
+            customButton1.TabIndex = 0;
+            customButton1.UseVisualStyleBackColor = true;
             // 
             // guna2CirclePictureBox2
             // 
             guna2CirclePictureBox2.ImageRotate = 0F;
             guna2CirclePictureBox2.Location = new Point(11, 11);
             guna2CirclePictureBox2.Name = "guna2CirclePictureBox2";
-            guna2CirclePictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges15;
+            guna2CirclePictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges17;
             guna2CirclePictureBox2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CirclePictureBox2.Size = new Size(32, 32);
             guna2CirclePictureBox2.TabIndex = 9;
@@ -1727,6 +1747,8 @@ namespace AutoJMS
             guna2Panel2.ResumeLayout(false);
             guna2Panel3.ResumeLayout(false);
             guna2Panel3.PerformLayout();
+            guna2Panel5.ResumeLayout(false);
+            guna2Panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox2).EndInit();
             panel_Main_act.ResumeLayout(false);
             pnl_ZaloChatz.ResumeLayout(false);
@@ -1809,7 +1831,6 @@ namespace AutoJMS
         private Panel pnl_Webview;
         private Microsoft.Web.WebView2.WinForms.WebView2 Main_Webview;
         private Panel pnl_Bottom;
-        private Panel panel1;
         private TableLayoutPanel gb_Status;
         private Panel panel2;
         private GroupBox gb_Preview;
@@ -1913,6 +1934,7 @@ namespace AutoJMS
         private Label label13;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel4;
         private Guna.UI2.WinForms.Guna2DataGridView guna2DataGridView1;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel5;
         private CustomControl.CustomButton customButton1;
     }
 }

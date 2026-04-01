@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheArtOfDevHtmlRenderer.Adapters.Entities;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace AutoJMS.CustomControl
 {
@@ -18,40 +13,40 @@ namespace AutoJMS.CustomControl
         private Color offBackColor = Color.Gray;
         private Color offToggleColor = Color.Gainsboro;
 
-        public Color OnBackColor { get => onBackColor; set => onBackColor = value; }
-        public Color OnToggleColor { get => onToggleColor; set => onToggleColor = value; }
-        public Color OffBackColor { get => offBackColor; set => offBackColor = value; }
-        public Color OffToggleColor {
-            get {
-
-                return offToggleColor;
-            }
-            set
-            { 
-            offToggleColor = value;
-            this.Invalidate();
-
-            }
+        public Color OnBackColor { get => onBackColor; set { onBackColor = value; this.Invalidate(); } }
+        public Color OnToggleColor { get => onToggleColor; set { onToggleColor = value; this.Invalidate(); } }
+        public Color OffBackColor { get => offBackColor; set { offBackColor = value; this.Invalidate(); } }
+        public Color OffToggleColor
+        {
+            get { return offToggleColor; }
+            set { offToggleColor = value; this.Invalidate(); }
         }
+
         public override string Text
         {
-            get
-            {
-
-                return base.Text;
-
-            }
-            set
-            {
-
-            }
+            get { return base.Text; }
+            set { }
         }
-//Constructor
-public CustomButton()
+
+        protected override bool ShowFocusCues => false;
+
+        //Constructor
+        public CustomButton()
         {
-
             this.MinimumSize = new Size(45, 22);
+
+            this.SetStyle(ControlStyles.UserPaint |
+                          ControlStyles.AllPaintingInWmPaint |
+                          ControlStyles.OptimizedDoubleBuffer |
+                          ControlStyles.ResizeRedraw, true);
+
+            this.AutoSize = false;
+            this.Cursor = Cursors.Hand;
+
+            this.FlatStyle = FlatStyle.Flat;
+            this.FlatAppearance.BorderSize = 0;
         }
+
         //Methods
         private GraphicsPath GetFigurePath()
         {
@@ -66,37 +61,65 @@ public CustomButton()
             path.CloseFigure();
 
             return path;
-
         }
+
         protected override void OnPaint(PaintEventArgs pevent)
         {
+            if (this.Parent != null)
+            {
+                if (this.Parent.BackgroundImage != null)
+                {
+                    ButtonRenderer.DrawParentBackground(pevent.Graphics, this.ClientRectangle, this);
+                }
+                else 
+                {
+                    pevent.Graphics.Clear(this.Parent.BackColor);
+                }
+            }
+            else
+            {
+                pevent.Graphics.Clear(this.BackColor);
+            }
+
+            // Bật làm mượt
+            pevent.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             int toggleSize = this.Height - 5;
-            pevent.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            pevent.Graphics.Clear(this.Parent.BackColor);
 
-            if (this.Checked) //ON
+            using (GraphicsPath path = GetFigurePath())
             {
-                //Draw the control surface
-                pevent.Graphics.FillPath(new SolidBrush(onBackColor), GetFigurePath());
-                //Draw the toggle
-                pevent.Graphics.FillEllipse(new SolidBrush(onToggleColor),
-                new Rectangle(this.Width - this.Height + 1, 2, toggleSize, toggleSize));
+                if (this.Checked) // ON
+                {
+                    
+                    using (SolidBrush brush = new SolidBrush(onBackColor))
+                    using (Pen pen = new Pen(onBackColor, 1.5f)) 
+                    {
+                        pevent.Graphics.FillPath(brush, path);
+                        pevent.Graphics.DrawPath(pen, path); 
+                    }
+
+                    using (SolidBrush toggleBrush = new SolidBrush(onToggleColor))
+                    {
+                        pevent.Graphics.FillEllipse(toggleBrush,
+                            new Rectangle(this.Width - this.Height + 1, 2, toggleSize, toggleSize));
+                    }
+                }
+                else // OFF
+                {
+                    using (SolidBrush brush = new SolidBrush(offBackColor))
+                    using (Pen pen = new Pen(offBackColor, 1.5f))
+                    {
+                        pevent.Graphics.FillPath(brush, path);
+                        pevent.Graphics.DrawPath(pen, path);
+                    }
+
+                    using (SolidBrush toggleBrush = new SolidBrush(offToggleColor))
+                    {
+                        pevent.Graphics.FillEllipse(toggleBrush,
+                            new Rectangle(2, 2, toggleSize, toggleSize));
+                    }
+                }
             }
-            else //OFF
-            {
-
-                //Draw the control surface
-
-
-                pevent.Graphics.FillPath(new SolidBrush(offBackColor), GetFigurePath());
-                //Draw the toggle
-                pevent.Graphics.FillEllipse(new SolidBrush(offToggleColor),
-                new Rectangle(2, 2, toggleSize, toggleSize));
-
-            }
-
         }
     }
-
 }
