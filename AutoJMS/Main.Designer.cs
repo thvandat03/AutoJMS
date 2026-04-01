@@ -17,9 +17,31 @@ namespace AutoJMS
 
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             pnl_Left = new Panel();
             Tab_Control = new TabControl();
             Tab_DKCH = new TabPage();
@@ -47,16 +69,21 @@ namespace AutoJMS
             btn_TraHanhTrinh = new Button();
             Tab_ZaloChat = new TabPage();
             pnl_ZaloChat_Main = new Panel();
-            panel21 = new Panel();
-            panel20 = new Panel();
-            ZaloChat_dgv_Data = new DataGridView();
-            maDon = new DataGridViewTextBoxColumn();
-            tenNhanVien = new DataGridViewTextBoxColumn();
-            soLanNhac = new DataGridViewTextBoxColumn();
-            groupBox9 = new GroupBox();
-            tableLayoutPanel5 = new TableLayoutPanel();
-            ZaloChat_btn_LamMoiData = new Button();
-            ZaloChat_btn_BatDau = new Button();
+            guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
+            guna2DataGridView1 = new Guna.UI2.WinForms.Guna2DataGridView();
+            guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            label12 = new Label();
+            guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
+            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
+            guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
+            btn_ZaloChat_batDau = new Guna.UI2.WinForms.Guna2Button();
+            guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
+            customButton1 = new AutoJMS.CustomControl.CustomButton();
+            guna2CirclePictureBox2 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            linkLabel2 = new LinkLabel();
+            label13 = new Label();
             panel_Main_act = new Panel();
             btn_FocusMode = new Button();
             pnl_ZaloChatz = new Panel();
@@ -142,10 +169,13 @@ namespace AutoJMS
             Tab_NangCao.SuspendLayout();
             Tab_ZaloChat.SuspendLayout();
             pnl_ZaloChat_Main.SuspendLayout();
-            panel20.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)ZaloChat_dgv_Data).BeginInit();
-            groupBox9.SuspendLayout();
-            tableLayoutPanel5.SuspendLayout();
+            guna2GradientPanel1.SuspendLayout();
+            guna2Panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)guna2DataGridView1).BeginInit();
+            guna2Panel1.SuspendLayout();
+            guna2Panel2.SuspendLayout();
+            guna2Panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox2).BeginInit();
             panel_Main_act.SuspendLayout();
             pnl_ZaloChatz.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Main_ZaloChat).BeginInit();
@@ -196,7 +226,7 @@ namespace AutoJMS
             pnl_Left.Dock = DockStyle.Left;
             pnl_Left.Location = new Point(0, 0);
             pnl_Left.Name = "pnl_Left";
-            pnl_Left.Size = new Size(260, 713);
+            pnl_Left.Size = new Size(400, 713);
             pnl_Left.TabIndex = 0;
             // 
             // Tab_Control
@@ -208,7 +238,7 @@ namespace AutoJMS
             Tab_Control.Location = new Point(0, 0);
             Tab_Control.Name = "Tab_Control";
             Tab_Control.SelectedIndex = 0;
-            Tab_Control.Size = new Size(260, 713);
+            Tab_Control.Size = new Size(400, 713);
             Tab_Control.TabIndex = 0;
             Tab_Control.SelectedIndexChanged += Tab_Control_SelectedIndexChanged;
             Tab_Control.TabIndexChanged += Tab_Control_SelectedIndexChanged;
@@ -221,7 +251,7 @@ namespace AutoJMS
             Tab_DKCH.Location = new Point(4, 29);
             Tab_DKCH.Name = "Tab_DKCH";
             Tab_DKCH.Padding = new Padding(3);
-            Tab_DKCH.Size = new Size(252, 680);
+            Tab_DKCH.Size = new Size(392, 680);
             Tab_DKCH.TabIndex = 0;
             Tab_DKCH.Text = "ĐKCH";
             Tab_DKCH.UseVisualStyleBackColor = true;
@@ -254,10 +284,10 @@ namespace AutoJMS
             // 
             now_Tracking.BorderStyle = BorderStyle.None;
             now_Tracking.Dock = DockStyle.Fill;
-            now_Tracking.Location = new Point(3, 165);
+            now_Tracking.Location = new Point(3, 166);
             now_Tracking.Name = "now_Tracking";
             now_Tracking.ScrollBars = RichTextBoxScrollBars.Vertical;
-            now_Tracking.Size = new Size(229, 102);
+            now_Tracking.Size = new Size(229, 101);
             now_Tracking.TabIndex = 1;
             now_Tracking.Text = "";
             // 
@@ -268,7 +298,7 @@ namespace AutoJMS
             txt_InputNew.Multiline = true;
             txt_InputNew.Name = "txt_InputNew";
             txt_InputNew.ScrollBars = ScrollBars.Vertical;
-            txt_InputNew.Size = new Size(229, 142);
+            txt_InputNew.Size = new Size(229, 143);
             txt_InputNew.TabIndex = 0;
             // 
             // gb_Control
@@ -289,7 +319,7 @@ namespace AutoJMS
             // 
             btn_Refresh.BackColor = Color.FromArgb(255, 192, 192);
             btn_Refresh.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btn_Refresh.Location = new Point(83, 26);
+            btn_Refresh.Location = new Point(83, 27);
             btn_Refresh.Name = "btn_Refresh";
             btn_Refresh.Size = new Size(94, 29);
             btn_Refresh.TabIndex = 1;
@@ -303,8 +333,8 @@ namespace AutoJMS
             btn_Stop.FlatStyle = FlatStyle.Flat;
             btn_Stop.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btn_Stop.ForeColor = Color.White;
-            btn_Stop.Location = new Point(6, 90);
-            btn_Stop.Margin = new Padding(10);
+            btn_Stop.Location = new Point(6, 91);
+            btn_Stop.Margin = new Padding(10, 11, 10, 11);
             btn_Stop.Name = "btn_Stop";
             btn_Stop.Size = new Size(223, 103);
             btn_Stop.TabIndex = 0;
@@ -318,7 +348,7 @@ namespace AutoJMS
             btn_DKCH2.FlatStyle = FlatStyle.Flat;
             btn_DKCH2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btn_DKCH2.Location = new Point(6, 152);
-            btn_DKCH2.Margin = new Padding(10);
+            btn_DKCH2.Margin = new Padding(10, 11, 10, 11);
             btn_DKCH2.Name = "btn_DKCH2";
             btn_DKCH2.Size = new Size(223, 63);
             btn_DKCH2.TabIndex = 0;
@@ -332,7 +362,7 @@ namespace AutoJMS
             btn_DKCH1.FlatStyle = FlatStyle.Flat;
             btn_DKCH1.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btn_DKCH1.Location = new Point(6, 69);
-            btn_DKCH1.Margin = new Padding(10);
+            btn_DKCH1.Margin = new Padding(10, 11, 10, 11);
             btn_DKCH1.Name = "btn_DKCH1";
             btn_DKCH1.Size = new Size(223, 63);
             btn_DKCH1.TabIndex = 0;
@@ -378,7 +408,7 @@ namespace AutoJMS
             num_Row.Maximum = new decimal(new int[] { 31, 0, 0, 0 });
             num_Row.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             num_Row.Name = "num_Row";
-            num_Row.Size = new Size(52, 30);
+            num_Row.Size = new Size(53, 30);
             num_Row.TabIndex = 3;
             num_Row.Value = new decimal(new int[] { 10, 0, 0, 0 });
             // 
@@ -460,14 +490,14 @@ namespace AutoJMS
             Tab_NangCao.Location = new Point(4, 29);
             Tab_NangCao.Name = "Tab_NangCao";
             Tab_NangCao.Padding = new Padding(3);
-            Tab_NangCao.Size = new Size(252, 680);
+            Tab_NangCao.Size = new Size(392, 680);
             Tab_NangCao.TabIndex = 1;
             Tab_NangCao.Text = "Nâng cao";
             Tab_NangCao.UseVisualStyleBackColor = true;
             // 
             // btn_NangCao_In
             // 
-            btn_NangCao_In.Location = new Point(20, 91);
+            btn_NangCao_In.Location = new Point(21, 91);
             btn_NangCao_In.Name = "btn_NangCao_In";
             btn_NangCao_In.Size = new Size(199, 52);
             btn_NangCao_In.TabIndex = 0;
@@ -477,7 +507,7 @@ namespace AutoJMS
             // 
             // btn_TraHanhTrinh
             // 
-            btn_TraHanhTrinh.Location = new Point(20, 24);
+            btn_TraHanhTrinh.Location = new Point(21, 24);
             btn_TraHanhTrinh.Name = "btn_TraHanhTrinh";
             btn_TraHanhTrinh.Size = new Size(199, 52);
             btn_TraHanhTrinh.TabIndex = 0;
@@ -491,129 +521,287 @@ namespace AutoJMS
             Tab_ZaloChat.Location = new Point(4, 29);
             Tab_ZaloChat.Name = "Tab_ZaloChat";
             Tab_ZaloChat.Padding = new Padding(3);
-            Tab_ZaloChat.Size = new Size(252, 680);
+            Tab_ZaloChat.Size = new Size(392, 680);
             Tab_ZaloChat.TabIndex = 2;
             Tab_ZaloChat.Text = "ZaloChat";
             Tab_ZaloChat.UseVisualStyleBackColor = true;
             // 
             // pnl_ZaloChat_Main
             // 
-            pnl_ZaloChat_Main.Controls.Add(panel21);
-            pnl_ZaloChat_Main.Controls.Add(panel20);
-            pnl_ZaloChat_Main.Controls.Add(groupBox9);
+            pnl_ZaloChat_Main.Controls.Add(guna2GradientPanel1);
             pnl_ZaloChat_Main.Dock = DockStyle.Fill;
             pnl_ZaloChat_Main.Location = new Point(3, 3);
             pnl_ZaloChat_Main.Name = "pnl_ZaloChat_Main";
-            pnl_ZaloChat_Main.Size = new Size(246, 674);
+            pnl_ZaloChat_Main.Size = new Size(386, 674);
             pnl_ZaloChat_Main.TabIndex = 0;
             // 
-            // panel21
+            // guna2GradientPanel1
             // 
-            panel21.Dock = DockStyle.Fill;
-            panel21.Location = new Point(0, 452);
-            panel21.Name = "panel21";
-            panel21.Size = new Size(246, 222);
-            panel21.TabIndex = 2;
+            guna2GradientPanel1.Controls.Add(guna2Panel4);
+            guna2GradientPanel1.Controls.Add(guna2Panel1);
+            guna2GradientPanel1.Controls.Add(guna2Panel2);
+            guna2GradientPanel1.Controls.Add(guna2Panel3);
+            guna2GradientPanel1.CustomizableEdges = customizableEdges18;
+            guna2GradientPanel1.Dock = DockStyle.Fill;
+            guna2GradientPanel1.FillColor = Color.FromArgb(128, 128, 255);
+            guna2GradientPanel1.FillColor2 = Color.FromArgb(255, 192, 192);
+            guna2GradientPanel1.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            guna2GradientPanel1.Location = new Point(0, 0);
+            guna2GradientPanel1.Name = "guna2GradientPanel1";
+            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges19;
+            guna2GradientPanel1.Size = new Size(386, 674);
+            guna2GradientPanel1.TabIndex = 0;
             // 
-            // panel20
+            // guna2Panel4
             // 
-            panel20.Controls.Add(ZaloChat_dgv_Data);
-            panel20.Dock = DockStyle.Top;
-            panel20.Location = new Point(0, 125);
-            panel20.Name = "panel20";
-            panel20.Size = new Size(246, 327);
-            panel20.TabIndex = 1;
+            guna2Panel4.Controls.Add(guna2DataGridView1);
+            guna2Panel4.CustomizableEdges = customizableEdges1;
+            guna2Panel4.Dock = DockStyle.Fill;
+            guna2Panel4.Location = new Point(0, 282);
+            guna2Panel4.Name = "guna2Panel4";
+            guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2Panel4.Size = new Size(386, 392);
+            guna2Panel4.TabIndex = 4;
             // 
-            // ZaloChat_dgv_Data
+            // guna2DataGridView1
             // 
-            ZaloChat_dgv_Data.AllowUserToAddRows = false;
-            ZaloChat_dgv_Data.AllowUserToDeleteRows = false;
-            ZaloChat_dgv_Data.BackgroundColor = Color.White;
-            ZaloChat_dgv_Data.BorderStyle = BorderStyle.None;
-            ZaloChat_dgv_Data.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            ZaloChat_dgv_Data.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            ZaloChat_dgv_Data.Columns.AddRange(new DataGridViewColumn[] { maDon, tenNhanVien, soLanNhac });
-            ZaloChat_dgv_Data.Dock = DockStyle.Fill;
-            ZaloChat_dgv_Data.Location = new Point(0, 0);
-            ZaloChat_dgv_Data.Name = "ZaloChat_dgv_Data";
-            ZaloChat_dgv_Data.ReadOnly = true;
-            ZaloChat_dgv_Data.RowHeadersVisible = false;
-            ZaloChat_dgv_Data.RowHeadersWidth = 51;
-            ZaloChat_dgv_Data.Size = new Size(246, 327);
-            ZaloChat_dgv_Data.TabIndex = 0;
+            dataGridViewCellStyle1.BackColor = Color.White;
+            guna2DataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            guna2DataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            guna2DataGridView1.ColumnHeadersHeight = 4;
+            guna2DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            guna2DataGridView1.Dock = DockStyle.Fill;
+            guna2DataGridView1.GridColor = Color.FromArgb(231, 229, 255);
+            guna2DataGridView1.Location = new Point(0, 0);
+            guna2DataGridView1.Name = "guna2DataGridView1";
+            guna2DataGridView1.RowHeadersVisible = false;
+            guna2DataGridView1.RowHeadersWidth = 51;
+            guna2DataGridView1.Size = new Size(386, 392);
+            guna2DataGridView1.TabIndex = 0;
+            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
+            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.Font = null;
+            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
+            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
+            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
+            guna2DataGridView1.ThemeStyle.BackColor = Color.White;
+            guna2DataGridView1.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
+            guna2DataGridView1.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
+            guna2DataGridView1.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
+            guna2DataGridView1.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
+            guna2DataGridView1.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            guna2DataGridView1.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            guna2DataGridView1.ThemeStyle.HeaderStyle.Height = 4;
+            guna2DataGridView1.ThemeStyle.ReadOnly = false;
+            guna2DataGridView1.ThemeStyle.RowsStyle.BackColor = Color.White;
+            guna2DataGridView1.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            guna2DataGridView1.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
+            guna2DataGridView1.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
+            guna2DataGridView1.ThemeStyle.RowsStyle.Height = 29;
+            guna2DataGridView1.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            guna2DataGridView1.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             // 
-            // maDon
+            // guna2Panel1
             // 
-            maDon.DataPropertyName = "maDon";
-            maDon.HeaderText = "Mã Đơn";
-            maDon.MinimumWidth = 6;
-            maDon.Name = "maDon";
-            maDon.ReadOnly = true;
-            maDon.Width = 125;
+            guna2Panel1.BorderColor = Color.White;
+            guna2Panel1.BorderRadius = 15;
+            guna2Panel1.BorderThickness = 3;
+            guna2Panel1.Controls.Add(label12);
+            guna2Panel1.CustomizableEdges = customizableEdges3;
+            guna2Panel1.Dock = DockStyle.Top;
+            guna2Panel1.FillColor = Color.Transparent;
+            guna2Panel1.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic);
+            guna2Panel1.Location = new Point(0, 173);
+            guna2Panel1.Name = "guna2Panel1";
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2Panel1.Size = new Size(386, 109);
+            guna2Panel1.TabIndex = 3;
             // 
-            // tenNhanVien
+            // label12
             // 
-            tenNhanVien.DataPropertyName = "nhanVien";
-            tenNhanVien.HeaderText = "Nhân Viên";
-            tenNhanVien.MinimumWidth = 6;
-            tenNhanVien.Name = "tenNhanVien";
-            tenNhanVien.ReadOnly = true;
-            tenNhanVien.Width = 125;
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label12.Location = new Point(146, 5);
+            label12.Name = "label12";
+            label12.Size = new Size(91, 23);
+            label12.TabIndex = 0;
+            label12.Text = "Trạng thái";
             // 
-            // soLanNhac
+            // guna2Panel2
             // 
-            soLanNhac.DataPropertyName = "soLanNhac";
-            soLanNhac.HeaderText = "Số lần nhắc";
-            soLanNhac.MinimumWidth = 6;
-            soLanNhac.Name = "soLanNhac";
-            soLanNhac.ReadOnly = true;
-            soLanNhac.Width = 125;
+            guna2Panel2.BorderColor = Color.White;
+            guna2Panel2.BorderRadius = 15;
+            guna2Panel2.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
+            guna2Panel2.BorderThickness = 3;
+            guna2Panel2.Controls.Add(guna2Button1);
+            guna2Panel2.Controls.Add(guna2Button2);
+            guna2Panel2.Controls.Add(guna2ComboBox1);
+            guna2Panel2.Controls.Add(btn_ZaloChat_batDau);
+            guna2Panel2.CustomizableEdges = customizableEdges13;
+            guna2Panel2.Dock = DockStyle.Top;
+            guna2Panel2.FillColor = Color.Transparent;
+            guna2Panel2.Location = new Point(0, 53);
+            guna2Panel2.Name = "guna2Panel2";
+            guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            guna2Panel2.Size = new Size(386, 120);
+            guna2Panel2.TabIndex = 2;
             // 
-            // groupBox9
+            // guna2Button1
             // 
-            groupBox9.Controls.Add(tableLayoutPanel5);
-            groupBox9.Dock = DockStyle.Top;
-            groupBox9.Location = new Point(0, 0);
-            groupBox9.Name = "groupBox9";
-            groupBox9.Size = new Size(246, 125);
-            groupBox9.TabIndex = 0;
-            groupBox9.TabStop = false;
+            guna2Button1.BorderColor = Color.Red;
+            guna2Button1.BorderRadius = 20;
+            guna2Button1.CustomizableEdges = customizableEdges5;
+            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button1.FillColor = Color.White;
+            guna2Button1.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic);
+            guna2Button1.ForeColor = Color.Black;
+            guna2Button1.Location = new Point(5, 65);
+            guna2Button1.Margin = new Padding(5);
+            guna2Button1.Name = "guna2Button1";
+            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            guna2Button1.Size = new Size(170, 48);
+            guna2Button1.TabIndex = 1;
+            guna2Button1.Text = "Dừng Bot";
             // 
-            // tableLayoutPanel5
+            // guna2Button2
             // 
-            tableLayoutPanel5.ColumnCount = 1;
-            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel5.Controls.Add(ZaloChat_btn_LamMoiData, 0, 1);
-            tableLayoutPanel5.Controls.Add(ZaloChat_btn_BatDau, 0, 0);
-            tableLayoutPanel5.Dock = DockStyle.Fill;
-            tableLayoutPanel5.Location = new Point(3, 23);
-            tableLayoutPanel5.Name = "tableLayoutPanel5";
-            tableLayoutPanel5.RowCount = 2;
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel5.Size = new Size(240, 99);
-            tableLayoutPanel5.TabIndex = 0;
+            guna2Button2.BorderRadius = 20;
+            guna2Button2.CustomizableEdges = customizableEdges7;
+            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button2.FillColor = Color.White;
+            guna2Button2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic);
+            guna2Button2.ForeColor = Color.Black;
+            guna2Button2.Location = new Point(211, 9);
+            guna2Button2.Margin = new Padding(5);
+            guna2Button2.Name = "guna2Button2";
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            guna2Button2.Size = new Size(170, 48);
+            guna2Button2.TabIndex = 1;
+            guna2Button2.Text = "Làm Mới";
             // 
-            // ZaloChat_btn_LamMoiData
+            // guna2ComboBox1
             // 
-            ZaloChat_btn_LamMoiData.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            ZaloChat_btn_LamMoiData.Location = new Point(63, 52);
-            ZaloChat_btn_LamMoiData.Name = "ZaloChat_btn_LamMoiData";
-            ZaloChat_btn_LamMoiData.Size = new Size(113, 44);
-            ZaloChat_btn_LamMoiData.TabIndex = 0;
-            ZaloChat_btn_LamMoiData.Text = "Làm Mới Data";
-            ZaloChat_btn_LamMoiData.UseVisualStyleBackColor = true;
-            ZaloChat_btn_LamMoiData.Click += ZaloChat_btn_LamMoiData_Click;
+            guna2ComboBox1.BackColor = Color.Transparent;
+            guna2ComboBox1.BorderRadius = 15;
+            guna2ComboBox1.CustomizableEdges = customizableEdges9;
+            guna2ComboBox1.DrawMode = DrawMode.OwnerDrawFixed;
+            guna2ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            guna2ComboBox1.FocusedColor = Color.FromArgb(94, 148, 255);
+            guna2ComboBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            guna2ComboBox1.Font = new Font("Segoe UI", 10F);
+            guna2ComboBox1.ForeColor = Color.FromArgb(68, 88, 112);
+            guna2ComboBox1.ItemHeight = 30;
+            guna2ComboBox1.Location = new Point(197, 72);
+            guna2ComboBox1.Name = "guna2ComboBox1";
+            guna2ComboBox1.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            guna2ComboBox1.Size = new Size(185, 36);
+            guna2ComboBox1.Sorted = true;
+            guna2ComboBox1.TabIndex = 2;
+            guna2ComboBox1.TextAlign = HorizontalAlignment.Center;
             // 
-            // ZaloChat_btn_BatDau
+            // btn_ZaloChat_batDau
             // 
-            ZaloChat_btn_BatDau.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
-            ZaloChat_btn_BatDau.Location = new Point(63, 3);
-            ZaloChat_btn_BatDau.Name = "ZaloChat_btn_BatDau";
-            ZaloChat_btn_BatDau.Size = new Size(113, 43);
-            ZaloChat_btn_BatDau.TabIndex = 0;
-            ZaloChat_btn_BatDau.Text = "Bắt đầu Bot";
-            ZaloChat_btn_BatDau.UseVisualStyleBackColor = true;
+            btn_ZaloChat_batDau.BorderRadius = 20;
+            btn_ZaloChat_batDau.CustomBorderColor = Color.FromArgb(0, 192, 0);
+            btn_ZaloChat_batDau.CustomizableEdges = customizableEdges11;
+            btn_ZaloChat_batDau.DisabledState.BorderColor = Color.DarkGray;
+            btn_ZaloChat_batDau.DisabledState.CustomBorderColor = Color.DarkGray;
+            btn_ZaloChat_batDau.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            btn_ZaloChat_batDau.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            btn_ZaloChat_batDau.FillColor = Color.White;
+            btn_ZaloChat_batDau.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic);
+            btn_ZaloChat_batDau.ForeColor = Color.Black;
+            btn_ZaloChat_batDau.Location = new Point(5, 9);
+            btn_ZaloChat_batDau.Name = "btn_ZaloChat_batDau";
+            btn_ZaloChat_batDau.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            btn_ZaloChat_batDau.Size = new Size(170, 48);
+            btn_ZaloChat_batDau.TabIndex = 0;
+            btn_ZaloChat_batDau.Text = "Bắt đầu Bot";
+            // 
+            // guna2Panel3
+            // 
+            guna2Panel3.BorderColor = Color.White;
+            guna2Panel3.BorderRadius = 15;
+            guna2Panel3.BorderThickness = 3;
+            guna2Panel3.Controls.Add(customButton1);
+            guna2Panel3.Controls.Add(guna2CirclePictureBox2);
+            guna2Panel3.Controls.Add(linkLabel2);
+            guna2Panel3.Controls.Add(label13);
+            guna2Panel3.CustomizableEdges = customizableEdges16;
+            guna2Panel3.Dock = DockStyle.Top;
+            guna2Panel3.Location = new Point(0, 0);
+            guna2Panel3.Name = "guna2Panel3";
+            guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges17;
+            guna2Panel3.Size = new Size(386, 53);
+            guna2Panel3.TabIndex = 1;
+            // 
+            // customButton1
+            // 
+            customButton1.BackColor = Color.FromArgb(128, 128, 255);
+            customButton1.ForeColor = Color.White;
+            customButton1.Location = new Point(286, 16);
+            customButton1.MinimumSize = new Size(45, 22);
+            customButton1.Name = "customButton1";
+            customButton1.OffBackColor = Color.FromArgb(224, 224, 224);
+            customButton1.OffToggleColor = Color.FromArgb(255, 128, 0);
+            customButton1.OnBackColor = Color.FromArgb(192, 255, 192);
+            customButton1.OnToggleColor = Color.FromArgb(0, 192, 0);
+            customButton1.Size = new Size(47, 22);
+            customButton1.TabIndex = 11;
+            customButton1.UseVisualStyleBackColor = false;
+            // 
+            // guna2CirclePictureBox2
+            // 
+            guna2CirclePictureBox2.ImageRotate = 0F;
+            guna2CirclePictureBox2.Location = new Point(11, 11);
+            guna2CirclePictureBox2.Name = "guna2CirclePictureBox2";
+            guna2CirclePictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges15;
+            guna2CirclePictureBox2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            guna2CirclePictureBox2.Size = new Size(32, 32);
+            guna2CirclePictureBox2.TabIndex = 9;
+            guna2CirclePictureBox2.TabStop = false;
+            // 
+            // linkLabel2
+            // 
+            linkLabel2.AutoSize = true;
+            linkLabel2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            linkLabel2.LinkBehavior = LinkBehavior.NeverUnderline;
+            linkLabel2.Location = new Point(47, 16);
+            linkLabel2.Name = "linkLabel2";
+            linkLabel2.Size = new Size(81, 23);
+            linkLabel2.TabIndex = 10;
+            linkLabel2.TabStop = true;
+            linkLabel2.Text = "linkLabel";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic);
+            label13.Location = new Point(203, 14);
+            label13.Name = "label13";
+            label13.Size = new Size(77, 23);
+            label13.TabIndex = 8;
+            label13.Text = "Tự động:";
             // 
             // panel_Main_act
             // 
@@ -623,9 +811,9 @@ namespace AutoJMS
             panel_Main_act.Controls.Add(pnl_TraHanhTrinh);
             panel_Main_act.Controls.Add(pnl_Webview);
             panel_Main_act.Dock = DockStyle.Fill;
-            panel_Main_act.Location = new Point(260, 0);
+            panel_Main_act.Location = new Point(400, 0);
             panel_Main_act.Name = "panel_Main_act";
-            panel_Main_act.Size = new Size(1002, 713);
+            panel_Main_act.Size = new Size(862, 713);
             panel_Main_act.TabIndex = 1;
             // 
             // btn_FocusMode
@@ -634,7 +822,7 @@ namespace AutoJMS
             btn_FocusMode.Image = (Image)resources.GetObject("btn_FocusMode.Image");
             btn_FocusMode.Location = new Point(-5, -5);
             btn_FocusMode.Name = "btn_FocusMode";
-            btn_FocusMode.Size = new Size(46, 46);
+            btn_FocusMode.Size = new Size(46, 45);
             btn_FocusMode.TabIndex = 1;
             btn_FocusMode.UseVisualStyleBackColor = false;
             btn_FocusMode.Click += btn_FocusMode_Click;
@@ -645,7 +833,7 @@ namespace AutoJMS
             pnl_ZaloChatz.Dock = DockStyle.Fill;
             pnl_ZaloChatz.Location = new Point(0, 0);
             pnl_ZaloChatz.Name = "pnl_ZaloChatz";
-            pnl_ZaloChatz.Size = new Size(1002, 713);
+            pnl_ZaloChatz.Size = new Size(862, 713);
             pnl_ZaloChatz.TabIndex = 1;
             // 
             // Main_ZaloChat
@@ -656,7 +844,7 @@ namespace AutoJMS
             Main_ZaloChat.Dock = DockStyle.Fill;
             Main_ZaloChat.Location = new Point(0, 0);
             Main_ZaloChat.Name = "Main_ZaloChat";
-            Main_ZaloChat.Size = new Size(1002, 713);
+            Main_ZaloChat.Size = new Size(862, 713);
             Main_ZaloChat.TabIndex = 0;
             Main_ZaloChat.ZoomFactor = 1D;
             // 
@@ -666,7 +854,7 @@ namespace AutoJMS
             pnl_InChuyenHoan.Dock = DockStyle.Fill;
             pnl_InChuyenHoan.Location = new Point(0, 0);
             pnl_InChuyenHoan.Name = "pnl_InChuyenHoan";
-            pnl_InChuyenHoan.Size = new Size(1002, 713);
+            pnl_InChuyenHoan.Size = new Size(862, 713);
             pnl_InChuyenHoan.TabIndex = 0;
             // 
             // pnl_InChuyenHoanControl
@@ -675,7 +863,7 @@ namespace AutoJMS
             pnl_InChuyenHoanControl.Dock = DockStyle.Fill;
             pnl_InChuyenHoanControl.Location = new Point(0, 0);
             pnl_InChuyenHoanControl.Name = "pnl_InChuyenHoanControl";
-            pnl_InChuyenHoanControl.Size = new Size(1002, 713);
+            pnl_InChuyenHoanControl.Size = new Size(862, 713);
             pnl_InChuyenHoanControl.TabIndex = 0;
             // 
             // splitContainer1
@@ -694,8 +882,9 @@ namespace AutoJMS
             // 
             splitContainer1.Panel2.Controls.Add(panel12);
             splitContainer1.Panel2.Controls.Add(pnl_InPreviewControl);
-            splitContainer1.Size = new Size(1002, 713);
-            splitContainer1.SplitterDistance = 789;
+            splitContainer1.Size = new Size(862, 713);
+            splitContainer1.SplitterDistance = 676;
+            splitContainer1.SplitterWidth = 5;
             splitContainer1.TabIndex = 0;
             // 
             // panel14
@@ -705,18 +894,18 @@ namespace AutoJMS
             panel14.Controls.Add(groupBox2);
             panel14.Controls.Add(richTextBox1);
             panel14.Dock = DockStyle.Fill;
-            panel14.Location = new Point(0, 58);
+            panel14.Location = new Point(0, 59);
             panel14.Name = "panel14";
-            panel14.Size = new Size(789, 655);
+            panel14.Size = new Size(676, 654);
             panel14.TabIndex = 1;
             // 
             // panel19
             // 
             panel19.Controls.Add(print_OptionWaybill);
             panel19.Dock = DockStyle.Fill;
-            panel19.Location = new Point(0, 186);
+            panel19.Location = new Point(0, 187);
             panel19.Name = "panel19";
-            panel19.Size = new Size(789, 469);
+            panel19.Size = new Size(676, 467);
             panel19.TabIndex = 4;
             // 
             // print_OptionWaybill
@@ -725,8 +914,8 @@ namespace AutoJMS
             print_OptionWaybill.AllowUserToDeleteRows = false;
             print_OptionWaybill.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             print_OptionWaybill.BackgroundColor = SystemColors.ControlLightLight;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            print_OptionWaybill.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            print_OptionWaybill.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             print_OptionWaybill.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             print_OptionWaybill.Dock = DockStyle.Fill;
             print_OptionWaybill.EditMode = DataGridViewEditMode.EditProgrammatically;
@@ -736,7 +925,7 @@ namespace AutoJMS
             print_OptionWaybill.RowHeadersVisible = false;
             print_OptionWaybill.RowHeadersWidth = 51;
             print_OptionWaybill.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            print_OptionWaybill.Size = new Size(789, 469);
+            print_OptionWaybill.Size = new Size(676, 467);
             print_OptionWaybill.TabIndex = 0;
             // 
             // panel18
@@ -749,14 +938,14 @@ namespace AutoJMS
             panel18.Dock = DockStyle.Top;
             panel18.Location = new Point(0, 152);
             panel18.Name = "panel18";
-            panel18.Size = new Size(789, 34);
+            panel18.Size = new Size(676, 35);
             panel18.TabIndex = 3;
             // 
             // print_SelectAll
             // 
             print_SelectAll.AutoSize = true;
             print_SelectAll.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            print_SelectAll.Location = new Point(8, 6);
+            print_SelectAll.Location = new Point(8, 5);
             print_SelectAll.Name = "print_SelectAll";
             print_SelectAll.Size = new Size(108, 24);
             print_SelectAll.TabIndex = 1;
@@ -768,7 +957,7 @@ namespace AutoJMS
             // 
             label10.Anchor = AnchorStyles.Right;
             label10.AutoSize = true;
-            label10.Location = new Point(675, 9);
+            label10.Location = new Point(562, 9);
             label10.Name = "label10";
             label10.Size = new Size(33, 20);
             label10.TabIndex = 0;
@@ -780,7 +969,7 @@ namespace AutoJMS
             label11.Anchor = AnchorStyles.Right;
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            label11.Location = new Point(632, 8);
+            label11.Location = new Point(518, 8);
             label11.Name = "label11";
             label11.Size = new Size(49, 20);
             label11.TabIndex = 0;
@@ -791,7 +980,7 @@ namespace AutoJMS
             // 
             label9.Anchor = AnchorStyles.Right;
             label9.AutoSize = true;
-            label9.Location = new Point(745, 9);
+            label9.Location = new Point(632, 9);
             label9.Name = "label9";
             label9.Size = new Size(33, 20);
             label9.TabIndex = 0;
@@ -803,7 +992,7 @@ namespace AutoJMS
             label8.Anchor = AnchorStyles.Right;
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            label8.Location = new Point(703, 8);
+            label8.Location = new Point(589, 8);
             label8.Name = "label8";
             label8.Size = new Size(48, 20);
             label8.TabIndex = 0;
@@ -816,7 +1005,7 @@ namespace AutoJMS
             groupBox2.Dock = DockStyle.Top;
             groupBox2.Location = new Point(0, 0);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(789, 152);
+            groupBox2.Size = new Size(676, 152);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             // 
@@ -832,8 +1021,8 @@ namespace AutoJMS
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel3.Size = new Size(783, 126);
+            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 120F));
+            tableLayoutPanel3.Size = new Size(670, 126);
             tableLayoutPanel3.TabIndex = 0;
             // 
             // panel11
@@ -843,7 +1032,7 @@ namespace AutoJMS
             panel11.Dock = DockStyle.Fill;
             panel11.Location = new Point(3, 3);
             panel11.Name = "panel11";
-            panel11.Size = new Size(172, 120);
+            panel11.Size = new Size(146, 120);
             panel11.TabIndex = 0;
             // 
             // print_Input
@@ -853,7 +1042,7 @@ namespace AutoJMS
             print_Input.Location = new Point(0, 20);
             print_Input.Name = "print_Input";
             print_Input.ScrollBars = RichTextBoxScrollBars.ForcedVertical;
-            print_Input.Size = new Size(172, 100);
+            print_Input.Size = new Size(146, 100);
             print_Input.TabIndex = 1;
             print_Input.Text = "";
             // 
@@ -871,9 +1060,9 @@ namespace AutoJMS
             // 
             panel13.Controls.Add(tableLayoutPanel4);
             panel13.Dock = DockStyle.Fill;
-            panel13.Location = new Point(181, 3);
+            panel13.Location = new Point(155, 3);
             panel13.Name = "panel13";
-            panel13.Size = new Size(599, 120);
+            panel13.Size = new Size(512, 120);
             panel13.TabIndex = 1;
             // 
             // tableLayoutPanel4
@@ -890,7 +1079,7 @@ namespace AutoJMS
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 1;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Size = new Size(599, 120);
+            tableLayoutPanel4.Size = new Size(512, 120);
             tableLayoutPanel4.TabIndex = 0;
             // 
             // panel15
@@ -900,16 +1089,16 @@ namespace AutoJMS
             panel15.Dock = DockStyle.Fill;
             panel15.Location = new Point(3, 3);
             panel15.Name = "panel15";
-            panel15.Size = new Size(193, 114);
+            panel15.Size = new Size(164, 114);
             panel15.TabIndex = 0;
             // 
             // groupBox6
             // 
             groupBox6.Controls.Add(print_pickerName);
             groupBox6.Dock = DockStyle.Top;
-            groupBox6.Location = new Point(0, 58);
+            groupBox6.Location = new Point(0, 59);
             groupBox6.Name = "groupBox6";
-            groupBox6.Size = new Size(193, 58);
+            groupBox6.Size = new Size(164, 59);
             groupBox6.TabIndex = 0;
             groupBox6.TabStop = false;
             groupBox6.Text = "Tên nhân viên nhận hàng:";
@@ -922,7 +1111,7 @@ namespace AutoJMS
             print_pickerName.Location = new Point(3, 23);
             print_pickerName.Multiline = true;
             print_pickerName.Name = "print_pickerName";
-            print_pickerName.Size = new Size(187, 32);
+            print_pickerName.Size = new Size(158, 33);
             print_pickerName.TabIndex = 0;
             print_pickerName.Text = "0355520331";
             print_pickerName.TextAlign = HorizontalAlignment.Center;
@@ -933,7 +1122,7 @@ namespace AutoJMS
             groupBox3.Dock = DockStyle.Top;
             groupBox3.Location = new Point(0, 0);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(193, 58);
+            groupBox3.Size = new Size(164, 59);
             groupBox3.TabIndex = 0;
             groupBox3.TabStop = false;
             groupBox3.Text = "Thời gian nhận từ:";
@@ -946,7 +1135,7 @@ namespace AutoJMS
             print_pickTimeFrom.Location = new Point(3, 23);
             print_pickTimeFrom.Margin = new Padding(5);
             print_pickTimeFrom.Name = "print_pickTimeFrom";
-            print_pickTimeFrom.Size = new Size(187, 27);
+            print_pickTimeFrom.Size = new Size(158, 27);
             print_pickTimeFrom.TabIndex = 3;
             print_pickTimeFrom.Value = new DateTime(2026, 3, 16, 0, 0, 0, 0);
             // 
@@ -955,18 +1144,18 @@ namespace AutoJMS
             panel16.Controls.Add(groupBox7);
             panel16.Controls.Add(groupBox4);
             panel16.Dock = DockStyle.Fill;
-            panel16.Location = new Point(202, 3);
+            panel16.Location = new Point(173, 3);
             panel16.Name = "panel16";
-            panel16.Size = new Size(193, 114);
+            panel16.Size = new Size(164, 114);
             panel16.TabIndex = 1;
             // 
             // groupBox7
             // 
             groupBox7.Controls.Add(print_KHCode);
             groupBox7.Dock = DockStyle.Top;
-            groupBox7.Location = new Point(0, 58);
+            groupBox7.Location = new Point(0, 59);
             groupBox7.Name = "groupBox7";
-            groupBox7.Size = new Size(193, 58);
+            groupBox7.Size = new Size(164, 59);
             groupBox7.TabIndex = 0;
             groupBox7.TabStop = false;
             groupBox7.Text = "Tên KH/ Mã KH:";
@@ -979,7 +1168,7 @@ namespace AutoJMS
             print_KHCode.Location = new Point(3, 23);
             print_KHCode.Multiline = true;
             print_KHCode.Name = "print_KHCode";
-            print_KHCode.Size = new Size(187, 32);
+            print_KHCode.Size = new Size(158, 33);
             print_KHCode.TabIndex = 0;
             print_KHCode.Text = "0355520331";
             print_KHCode.TextAlign = HorizontalAlignment.Center;
@@ -990,7 +1179,7 @@ namespace AutoJMS
             groupBox4.Dock = DockStyle.Top;
             groupBox4.Location = new Point(0, 0);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(193, 58);
+            groupBox4.Size = new Size(164, 59);
             groupBox4.TabIndex = 0;
             groupBox4.TabStop = false;
             groupBox4.Text = "Thời gian nhận đến:";
@@ -1003,7 +1192,7 @@ namespace AutoJMS
             print_pickTimeTo.Location = new Point(3, 23);
             print_pickTimeTo.Margin = new Padding(5);
             print_pickTimeTo.Name = "print_pickTimeTo";
-            print_pickTimeTo.Size = new Size(187, 27);
+            print_pickTimeTo.Size = new Size(158, 27);
             print_pickTimeTo.TabIndex = 3;
             print_pickTimeTo.Value = new DateTime(2026, 3, 16, 0, 0, 0, 0);
             // 
@@ -1012,18 +1201,18 @@ namespace AutoJMS
             panel17.Controls.Add(groupBox8);
             panel17.Controls.Add(groupBox5);
             panel17.Dock = DockStyle.Fill;
-            panel17.Location = new Point(401, 3);
+            panel17.Location = new Point(343, 3);
             panel17.Name = "panel17";
-            panel17.Size = new Size(195, 114);
+            panel17.Size = new Size(166, 114);
             panel17.TabIndex = 2;
             // 
             // groupBox8
             // 
             groupBox8.Controls.Add(print_ReceivePhoneNum);
             groupBox8.Dock = DockStyle.Top;
-            groupBox8.Location = new Point(0, 58);
+            groupBox8.Location = new Point(0, 59);
             groupBox8.Name = "groupBox8";
-            groupBox8.Size = new Size(195, 58);
+            groupBox8.Size = new Size(166, 59);
             groupBox8.TabIndex = 0;
             groupBox8.TabStop = false;
             groupBox8.Text = "SĐT người nhận:";
@@ -1036,7 +1225,7 @@ namespace AutoJMS
             print_ReceivePhoneNum.Location = new Point(3, 23);
             print_ReceivePhoneNum.Multiline = true;
             print_ReceivePhoneNum.Name = "print_ReceivePhoneNum";
-            print_ReceivePhoneNum.Size = new Size(189, 32);
+            print_ReceivePhoneNum.Size = new Size(160, 33);
             print_ReceivePhoneNum.TabIndex = 0;
             print_ReceivePhoneNum.Text = "0355520331";
             print_ReceivePhoneNum.TextAlign = HorizontalAlignment.Center;
@@ -1047,7 +1236,7 @@ namespace AutoJMS
             groupBox5.Dock = DockStyle.Top;
             groupBox5.Location = new Point(0, 0);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(195, 58);
+            groupBox5.Size = new Size(166, 59);
             groupBox5.TabIndex = 0;
             groupBox5.TabStop = false;
             groupBox5.Text = "SĐT người gửi:";
@@ -1060,7 +1249,7 @@ namespace AutoJMS
             print_SendPhoneNum.Location = new Point(3, 23);
             print_SendPhoneNum.Multiline = true;
             print_SendPhoneNum.Name = "print_SendPhoneNum";
-            print_SendPhoneNum.Size = new Size(189, 32);
+            print_SendPhoneNum.Size = new Size(160, 33);
             print_SendPhoneNum.TabIndex = 0;
             print_SendPhoneNum.Text = "0355520331";
             print_SendPhoneNum.TextAlign = HorizontalAlignment.Center;
@@ -1070,7 +1259,7 @@ namespace AutoJMS
             // 
             richTextBox1.Location = new Point(5, 55);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(125, 94);
+            richTextBox1.Size = new Size(125, 95);
             richTextBox1.TabIndex = 2;
             richTextBox1.Text = "";
             // 
@@ -1080,7 +1269,7 @@ namespace AutoJMS
             pnl_InControl.Dock = DockStyle.Top;
             pnl_InControl.Location = new Point(0, 0);
             pnl_InControl.Name = "pnl_InControl";
-            pnl_InControl.Size = new Size(789, 58);
+            pnl_InControl.Size = new Size(676, 59);
             pnl_InControl.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -1103,17 +1292,17 @@ namespace AutoJMS
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(789, 58);
+            tableLayoutPanel2.Size = new Size(676, 59);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // print_InReverse
             // 
             print_InReverse.Dock = DockStyle.Fill;
             print_InReverse.Font = new Font("Segoe UI", 7.8F);
-            print_InReverse.Location = new Point(661, 10);
-            print_InReverse.Margin = new Padding(5, 10, 5, 10);
+            print_InReverse.Location = new Point(569, 11);
+            print_InReverse.Margin = new Padding(5, 11, 5, 11);
             print_InReverse.Name = "print_InReverse";
-            print_InReverse.Size = new Size(123, 38);
+            print_InReverse.Size = new Size(102, 37);
             print_InReverse.TabIndex = 5;
             print_InReverse.Text = "In reverse";
             print_InReverse.UseVisualStyleBackColor = true;
@@ -1123,10 +1312,10 @@ namespace AutoJMS
             // 
             print_InLaiDon.Dock = DockStyle.Fill;
             print_InLaiDon.Font = new Font("Segoe UI", 7.8F);
-            print_InLaiDon.Location = new Point(532, 10);
-            print_InLaiDon.Margin = new Padding(5, 10, 5, 10);
+            print_InLaiDon.Location = new Point(458, 11);
+            print_InLaiDon.Margin = new Padding(5, 11, 5, 11);
             print_InLaiDon.Name = "print_InLaiDon";
-            print_InLaiDon.Size = new Size(119, 38);
+            print_InLaiDon.Size = new Size(101, 37);
             print_InLaiDon.TabIndex = 4;
             print_InLaiDon.Text = "In lại đơn";
             print_InLaiDon.UseVisualStyleBackColor = true;
@@ -1136,10 +1325,10 @@ namespace AutoJMS
             // 
             print_InChuyenTiep.Dock = DockStyle.Fill;
             print_InChuyenTiep.Font = new Font("Segoe UI", 7.8F);
-            print_InChuyenTiep.Location = new Point(392, 10);
-            print_InChuyenTiep.Margin = new Padding(5, 10, 5, 10);
+            print_InChuyenTiep.Location = new Point(338, 11);
+            print_InChuyenTiep.Margin = new Padding(5, 11, 5, 11);
             print_InChuyenTiep.Name = "print_InChuyenTiep";
-            print_InChuyenTiep.Size = new Size(130, 38);
+            print_InChuyenTiep.Size = new Size(110, 37);
             print_InChuyenTiep.TabIndex = 3;
             print_InChuyenTiep.Text = "In chuyển tiếp";
             print_InChuyenTiep.UseVisualStyleBackColor = true;
@@ -1149,10 +1338,10 @@ namespace AutoJMS
             // 
             print_InChuyenHoan.Dock = DockStyle.Fill;
             print_InChuyenHoan.Font = new Font("Segoe UI", 7.8F);
-            print_InChuyenHoan.Location = new Point(263, 10);
-            print_InChuyenHoan.Margin = new Padding(5, 10, 5, 10);
+            print_InChuyenHoan.Location = new Point(227, 11);
+            print_InChuyenHoan.Margin = new Padding(5, 11, 5, 11);
             print_InChuyenHoan.Name = "print_InChuyenHoan";
-            print_InChuyenHoan.Size = new Size(119, 38);
+            print_InChuyenHoan.Size = new Size(101, 37);
             print_InChuyenHoan.TabIndex = 2;
             print_InChuyenHoan.Text = "In hoàn";
             print_InChuyenHoan.UseVisualStyleBackColor = true;
@@ -1162,10 +1351,10 @@ namespace AutoJMS
             // 
             print_LamMoi.Dock = DockStyle.Fill;
             print_LamMoi.Font = new Font("Segoe UI", 7.8F);
-            print_LamMoi.Location = new Point(134, 10);
-            print_LamMoi.Margin = new Padding(5, 10, 5, 10);
+            print_LamMoi.Location = new Point(116, 11);
+            print_LamMoi.Margin = new Padding(5, 11, 5, 11);
             print_LamMoi.Name = "print_LamMoi";
-            print_LamMoi.Size = new Size(119, 38);
+            print_LamMoi.Size = new Size(101, 37);
             print_LamMoi.TabIndex = 1;
             print_LamMoi.Text = "Làm mới";
             print_LamMoi.UseVisualStyleBackColor = true;
@@ -1175,10 +1364,10 @@ namespace AutoJMS
             // 
             print_TimKiem.Dock = DockStyle.Fill;
             print_TimKiem.Font = new Font("Segoe UI", 7.8F);
-            print_TimKiem.Location = new Point(5, 10);
-            print_TimKiem.Margin = new Padding(5, 10, 5, 10);
+            print_TimKiem.Location = new Point(5, 11);
+            print_TimKiem.Margin = new Padding(5, 11, 5, 11);
             print_TimKiem.Name = "print_TimKiem";
-            print_TimKiem.Size = new Size(119, 38);
+            print_TimKiem.Size = new Size(101, 37);
             print_TimKiem.TabIndex = 0;
             print_TimKiem.Text = "Tìm kiếm";
             print_TimKiem.UseVisualStyleBackColor = true;
@@ -1189,9 +1378,9 @@ namespace AutoJMS
             panel12.BorderStyle = BorderStyle.Fixed3D;
             panel12.Controls.Add(print_Preview);
             panel12.Dock = DockStyle.Fill;
-            panel12.Location = new Point(0, 58);
+            panel12.Location = new Point(0, 59);
             panel12.Name = "panel12";
-            panel12.Size = new Size(209, 655);
+            panel12.Size = new Size(181, 654);
             panel12.TabIndex = 1;
             // 
             // print_Preview
@@ -1202,7 +1391,7 @@ namespace AutoJMS
             print_Preview.Dock = DockStyle.Fill;
             print_Preview.Location = new Point(0, 0);
             print_Preview.Name = "print_Preview";
-            print_Preview.Size = new Size(205, 651);
+            print_Preview.Size = new Size(177, 650);
             print_Preview.TabIndex = 0;
             print_Preview.ZoomFactor = 1D;
             // 
@@ -1212,7 +1401,7 @@ namespace AutoJMS
             pnl_InPreviewControl.Dock = DockStyle.Top;
             pnl_InPreviewControl.Location = new Point(0, 0);
             pnl_InPreviewControl.Name = "pnl_InPreviewControl";
-            pnl_InPreviewControl.Size = new Size(209, 58);
+            pnl_InPreviewControl.Size = new Size(181, 59);
             pnl_InPreviewControl.TabIndex = 0;
             // 
             // groupBox1
@@ -1221,7 +1410,7 @@ namespace AutoJMS
             groupBox1.Dock = DockStyle.Fill;
             groupBox1.Location = new Point(0, 0);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(209, 58);
+            groupBox1.Size = new Size(181, 59);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "PREVIEW";
@@ -1232,7 +1421,7 @@ namespace AutoJMS
             print_btn_Print.Location = new Point(75, 15);
             print_btn_Print.Margin = new Padding(5);
             print_btn_Print.Name = "print_btn_Print";
-            print_btn_Print.Size = new Size(140, 40);
+            print_btn_Print.Size = new Size(139, 40);
             print_btn_Print.TabIndex = 0;
             print_btn_Print.Text = "IN";
             print_btn_Print.UseVisualStyleBackColor = true;
@@ -1246,7 +1435,7 @@ namespace AutoJMS
             pnl_TraHanhTrinh.Controls.Add(panel10);
             pnl_TraHanhTrinh.Location = new Point(8, 8);
             pnl_TraHanhTrinh.Name = "pnl_TraHanhTrinh";
-            pnl_TraHanhTrinh.Size = new Size(1004, 713);
+            pnl_TraHanhTrinh.Size = new Size(1003, 713);
             pnl_TraHanhTrinh.TabIndex = 3;
             // 
             // panel8
@@ -1254,22 +1443,22 @@ namespace AutoJMS
             panel8.Controls.Add(Data_Result);
             panel8.Controls.Add(panel9);
             panel8.Dock = DockStyle.Fill;
-            panel8.Location = new Point(0, 135);
+            panel8.Location = new Point(0, 136);
             panel8.Name = "panel8";
-            panel8.Size = new Size(1004, 578);
+            panel8.Size = new Size(1003, 577);
             panel8.TabIndex = 2;
             // 
             // Data_Result
             // 
             Data_Result.BackgroundColor = SystemColors.ButtonHighlight;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Control;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            Data_Result.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = SystemColors.Control;
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle5.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
+            Data_Result.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             Data_Result.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             Data_Result.Dock = DockStyle.Fill;
             Data_Result.EditMode = DataGridViewEditMode.EditProgrammatically;
@@ -1278,7 +1467,7 @@ namespace AutoJMS
             Data_Result.Name = "Data_Result";
             Data_Result.RowHeadersWidth = 51;
             Data_Result.RowTemplate.Resizable = DataGridViewTriState.True;
-            Data_Result.Size = new Size(1004, 563);
+            Data_Result.Size = new Size(1003, 562);
             Data_Result.TabIndex = 2;
             // 
             // panel9
@@ -1286,7 +1475,7 @@ namespace AutoJMS
             panel9.Dock = DockStyle.Top;
             panel9.Location = new Point(0, 0);
             panel9.Name = "panel9";
-            panel9.Size = new Size(1004, 15);
+            panel9.Size = new Size(1003, 15);
             panel9.TabIndex = 1;
             // 
             // panel7
@@ -1298,10 +1487,10 @@ namespace AutoJMS
             panel7.Controls.Add(Data_Waybill);
             panel7.Controls.Add(splitter1);
             panel7.Dock = DockStyle.Top;
-            panel7.Location = new Point(0, 50);
+            panel7.Location = new Point(0, 51);
             panel7.Margin = new Padding(155);
             panel7.Name = "panel7";
-            panel7.Size = new Size(1004, 85);
+            panel7.Size = new Size(1003, 85);
             panel7.TabIndex = 1;
             // 
             // panel6
@@ -1336,7 +1525,7 @@ namespace AutoJMS
             // 
             // progressBarTracking
             // 
-            progressBarTracking.Location = new Point(334, 62);
+            progressBarTracking.Location = new Point(334, 61);
             progressBarTracking.Name = "progressBarTracking";
             progressBarTracking.Size = new Size(125, 20);
             progressBarTracking.Style = ProgressBarStyle.Continuous;
@@ -1357,7 +1546,7 @@ namespace AutoJMS
             // 
             Data_Waybill.Dock = DockStyle.Left;
             Data_Waybill.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Data_Waybill.Location = new Point(116, 0);
+            Data_Waybill.Location = new Point(117, 0);
             Data_Waybill.Name = "Data_Waybill";
             Data_Waybill.ScrollBars = RichTextBoxScrollBars.ForcedHorizontal;
             Data_Waybill.Size = new Size(212, 85);
@@ -1368,7 +1557,7 @@ namespace AutoJMS
             // 
             splitter1.Location = new Point(0, 0);
             splitter1.Name = "splitter1";
-            splitter1.Size = new Size(116, 85);
+            splitter1.Size = new Size(117, 85);
             splitter1.TabIndex = 0;
             splitter1.TabStop = false;
             // 
@@ -1378,7 +1567,7 @@ namespace AutoJMS
             panel10.Dock = DockStyle.Top;
             panel10.Location = new Point(0, 0);
             panel10.Name = "panel10";
-            panel10.Size = new Size(1004, 50);
+            panel10.Size = new Size(1003, 51);
             panel10.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -1401,7 +1590,7 @@ namespace AutoJMS
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.Size = new Size(993, 50);
+            tableLayoutPanel1.Size = new Size(993, 51);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // btn_Upload
@@ -1411,7 +1600,7 @@ namespace AutoJMS
             btn_Upload.Location = new Point(827, 5);
             btn_Upload.Margin = new Padding(5);
             btn_Upload.Name = "btn_Upload";
-            btn_Upload.Size = new Size(161, 42);
+            btn_Upload.Size = new Size(161, 43);
             btn_Upload.TabIndex = 5;
             btn_Upload.Text = "Tải lên";
             btn_Upload.UseVisualStyleBackColor = true;
@@ -1424,7 +1613,7 @@ namespace AutoJMS
             btn_Export_Spe.Location = new Point(658, 5);
             btn_Export_Spe.Margin = new Padding(5);
             btn_Export_Spe.Name = "btn_Export_Spe";
-            btn_Export_Spe.Size = new Size(159, 42);
+            btn_Export_Spe.Size = new Size(159, 43);
             btn_Export_Spe.TabIndex = 4;
             btn_Export_Spe.Text = "Phát - Hoàn";
             btn_Export_Spe.UseVisualStyleBackColor = true;
@@ -1437,7 +1626,7 @@ namespace AutoJMS
             btn_Download.Location = new Point(447, 5);
             btn_Download.Margin = new Padding(5);
             btn_Download.Name = "btn_Download";
-            btn_Download.Size = new Size(201, 42);
+            btn_Download.Size = new Size(201, 43);
             btn_Download.TabIndex = 3;
             btn_Download.Text = "Trung tâm tải xuống";
             btn_Download.UseVisualStyleBackColor = true;
@@ -1450,7 +1639,7 @@ namespace AutoJMS
             btn_Clear.Location = new Point(278, 5);
             btn_Clear.Margin = new Padding(5);
             btn_Clear.Name = "btn_Clear";
-            btn_Clear.Size = new Size(159, 42);
+            btn_Clear.Size = new Size(159, 43);
             btn_Clear.TabIndex = 2;
             btn_Clear.Text = "Làm mới";
             btn_Clear.UseVisualStyleBackColor = true;
@@ -1463,7 +1652,7 @@ namespace AutoJMS
             btn_Export.Location = new Point(109, 5);
             btn_Export.Margin = new Padding(5);
             btn_Export.Name = "btn_Export";
-            btn_Export.Size = new Size(159, 42);
+            btn_Export.Size = new Size(159, 43);
             btn_Export.TabIndex = 1;
             btn_Export.Text = "Xuất dữ liệu";
             btn_Export.UseVisualStyleBackColor = true;
@@ -1476,7 +1665,7 @@ namespace AutoJMS
             btn_TimKiem.Location = new Point(5, 5);
             btn_TimKiem.Margin = new Padding(5);
             btn_TimKiem.Name = "btn_TimKiem";
-            btn_TimKiem.Size = new Size(94, 42);
+            btn_TimKiem.Size = new Size(94, 43);
             btn_TimKiem.TabIndex = 0;
             btn_TimKiem.Text = "Tìm kiếm";
             btn_TimKiem.UseVisualStyleBackColor = true;
@@ -1488,7 +1677,7 @@ namespace AutoJMS
             pnl_Webview.Dock = DockStyle.Fill;
             pnl_Webview.Location = new Point(0, 0);
             pnl_Webview.Name = "pnl_Webview";
-            pnl_Webview.Size = new Size(1002, 713);
+            pnl_Webview.Size = new Size(862, 713);
             pnl_Webview.TabIndex = 2;
             // 
             // Main_Webview
@@ -1500,7 +1689,7 @@ namespace AutoJMS
             Main_Webview.Dock = DockStyle.Fill;
             Main_Webview.Location = new Point(0, 0);
             Main_Webview.Name = "Main_Webview";
-            Main_Webview.Size = new Size(1002, 713);
+            Main_Webview.Size = new Size(862, 713);
             Main_Webview.TabIndex = 0;
             Main_Webview.ZoomFactor = 1D;
             // 
@@ -1530,10 +1719,15 @@ namespace AutoJMS
             Tab_NangCao.ResumeLayout(false);
             Tab_ZaloChat.ResumeLayout(false);
             pnl_ZaloChat_Main.ResumeLayout(false);
-            panel20.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)ZaloChat_dgv_Data).EndInit();
-            groupBox9.ResumeLayout(false);
-            tableLayoutPanel5.ResumeLayout(false);
+            guna2GradientPanel1.ResumeLayout(false);
+            guna2Panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)guna2DataGridView1).EndInit();
+            guna2Panel1.ResumeLayout(false);
+            guna2Panel1.PerformLayout();
+            guna2Panel2.ResumeLayout(false);
+            guna2Panel3.ResumeLayout(false);
+            guna2Panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox2).EndInit();
             panel_Main_act.ResumeLayout(false);
             pnl_ZaloChatz.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)Main_ZaloChat).EndInit();
@@ -1624,7 +1818,6 @@ namespace AutoJMS
         private GroupBox bg_Process;
         private RichTextBox txt_Status;
         private TextBox txt_NowBill;
-        private Label label3;
         private Panel panel4;
         private GroupBox gb_Log;
         private RichTextBox txt_Log;
@@ -1703,18 +1896,23 @@ namespace AutoJMS
         private TabPage Tab_ZaloChat;
         private Button btn_FocusMode;
         private Panel pnl_ZaloChat_Main;
-        private GroupBox groupBox9;
-        private TableLayoutPanel tableLayoutPanel5;
         private Button button1;
         private Button button2;
-        private Panel panel21;
-        private Panel panel20;
         private DataGridView dataGridView1;
-        private DataGridView ZaloChat_dgv_Data;
-        private Button ZaloChat_btn_LamMoiData;
-        private Button ZaloChat_btn_BatDau;
-        private DataGridViewTextBoxColumn maDon;
-        private DataGridViewTextBoxColumn tenNhanVien;
-        private DataGridViewTextBoxColumn soLanNhac;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
+        private Guna.UI2.WinForms.Guna2Button btn_ZaloChat_batDau;
+        private Guna.UI2.WinForms.Guna2Button guna2Button2;
+        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox1;
+        private Label label12;
+        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel1;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox2;
+        private LinkLabel linkLabel2;
+        private Label label13;
+        private Guna.UI2.WinForms.Guna2Panel guna2Panel4;
+        private Guna.UI2.WinForms.Guna2DataGridView guna2DataGridView1;
+        private CustomControl.CustomButton customButton1;
     }
 }

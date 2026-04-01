@@ -68,7 +68,7 @@ namespace AutoJMS
             CheckForIllegalCrossThreadCalls = false;
 
             _focusMode = new FocusModeHelper(pnl_Left, btn_FocusMode);
-           
+
             this.KeyPreview = true;
             _dkchManager = new DkchManager();
             _dkchManager.OnSaveCountChanged += (count) => lbl_CountSave.Text = count.ToString();
@@ -150,6 +150,11 @@ namespace AutoJMS
 
                         // 5. Ghi dữ liệu đè lên sheet BUMP
                         GoogleSheetService.UpdateBumpSheet(sheetData, spreadsheetId, "BUMP!A2");
+                        string targetSheetName = "BUMP";
+
+
+                        // Bước 3.2: GHI ĐÈ DỮ LIỆU MỚI (Bắt đầu từ ô A1 vì đã có chứa Header)
+                        GoogleSheetService.UpdateBumpSheet(sheetData, spreadsheetId, $"{targetSheetName}!A2");
                     }
 
                     // 6. Hoàn tất quá trình, đánh dấu C5 thành DONE (hoặc bạn có thể set nó thành ô trống "")
@@ -246,7 +251,7 @@ namespace AutoJMS
                 {
                     if (pnl_ZaloChatz != null)
                     {
-                        pnl_Left.Width = _originalPnlLeftWidth * 2; // Kéo giãn panel trái
+                        pnl_Left.Width = 400; // Kéo giãn panel trái
                         if (pnl_ZaloChatz.Parent != panel_Main_act) pnl_ZaloChatz.Parent = panel_Main_act;
                         pnl_ZaloChatz.Visible = true;
                         pnl_ZaloChatz.BringToFront();
@@ -700,7 +705,7 @@ namespace AutoJMS
                 }
             }
             catch (Exception ex)
-            {}
+            { }
             return null;
         }
 
@@ -793,7 +798,7 @@ namespace AutoJMS
                 }
             }
             catch (Exception ex)
-            {}
+            { }
             finally
             {
                 print_btn_Print.Enabled = true;
@@ -801,21 +806,6 @@ namespace AutoJMS
             }
         }
 
-        private async void ZaloChat_btn_LamMoiData_Click(object sender, EventArgs e)
-        {
-            if (_zaloChatService == null)
-            {
-                MessageBox.Show("Vui lòng đợi Zalo khởi tạo xong!");
-                return;
-            }
 
-            ZaloChat_btn_LamMoiData.Text = "Đang tải...";
-            ZaloChat_btn_LamMoiData.Enabled = false;
-
-            await _zaloChatService.LoadDataToGridAsync(ZaloChat_dgv_Data);
-
-            ZaloChat_btn_LamMoiData.Text = "Làm mới Data";
-            ZaloChat_btn_LamMoiData.Enabled = true;
-        }
     }
 }
