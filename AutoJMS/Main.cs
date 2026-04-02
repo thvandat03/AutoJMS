@@ -957,39 +957,56 @@ namespace AutoJMS
         }
         private async Task LoadZaloData()
         {
-            if (_zaloChatService == null) return;
-
-            // Tạm dừng vẽ để tránh flicker
-            zaloChat_DataView.SuspendLayout();
+            if (_zaloChatService == null)
+            {
+                Console.WriteLine("[Zalo] Service chưa khởi tạo.");
+                return;
+            }
 
             try
             {
-                // === BẮT BUỘC TẮT AutoGenerateColumns ===
-                zaloChat_DataView.AutoGenerateColumns = false;
-                UniformHeaderColor();
+                Console.WriteLine("[Zalo] Đang tải dữ liệu từ Sheet...");
+
                 _allZaloReminders = await _zaloChatService.GetDataFromSheetAsync();
+
+                Console.WriteLine($"[Zalo] ✅ Lấy được {_allZaloReminders.Count} vận đơn");
 
                 if (_allZaloReminders.Count == 0)
                 {
-                    _zaloBindingSource.DataSource = null;
                     zaloChat_DataView.DataSource = null;
+                    MessageBox.Show("Sheet hiện tại không có vận đơn nào!", "Thông báo");
                     return;
                 }
 
+                // Tự động tạo danh sách trạng thái cho ComboBox
                 PopulateZaloStatusCombo();
 
+                // Gán dữ liệu
                 _zaloBindingSource.DataSource = _allZaloReminders;
-                zaloChat_DataView.DataSource = _zaloBindingSource;
 
-                zaloChat_DataView.Refresh();
-                zaloChat_DataView.Update();
+                // Force refresh
+                if (zaloChat_DataView.InvokeRequired)
+                {
+                    zaloChat_DataView.Invoke(new Action(() =>
+                    {
+                        zaloChat_DataView.Refresh();
+                        zaloChat_DataView.Update();
+                    }));
+                }
+                else
+                {
+                    zaloChat_DataView.Refresh();
+                    zaloChat_DataView.Update();
+                }
+
+                MessageBox.Show($"ĐÃ LOAD THÀNH CÔNG {_allZaloReminders.Count} vận đơn vào grid!",
+                               "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            finally
+            catch (Exception ex)
             {
-                zaloChat_DataView.ResumeLayout(true);
+                Console.WriteLine($"[LoadZaloData] Lỗi: {ex.Message}");
+                MessageBox.Show($"Lỗi load: {ex.Message}");
             }
-
-            Console.WriteLine($"[Zalo] Load thành công {_allZaloReminders.Count} vận đơn");
         }
         /// <summary>
         /// Bật DoubleBuffered cho Guna2DataGridView (tăng tốc vẽ, giảm flicker)

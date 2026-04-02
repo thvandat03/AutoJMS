@@ -130,12 +130,11 @@ namespace AutoJMS
 
                             reminders.Add(new Reminder
                             {
-                                row = reminders.Count + 2,      // row giả để update sau (nếu cần)
+                                     // row giả để update sau (nếu cần)
                                 maDon = maDon,
                                 nhanVien = "",                  // tạm để trống (bạn có thể bổ sung sau)
                                 trangThai = "Đang theo dõi",    // trạng thái mặc định
                                 soLanNhac = 0,
-                                thoiGianNhac = ""
                             });
                         }
                     }

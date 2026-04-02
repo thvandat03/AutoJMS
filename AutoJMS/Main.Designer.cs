@@ -78,10 +78,9 @@ namespace AutoJMS
             panel2 = new Panel();
             zaloChat_DataView = new Guna.UI2.WinForms.Guna2DataGridView();
             maDon = new DataGridViewTextBoxColumn();
-            tenNhanVien = new DataGridViewTextBoxColumn();
+            nhanVien = new DataGridViewTextBoxColumn();
             trangThai = new DataGridViewTextBoxColumn();
             soLanNhac = new DataGridViewTextBoxColumn();
-            thoiGianNhac = new DataGridViewTextBoxColumn();
             panel1 = new Panel();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             zaloChat_lbl_kienVanDe = new Label();
@@ -609,7 +608,7 @@ namespace AutoJMS
             zaloChat_DataView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             zaloChat_DataView.ColumnHeadersHeight = 22;
             zaloChat_DataView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            zaloChat_DataView.Columns.AddRange(new DataGridViewColumn[] { maDon, tenNhanVien, trangThai, soLanNhac, thoiGianNhac });
+            zaloChat_DataView.Columns.AddRange(new DataGridViewColumn[] { maDon, nhanVien, trangThai, soLanNhac });
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
@@ -658,14 +657,13 @@ namespace AutoJMS
             maDon.ReadOnly = true;
             maDon.Width = 114;
             // 
-            // tenNhanVien
+            // nhanVien
             // 
-            tenNhanVien.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            tenNhanVien.HeaderText = "Tên nhân viên";
-            tenNhanVien.MinimumWidth = 6;
-            tenNhanVien.Name = "tenNhanVien";
-            tenNhanVien.ReadOnly = true;
-            tenNhanVien.Width = 126;
+            nhanVien.HeaderText = "Tên nhân viên";
+            nhanVien.MinimumWidth = 6;
+            nhanVien.Name = "nhanVien";
+            nhanVien.ReadOnly = true;
+            nhanVien.Width = 125;
             // 
             // trangThai
             // 
@@ -684,15 +682,6 @@ namespace AutoJMS
             soLanNhac.Name = "soLanNhac";
             soLanNhac.ReadOnly = true;
             soLanNhac.Width = 112;
-            // 
-            // thoiGianNhac
-            // 
-            thoiGianNhac.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            thoiGianNhac.HeaderText = "Thời gian nhắc";
-            thoiGianNhac.MinimumWidth = 6;
-            thoiGianNhac.Name = "thoiGianNhac";
-            thoiGianNhac.ReadOnly = true;
-            thoiGianNhac.Width = 133;
             // 
             // panel1
             // 
@@ -2159,9 +2148,8 @@ namespace AutoJMS
         private Panel panel1;
         private Guna.UI2.WinForms.Guna2DataGridView zaloChat_DataView;
         private DataGridViewTextBoxColumn maDon;
-        private DataGridViewTextBoxColumn tenNhanVien;
+        private DataGridViewTextBoxColumn nhanVien;
         private DataGridViewTextBoxColumn trangThai;
         private DataGridViewTextBoxColumn soLanNhac;
-        private DataGridViewTextBoxColumn thoiGianNhac;
     }
 }
