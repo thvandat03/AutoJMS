@@ -1012,58 +1012,59 @@ namespace AutoJMS
         }
         private async Task LoadZaloData()
         {
-            if (_zaloChatService == null)
-            {
-                Console.WriteLine("[Zalo] Service chưa khởi tạo.");
-                return;
-            }
+            if (_zaloChatService == null) return;
+
+            zaloChat_DataView.SuspendLayout();
 
             try
             {
-                Console.WriteLine("[Zalo] Đang tải dữ liệu từ Sheet...");
+                // 1. Lấy danh sách mã vận đơn từ cột B
+                var waybills = await _zaloChatService.GetDataFromSheetAsync();
 
-                _allZaloReminders = await _zaloChatService.GetDataFromSheetAsync();
-
-                Console.WriteLine($"[Zalo] ✅ Lấy được {_allZaloReminders.Count} vận đơn");
-
-                if (_allZaloReminders.Count == 0)
+                if (waybills.Count == 0)
                 {
+                    _zaloBindingSource.DataSource = null;
                     zaloChat_DataView.DataSource = null;
-                    MessageBox.Show("Sheet hiện tại không có vận đơn nào!", "Thông báo");
                     return;
                 }
 
-                // Tự động tạo danh sách trạng thái cho ComboBox
+                // 2. Chạy tracking để lấy dữ liệu mới nhất
+                await _trackingService.SearchTrackingAsync(string.Join("\n", waybills), false);
+
+                // 3. Lấy kết quả tracking
+                var results = _trackingService.GetAllRows();
+
+                // 4. MAP THEO YÊU CẦU CỦA BẠN
+                _allZaloReminders = results.Select(r => new Reminder
+                {
+                    maDon = r.WaybillNo ?? "",
+                    nhanVien = r.NhanVienKienVanDe ?? "",
+                    trangThai = r.ThaoTacCuoi ?? "",
+                    soLanNhac = 0,                    // có thể tính sau nếu cần
+                    thoiGianNhac = "",
+                    row = 0
+                }).ToList();
+
+                // 5. Đổ dữ liệu lên grid
+                _zaloBindingSource.DataSource = _allZaloReminders;
+                zaloChat_DataView.DataSource = _zaloBindingSource;
+
                 PopulateZaloStatusCombo();
 
-                // Gán dữ liệu
-                _zaloBindingSource.DataSource = _allZaloReminders;
+                zaloChat_DataView.Refresh();
+                zaloChat_DataView.Update();
 
-                // Force refresh
-                if (zaloChat_DataView.InvokeRequired)
-                {
-                    zaloChat_DataView.Invoke(new Action(() =>
-                    {
-                        zaloChat_DataView.Refresh();
-                        zaloChat_DataView.Update();
-                    }));
-                }
-                else
-                {
-                    zaloChat_DataView.Refresh();
-                    zaloChat_DataView.Update();
-                }
-
-                MessageBox.Show($"ĐÃ LOAD THÀNH CÔNG {_allZaloReminders.Count} vận đơn vào grid!",
-                               "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Console.WriteLine($"[Zalo] ✅ Đã map và load {_allZaloReminders.Count} vận đơn theo mapping mới");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"[LoadZaloData] Lỗi: {ex.Message}");
-                MessageBox.Show($"Lỗi load: {ex.Message}");
+            }
+            finally
+            {
+                zaloChat_DataView.ResumeLayout(true);
             }
         }
-        /// <summary>
         /// Bật DoubleBuffered cho Guna2DataGridView (tăng tốc vẽ, giảm flicker)
         /// </summary>
         private void EnableDoubleBufferedForGunaGrid()
@@ -1183,6 +1184,21 @@ namespace AutoJMS
                 }
 
                 GoogleSheetService.UpdateBumpSheet(sheetData, spreadsheetId, "BUMP!A2");
+
+                _allZaloReminders = results.Select(r => new Reminder
+                {
+                    maDon = r.WaybillNo ?? "",
+                    nhanVien = r.NhanVienKienVanDe ?? "",
+                    trangThai = r.ThaoTacCuoi ?? "",
+                    soLanNhac = 0,
+                    thoiGianNhac = "",
+                }).ToList();
+
+                _zaloBindingSource.DataSource = _allZaloReminders;
+                zaloChat_DataView.DataSource = _zaloBindingSource;
+
+                PopulateZaloStatusCombo();
+                zaloChat_DataView.Refresh();
 
                 Console.WriteLine($"[PHATLAI] Hoàn tất tracking cột B và update BUMP");
             }
