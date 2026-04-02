@@ -38,15 +38,10 @@ namespace AutoJMS
             _settings = SettingsManager.Load();
             Version appVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             string versionText = $"Phiên bản: v{appVersion}";
-
-            // 3. HIỂN THỊ MESSAGEBOX ĐỂ TEST (Debug)
-            //MessageBox.Show("Số phiên bản lấy được là: " + versionText, "Test Version");
-
-            // 4. Ép Label hiển thị bằng code (tránh lỗi Design)
             lbl_version.Text = versionText;
-            lbl_version.ForeColor = System.Drawing.Color.Red; // Ép màu đỏ chót cho dễ nhìn
-            lbl_version.Visible = true; // Ép hiện
-            lbl_version.BringToFront(); // Ép nổi lên trên cùng mọi panel khác
+            lbl_version.ForeColor = System.Drawing.Color.Red;
+            lbl_version.Visible = true; 
+            lbl_version.BringToFront(); 
         
         cb_SheetName.SelectedItem = _settings.DefaultSheet;
             ckb_UseSheet.Checked = _settings.UseSheetByDefault;
