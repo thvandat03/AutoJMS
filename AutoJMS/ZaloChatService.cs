@@ -222,6 +222,7 @@ namespace AutoJMS
     /// </summary>
     public class Reminder
     {
+        // LƯU Ý: Phải có chữ 'public', kiểu dữ liệu, tên biến, và { get; set; } viết liền nhau
         public int row { get; set; }
         public string maDon { get; set; }
         public string nhanVien { get; set; }

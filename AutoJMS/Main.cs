@@ -979,26 +979,45 @@ namespace AutoJMS
         }
         // Khai báo biến toàn cục ở đầu file Main.cs
         private List<Reminder> _allZaloReminders = new List<Reminder>();
-
+        private HashSet<string> _savedStatuses = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         // --- Hãy sửa lại hàm tải dữ liệu của bạn để gán biến này ---
         private void PopulateZaloStatusCombo()
         {
-            if (zaloChat_selectStatus == null || _allZaloReminders == null) return;
+            if (zaloChat_selectStatus.InvokeRequired)
+            {
+                zaloChat_selectStatus.Invoke(new Action(PopulateZaloStatusCombo));
+                return;
+            }
 
-            var unique = _allZaloReminders
-                .Where(r => !string.IsNullOrWhiteSpace(r.trangThai))
-                .Select(r => r.trangThai.Trim())
-                .Distinct(StringComparer.OrdinalIgnoreCase)
-                .OrderBy(s => s)
-                .ToList();
+            if (zaloChat_selectStatus == null) return;
 
+            // 1. Tắt sự kiện để chống lỗi vòng lặp
+
+            string currentSelected = zaloChat_selectStatus.Text;
+
+            // 2. Clear và nạp lại Item từ Kho lưu trữ (_savedStatuses)
             zaloChat_selectStatus.Items.Clear();
             zaloChat_selectStatus.Items.Add("Tất cả");
 
-            foreach (var s in unique)
-                zaloChat_selectStatus.Items.Add(s);
+            // Sắp xếp kho lưu trữ theo thứ tự Alphabet cho đẹp mắt
+            var sortedStatuses = _savedStatuses.OrderBy(s => s).ToList();
 
-            zaloChat_selectStatus.SelectedIndex = 0;
+            foreach (var status in sortedStatuses)
+            {
+                zaloChat_selectStatus.Items.Add(status);
+            }
+
+            // 3. Khôi phục lại lựa chọn cũ của người dùng (Giữ nguyên trạng thái đang lọc)
+            if (!string.IsNullOrEmpty(currentSelected) && zaloChat_selectStatus.Items.Contains(currentSelected))
+            {
+                zaloChat_selectStatus.Text = currentSelected;
+            }
+            else
+            {
+                zaloChat_selectStatus.SelectedIndex = 0; // Về "Tất cả" nếu chưa chọn
+            }
+
+            // 4. Bật lại sự kiện
         }
         /// <summary>
         /// Buộc tất cả header cột cùng màu
@@ -1034,32 +1053,32 @@ namespace AutoJMS
                 // 3. Lấy kết quả tracking
                 var results = _trackingService.GetAllRows();
 
-                // 4. MAP THEO YÊU CẦU CỦA BẠN
-                _allZaloReminders = results.Select(r => new Reminder
+                // 4. MAP THEO YÊU CẦU CỦA BẠN (CODE MỚI ĐÃ SỬA)
+                var mappedData = results.Select(item => new Reminder
                 {
-                    maDon = r.WaybillNo ?? "",
-                    nhanVien = r.NhanVienKienVanDe ?? "",
-                    trangThai = r.ThaoTacCuoi ?? "",
-                    soLanNhac = 0,                    // có thể tính sau nếu cần
-                    thoiGianNhac = "",
-                    row = 0
+                    maDon = item.WaybillNo ?? "",
+                    trangThai = item.ThaoTacCuoi ?? "",
+                    nhanVien = item.NhanVienKienVanDe ?? "",
+                    soLanNhac = 0,
+                    thoiGianNhac = ""
                 }).ToList();
 
-                // 5. Đổ dữ liệu lên grid
-                _zaloBindingSource.DataSource = _allZaloReminders;
-                zaloChat_DataView.DataSource = _zaloBindingSource;
-
-                PopulateZaloStatusCombo();
-
-                zaloChat_DataView.Refresh();
-                zaloChat_DataView.Update();
+                // 5. GỌI HÀM AN TOÀN ĐỂ ĐỔ DỮ LIỆU
+                if (zaloChat_DataView.InvokeRequired)
+                {
+                    zaloChat_DataView.Invoke(new Action(() =>
+                    {
+                        UpdateGridViewData(mappedData);
+                    }));
+                }
+                else
+                {
+                    UpdateGridViewData(mappedData);
+                }
 
                 Console.WriteLine($"[Zalo] ✅ Đã map và load {_allZaloReminders.Count} vận đơn theo mapping mới");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[LoadZaloData] Lỗi: {ex.Message}");
-            }
+            catch (Exception ex) { }
             finally
             {
                 zaloChat_DataView.ResumeLayout(true);
@@ -1092,30 +1111,58 @@ namespace AutoJMS
         {
             if (_allZaloReminders == null || zaloChat_DataView == null) return;
 
-            string selected = zaloChat_selectStatus?.Text?.Trim() ?? "Tất cả";
+            // 1. Lấy giá trị đang chọn (Có bọc luồng để không bị crash)
+            string selected = "Tất cả";
+            if (zaloChat_selectStatus.InvokeRequired)
+            {
+                zaloChat_selectStatus.Invoke(new Action(() => selected = zaloChat_selectStatus.Text?.Trim() ?? "Tất cả"));
+            }
+            else
+            {
+                selected = zaloChat_selectStatus.Text?.Trim() ?? "Tất cả";
+            }
 
-            List<Reminder> listToShow = (string.IsNullOrWhiteSpace(selected) || selected == "Tất cả")
-                ? _allZaloReminders
-                : _allZaloReminders.Where(r =>
+            // 2. Tìm các đơn hàng khớp với trạng thái
+            List<Reminder> listToShow;
+            if (string.IsNullOrWhiteSpace(selected) || selected == "Tất cả")
+            {
+                listToShow = _allZaloReminders;
+            }
+            else
+            {
+                listToShow = _allZaloReminders.Where(r =>
                     !string.IsNullOrEmpty(r.trangThai) &&
                     r.trangThai.IndexOf(selected, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+            }
 
-            zaloChat_DataView.DataSource = null;        // Reset hoàn toàn
-            zaloChat_DataView.DataSource = listToShow;
-
-            zaloChat_DataView.Refresh();
-            zaloChat_DataView.Update();
-
-            Console.WriteLine($"[Zalo] Grid hiển thị {listToShow.Count} dòng (filter: {selected})");
+            // 3. Ép DataGridView hiển thị dữ liệu đã lọc
+            if (zaloChat_DataView.InvokeRequired)
+            {
+                zaloChat_DataView.Invoke(new Action(() => {
+                    zaloChat_DataView.AutoGenerateColumns = false; // Ngăn đẻ thêm cột rác
+                    _zaloBindingSource.DataSource = new System.ComponentModel.BindingList<Reminder>(listToShow);
+                    zaloChat_DataView.DataSource = _zaloBindingSource;
+                    zaloChat_DataView.Refresh();
+                }));
+            }
+            else
+            {
+                zaloChat_DataView.AutoGenerateColumns = false;
+                _zaloBindingSource.DataSource = new System.ComponentModel.BindingList<Reminder>(listToShow);
+                zaloChat_DataView.DataSource = _zaloBindingSource;
+                zaloChat_DataView.Refresh();
+            }
         }
+
+        // Bắt buộc phải có hàm này để nhận biết khi bạn click chọn Trạng thái mới
         private void zaloChat_selectStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Chỉ filter khi đã có dữ liệu
             if (_allZaloReminders != null && _allZaloReminders.Count > 0)
             {
                 FilterZaloGrid();
             }
         }
+       
         private async void zaloChat_btn_Refesh_Click(object sender, EventArgs e)
         {
             zaloChat_btn_Refesh.Enabled = false;
@@ -1185,20 +1232,28 @@ namespace AutoJMS
 
                 GoogleSheetService.UpdateBumpSheet(sheetData, spreadsheetId, "BUMP!A2");
 
-                _allZaloReminders = results.Select(r => new Reminder
+                // === CODE MỚI THAY THẾ Ở ĐÂY ===
+                var mappedData = results.Select(item => new Reminder
                 {
-                    maDon = r.WaybillNo ?? "",
-                    nhanVien = r.NhanVienKienVanDe ?? "",
-                    trangThai = r.ThaoTacCuoi ?? "",
+                    maDon = item.WaybillNo ?? "",
+                    trangThai = item.ThaoTacCuoi ?? "",
+                    nhanVien = item.NhanVienKienVanDe ?? "",
                     soLanNhac = 0,
-                    thoiGianNhac = "",
+                    thoiGianNhac = ""
                 }).ToList();
 
-                _zaloBindingSource.DataSource = _allZaloReminders;
-                zaloChat_DataView.DataSource = _zaloBindingSource;
-
-                PopulateZaloStatusCombo();
-                zaloChat_DataView.Refresh();
+                if (zaloChat_DataView.InvokeRequired)
+                {
+                    zaloChat_DataView.Invoke(new Action(() =>
+                    {
+                        UpdateGridViewData(mappedData);
+                    }));
+                }
+                else
+                {
+                    UpdateGridViewData(mappedData);
+                }
+                // === KẾT THÚC CODE MỚI ===
 
                 Console.WriteLine($"[PHATLAI] Hoàn tất tracking cột B và update BUMP");
             }
@@ -1206,6 +1261,32 @@ namespace AutoJMS
             {
                 Console.WriteLine($"[PHATLAI ReTrack] Lỗi: {ex.Message}");
             }
+        }
+        private void UpdateGridViewData(List<Reminder> data)
+        {
+            _allZaloReminders = data;
+
+            // === TỰ ĐỘNG LƯU LẠI CÁC TRẠNG THÁI (ThaoTacCuoi) ===
+            foreach (var item in data)
+            {
+                if (!string.IsNullOrWhiteSpace(item.trangThai))
+                {
+                    _savedStatuses.Add(item.trangThai.Trim()); // HashSet sẽ tự động bỏ qua nếu đã có
+                }
+            }
+
+            // Gắn dữ liệu vào bảng
+            _zaloBindingSource.DataSource = new System.ComponentModel.BindingList<Reminder>(_allZaloReminders);
+
+            if (zaloChat_DataView.DataSource != _zaloBindingSource)
+            {
+                zaloChat_DataView.DataSource = _zaloBindingSource;
+            }
+
+            // Cập nhật lại ComboBox
+            PopulateZaloStatusCombo();
+
+            zaloChat_DataView.Refresh();
         }
 
 
@@ -1220,9 +1301,21 @@ namespace AutoJMS
 
 
 
+    } // Dấu ngoặc đóng của class Main
+} // Dấu ngoặc đóng của namespace AutoJMS
 
 
 
 
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
