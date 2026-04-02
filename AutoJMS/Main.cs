@@ -282,6 +282,7 @@ namespace AutoJMS
                     // === LUÔN SETUP GRID NGAY KHI MỞ TAB (để header hiện liền) ===
                     if (!_isZaloLoaded)
                     {
+                        SetupZaloChatGrid();
                         zaloChat_DataView.AutoGenerateColumns = false;
                         UniformHeaderColor();
                         EnableDoubleBufferedForGunaGrid();
@@ -863,7 +864,61 @@ namespace AutoJMS
             AutoUpdater.Start(xmlUrl);
         }
 
+        private void SetupZaloChatGrid()
+        {
+            zaloChat_DataView.AutoGenerateColumns = false;
+            zaloChat_DataView.Columns.Clear();
 
+            // Tạo 4 cột
+            zaloChat_DataView.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "colMaDon",
+                DataPropertyName = "maDon",
+                HeaderText = "Mã vận đơn",
+                Width = 130,
+                ReadOnly = true
+            });
+
+            zaloChat_DataView.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "colNhanVien",
+                DataPropertyName = "nhanVien",
+                HeaderText = "Tên nhân viên",
+                Width = 160,
+                ReadOnly = true
+            });
+
+            zaloChat_DataView.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "colTrangThai",
+                DataPropertyName = "trangThai",
+                HeaderText = "Trạng thái",
+                Width = 180,
+                ReadOnly = true
+            });
+
+            zaloChat_DataView.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "colSoLanNhac",
+                DataPropertyName = "soLanNhac",
+                HeaderText = "Số lần nhắc",
+                Width = 100,
+                ReadOnly = true
+            });
+
+            // === BẮT BUỘC HIỂN THỊ HEADER DÙ CHƯA CÓ DỮ LIỆU ===
+            zaloChat_DataView.ColumnHeadersVisible = true;
+            zaloChat_DataView.RowHeadersVisible = false;
+            zaloChat_DataView.AllowUserToAddRows = false;
+            zaloChat_DataView.AllowUserToDeleteRows = false;
+            zaloChat_DataView.ReadOnly = true;
+
+            // Khởi tạo BindingSource rỗng để header luôn hiện
+            _zaloBindingSource.DataSource = null;
+            zaloChat_DataView.DataSource = _zaloBindingSource;
+
+            Console.WriteLine("[Zalo] ✅ Grid đã tạo 4 cột và header luôn hiển thị");
+        }
         private void InitStatusTimer()
         {
             timer_AutoUpdateStatus = new System.Windows.Forms.Timer();
