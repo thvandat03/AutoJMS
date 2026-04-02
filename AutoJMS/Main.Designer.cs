@@ -173,6 +173,9 @@ namespace AutoJMS
             btn_TimKiem = new Button();
             pnl_Webview = new Panel();
             Main_Webview = new Microsoft.Web.WebView2.WinForms.WebView2();
+            label15 = new Label();
+            label13 = new Label();
+            label16 = new Label();
             pnl_Left.SuspendLayout();
             Tab_Control.SuspendLayout();
             Tab_DKCH.SuspendLayout();
@@ -641,6 +644,9 @@ namespace AutoJMS
             guna2Panel1.BorderColor = Color.White;
             guna2Panel1.BorderRadius = 15;
             guna2Panel1.BorderThickness = 3;
+            guna2Panel1.Controls.Add(label16);
+            guna2Panel1.Controls.Add(label15);
+            guna2Panel1.Controls.Add(label13);
             guna2Panel1.Controls.Add(progressBar1);
             guna2Panel1.Controls.Add(zaloChat_btn_Refesh);
             guna2Panel1.Controls.Add(label12);
@@ -785,7 +791,7 @@ namespace AutoJMS
             ZaloChat_btn_start.ShadowDecoration.CustomizableEdges = customizableEdges12;
             ZaloChat_btn_start.Size = new Size(170, 48);
             ZaloChat_btn_start.TabIndex = 0;
-            ZaloChat_btn_start.Text = "Bắt đầu Bot";
+            ZaloChat_btn_start.Text = "Bắt đầu - Bot";
             // 
             // guna2Panel3
             // 
@@ -1826,6 +1832,30 @@ namespace AutoJMS
             Main_Webview.TabIndex = 0;
             Main_Webview.ZoomFactor = 1D;
             // 
+            // label15
+            // 
+            label15.Location = new Point(5, 89);
+            label15.Name = "label15";
+            label15.Size = new Size(162, 23);
+            label15.TabIndex = 4;
+            label15.Text = "Đang chuyển hoàn:";
+            // 
+            // label13
+            // 
+            label13.Location = new Point(5, 32);
+            label13.Name = "label13";
+            label13.Size = new Size(87, 23);
+            label13.TabIndex = 4;
+            label13.Text = "Tổng đơn:";
+            // 
+            // label16
+            // 
+            label16.Location = new Point(5, 60);
+            label16.Name = "label16";
+            label16.Size = new Size(132, 23);
+            label16.TabIndex = 4;
+            label16.Text = "Có kiện vấn đề:";
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -2060,5 +2090,8 @@ namespace AutoJMS
         private Guna.UI2.WinForms.Guna2ComboBox zaloChat_selectTimeRemind;
         private Label label14;
         private ProgressBar progressBar1;
+        private Label label15;
+        private Label label13;
+        private Label label16;
     }
 }
