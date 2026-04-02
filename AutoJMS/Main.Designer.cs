@@ -17,38 +17,36 @@ namespace AutoJMS
 
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             pnl_Left = new Panel();
@@ -80,18 +78,17 @@ namespace AutoJMS
             pnl_ZaloChat_Main = new Panel();
             guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
             guna2Panel4 = new Guna.UI2.WinForms.Guna2Panel();
-            guna2DataGridView1 = new Guna.UI2.WinForms.Guna2DataGridView();
+            zaloChat_DataView = new Guna.UI2.WinForms.Guna2DataGridView();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            progressBar1 = new ProgressBar();
+            zaloChat_btn_Refesh = new Guna.UI2.WinForms.Guna2Button();
             label12 = new Label();
+            zaloChat_selectStatus = new Guna.UI2.WinForms.Guna2ComboBox();
             guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
-            btn_ZaloChat_batDau = new Guna.UI2.WinForms.Guna2Button();
+            zaloChat_selectTimeRemind = new Guna.UI2.WinForms.Guna2ComboBox();
+            label14 = new Label();
+            ZaloChat_btn_start = new Guna.UI2.WinForms.Guna2Button();
             guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
-            guna2Panel5 = new Guna.UI2.WinForms.Guna2Panel();
-            customButton2 = new AutoJMS.CustomControl.CustomButton();
-            label13 = new Label();
             guna2CirclePictureBox2 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             linkLabel2 = new LinkLabel();
             tab_About = new TabPage();
@@ -189,11 +186,10 @@ namespace AutoJMS
             pnl_ZaloChat_Main.SuspendLayout();
             guna2GradientPanel1.SuspendLayout();
             guna2Panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)guna2DataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)zaloChat_DataView).BeginInit();
             guna2Panel1.SuspendLayout();
             guna2Panel2.SuspendLayout();
             guna2Panel3.SuspendLayout();
-            guna2Panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox2).BeginInit();
             tab_About.SuspendLayout();
             guna2Panel6.SuspendLayout();
@@ -566,32 +562,32 @@ namespace AutoJMS
             guna2GradientPanel1.Controls.Add(guna2Panel1);
             guna2GradientPanel1.Controls.Add(guna2Panel2);
             guna2GradientPanel1.Controls.Add(guna2Panel3);
-            guna2GradientPanel1.CustomizableEdges = customizableEdges20;
+            guna2GradientPanel1.CustomizableEdges = customizableEdges18;
             guna2GradientPanel1.Dock = DockStyle.Fill;
             guna2GradientPanel1.FillColor = Color.FromArgb(128, 128, 255);
             guna2GradientPanel1.FillColor2 = Color.FromArgb(255, 192, 192);
             guna2GradientPanel1.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
             guna2GradientPanel1.Location = new Point(0, 0);
             guna2GradientPanel1.Name = "guna2GradientPanel1";
-            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges21;
+            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges19;
             guna2GradientPanel1.Size = new Size(386, 674);
             guna2GradientPanel1.TabIndex = 0;
             // 
             // guna2Panel4
             // 
-            guna2Panel4.Controls.Add(guna2DataGridView1);
+            guna2Panel4.Controls.Add(zaloChat_DataView);
             guna2Panel4.CustomizableEdges = customizableEdges1;
             guna2Panel4.Dock = DockStyle.Fill;
-            guna2Panel4.Location = new Point(0, 281);
+            guna2Panel4.Location = new Point(0, 252);
             guna2Panel4.Name = "guna2Panel4";
             guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Panel4.Size = new Size(386, 393);
+            guna2Panel4.Size = new Size(386, 422);
             guna2Panel4.TabIndex = 4;
             // 
-            // guna2DataGridView1
+            // zaloChat_DataView
             // 
             dataGridViewCellStyle1.BackColor = Color.White;
-            guna2DataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            zaloChat_DataView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
@@ -599,9 +595,9 @@ namespace AutoJMS
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            guna2DataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            guna2DataGridView1.ColumnHeadersHeight = 4;
-            guna2DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            zaloChat_DataView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            zaloChat_DataView.ColumnHeadersHeight = 4;
+            zaloChat_DataView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
@@ -609,52 +605,81 @@ namespace AutoJMS
             dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            guna2DataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
-            guna2DataGridView1.Dock = DockStyle.Fill;
-            guna2DataGridView1.GridColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView1.Location = new Point(0, 0);
-            guna2DataGridView1.Name = "guna2DataGridView1";
-            guna2DataGridView1.RowHeadersVisible = false;
-            guna2DataGridView1.RowHeadersWidth = 51;
-            guna2DataGridView1.Size = new Size(386, 393);
-            guna2DataGridView1.TabIndex = 0;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.Font = null;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
-            guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
-            guna2DataGridView1.ThemeStyle.BackColor = Color.White;
-            guna2DataGridView1.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView1.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
-            guna2DataGridView1.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            guna2DataGridView1.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
-            guna2DataGridView1.ThemeStyle.HeaderStyle.ForeColor = Color.White;
-            guna2DataGridView1.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            guna2DataGridView1.ThemeStyle.HeaderStyle.Height = 4;
-            guna2DataGridView1.ThemeStyle.ReadOnly = false;
-            guna2DataGridView1.ThemeStyle.RowsStyle.BackColor = Color.White;
-            guna2DataGridView1.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            guna2DataGridView1.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
-            guna2DataGridView1.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
-            guna2DataGridView1.ThemeStyle.RowsStyle.Height = 29;
-            guna2DataGridView1.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            guna2DataGridView1.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            zaloChat_DataView.DefaultCellStyle = dataGridViewCellStyle3;
+            zaloChat_DataView.Dock = DockStyle.Fill;
+            zaloChat_DataView.GridColor = Color.FromArgb(231, 229, 255);
+            zaloChat_DataView.Location = new Point(0, 0);
+            zaloChat_DataView.Name = "zaloChat_DataView";
+            zaloChat_DataView.RowHeadersVisible = false;
+            zaloChat_DataView.RowHeadersWidth = 51;
+            zaloChat_DataView.Size = new Size(386, 422);
+            zaloChat_DataView.TabIndex = 0;
+            zaloChat_DataView.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
+            zaloChat_DataView.ThemeStyle.AlternatingRowsStyle.Font = null;
+            zaloChat_DataView.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
+            zaloChat_DataView.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
+            zaloChat_DataView.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
+            zaloChat_DataView.ThemeStyle.BackColor = Color.White;
+            zaloChat_DataView.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
+            zaloChat_DataView.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
+            zaloChat_DataView.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
+            zaloChat_DataView.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 9F);
+            zaloChat_DataView.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            zaloChat_DataView.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            zaloChat_DataView.ThemeStyle.HeaderStyle.Height = 4;
+            zaloChat_DataView.ThemeStyle.ReadOnly = false;
+            zaloChat_DataView.ThemeStyle.RowsStyle.BackColor = Color.White;
+            zaloChat_DataView.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            zaloChat_DataView.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 9F);
+            zaloChat_DataView.ThemeStyle.RowsStyle.ForeColor = Color.FromArgb(71, 69, 94);
+            zaloChat_DataView.ThemeStyle.RowsStyle.Height = 29;
+            zaloChat_DataView.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            zaloChat_DataView.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
             // 
             // guna2Panel1
             // 
             guna2Panel1.BorderColor = Color.White;
             guna2Panel1.BorderRadius = 15;
             guna2Panel1.BorderThickness = 3;
+            guna2Panel1.Controls.Add(progressBar1);
+            guna2Panel1.Controls.Add(zaloChat_btn_Refesh);
             guna2Panel1.Controls.Add(label12);
-            guna2Panel1.CustomizableEdges = customizableEdges3;
+            guna2Panel1.Controls.Add(zaloChat_selectStatus);
+            guna2Panel1.CustomizableEdges = customizableEdges7;
             guna2Panel1.Dock = DockStyle.Top;
             guna2Panel1.FillColor = Color.Transparent;
             guna2Panel1.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic);
-            guna2Panel1.Location = new Point(0, 172);
+            guna2Panel1.Location = new Point(0, 127);
             guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2Panel1.Size = new Size(386, 109);
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            guna2Panel1.Size = new Size(386, 125);
             guna2Panel1.TabIndex = 3;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Location = new Point(2, 27);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(383, 2);
+            progressBar1.TabIndex = 3;
+            // 
+            // zaloChat_btn_Refesh
+            // 
+            zaloChat_btn_Refesh.BorderRadius = 15;
+            zaloChat_btn_Refesh.CustomizableEdges = customizableEdges3;
+            zaloChat_btn_Refesh.DisabledState.BorderColor = Color.DarkGray;
+            zaloChat_btn_Refesh.DisabledState.CustomBorderColor = Color.DarkGray;
+            zaloChat_btn_Refesh.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            zaloChat_btn_Refesh.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            zaloChat_btn_Refesh.FillColor = Color.White;
+            zaloChat_btn_Refesh.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic);
+            zaloChat_btn_Refesh.ForeColor = Color.Black;
+            zaloChat_btn_Refesh.Location = new Point(216, 75);
+            zaloChat_btn_Refesh.Margin = new Padding(5);
+            zaloChat_btn_Refesh.Name = "zaloChat_btn_Refesh";
+            zaloChat_btn_Refesh.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            zaloChat_btn_Refesh.Size = new Size(147, 36);
+            zaloChat_btn_Refesh.TabIndex = 1;
+            zaloChat_btn_Refesh.Text = "Làm Mới";
             // 
             // label12
             // 
@@ -666,169 +691,123 @@ namespace AutoJMS
             label12.TabIndex = 0;
             label12.Text = "Trạng thái";
             // 
+            // zaloChat_selectStatus
+            // 
+            zaloChat_selectStatus.BackColor = Color.Transparent;
+            zaloChat_selectStatus.BorderRadius = 15;
+            zaloChat_selectStatus.CustomizableEdges = customizableEdges5;
+            zaloChat_selectStatus.DrawMode = DrawMode.OwnerDrawFixed;
+            zaloChat_selectStatus.DropDownHeight = 200;
+            zaloChat_selectStatus.DropDownStyle = ComboBoxStyle.DropDownList;
+            zaloChat_selectStatus.DropDownWidth = 160;
+            zaloChat_selectStatus.FocusedColor = Color.FromArgb(94, 148, 255);
+            zaloChat_selectStatus.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            zaloChat_selectStatus.Font = new Font("Segoe UI", 10F);
+            zaloChat_selectStatus.ForeColor = Color.FromArgb(68, 88, 112);
+            zaloChat_selectStatus.IntegralHeight = false;
+            zaloChat_selectStatus.ItemHeight = 30;
+            zaloChat_selectStatus.Items.AddRange(new object[] { "Đăng ký chuyển hoàn", "Giao lại hàng", "Quét phát hàng" });
+            zaloChat_selectStatus.Location = new Point(194, 31);
+            zaloChat_selectStatus.Name = "zaloChat_selectStatus";
+            zaloChat_selectStatus.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            zaloChat_selectStatus.Size = new Size(185, 36);
+            zaloChat_selectStatus.Sorted = true;
+            zaloChat_selectStatus.TabIndex = 2;
+            zaloChat_selectStatus.TextAlign = HorizontalAlignment.Center;
+            // 
             // guna2Panel2
             // 
             guna2Panel2.BorderColor = Color.White;
             guna2Panel2.BorderRadius = 15;
-            guna2Panel2.BorderStyle = System.Drawing.Drawing2D.DashStyle.Custom;
             guna2Panel2.BorderThickness = 3;
-            guna2Panel2.Controls.Add(guna2Button1);
-            guna2Panel2.Controls.Add(guna2Button2);
-            guna2Panel2.Controls.Add(guna2ComboBox1);
-            guna2Panel2.Controls.Add(btn_ZaloChat_batDau);
+            guna2Panel2.Controls.Add(zaloChat_selectTimeRemind);
+            guna2Panel2.Controls.Add(label14);
+            guna2Panel2.Controls.Add(ZaloChat_btn_start);
             guna2Panel2.CustomizableEdges = customizableEdges13;
             guna2Panel2.Dock = DockStyle.Top;
             guna2Panel2.FillColor = Color.Transparent;
             guna2Panel2.Location = new Point(0, 52);
             guna2Panel2.Name = "guna2Panel2";
             guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2Panel2.Size = new Size(386, 120);
+            guna2Panel2.Size = new Size(386, 75);
             guna2Panel2.TabIndex = 2;
             // 
-            // guna2Button1
+            // zaloChat_selectTimeRemind
             // 
-            guna2Button1.BorderColor = Color.Red;
-            guna2Button1.BorderRadius = 20;
-            guna2Button1.CustomizableEdges = customizableEdges5;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = Color.White;
-            guna2Button1.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic);
-            guna2Button1.ForeColor = Color.Black;
-            guna2Button1.Location = new Point(10, 65);
-            guna2Button1.Margin = new Padding(5);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            guna2Button1.Size = new Size(170, 48);
-            guna2Button1.TabIndex = 1;
-            guna2Button1.Text = "Dừng Bot";
+            zaloChat_selectTimeRemind.BackColor = Color.Transparent;
+            zaloChat_selectTimeRemind.BorderRadius = 15;
+            zaloChat_selectTimeRemind.CustomizableEdges = customizableEdges9;
+            zaloChat_selectTimeRemind.DrawMode = DrawMode.OwnerDrawFixed;
+            zaloChat_selectTimeRemind.DropDownHeight = 200;
+            zaloChat_selectTimeRemind.DropDownStyle = ComboBoxStyle.DropDownList;
+            zaloChat_selectTimeRemind.DropDownWidth = 160;
+            zaloChat_selectTimeRemind.FocusedColor = Color.FromArgb(94, 148, 255);
+            zaloChat_selectTimeRemind.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            zaloChat_selectTimeRemind.Font = new Font("Segoe UI", 10F);
+            zaloChat_selectTimeRemind.ForeColor = Color.FromArgb(68, 88, 112);
+            zaloChat_selectTimeRemind.IntegralHeight = false;
+            zaloChat_selectTimeRemind.ItemHeight = 30;
+            zaloChat_selectTimeRemind.Items.AddRange(new object[] { "1 tiếng", "2 tiếng", "30 phút", "5 giây" });
+            zaloChat_selectTimeRemind.ItemsAppearance.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            zaloChat_selectTimeRemind.ItemsAppearance.ForeColor = Color.Black;
+            zaloChat_selectTimeRemind.Location = new Point(264, 18);
+            zaloChat_selectTimeRemind.Name = "zaloChat_selectTimeRemind";
+            zaloChat_selectTimeRemind.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            zaloChat_selectTimeRemind.Size = new Size(115, 36);
+            zaloChat_selectTimeRemind.Sorted = true;
+            zaloChat_selectTimeRemind.TabIndex = 2;
+            zaloChat_selectTimeRemind.TextAlign = HorizontalAlignment.Center;
             // 
-            // guna2Button2
+            // label14
             // 
-            guna2Button2.BorderRadius = 20;
-            guna2Button2.CustomizableEdges = customizableEdges7;
-            guna2Button2.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button2.FillColor = Color.White;
-            guna2Button2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic);
-            guna2Button2.ForeColor = Color.Black;
-            guna2Button2.Location = new Point(208, 9);
-            guna2Button2.Margin = new Padding(5);
-            guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            guna2Button2.Size = new Size(170, 48);
-            guna2Button2.TabIndex = 1;
-            guna2Button2.Text = "Làm Mới";
+            label14.Font = new Font("Segoe UI", 9F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label14.ForeColor = Color.White;
+            label14.Location = new Point(187, 27);
+            label14.Name = "label14";
+            label14.Size = new Size(89, 25);
+            label14.TabIndex = 3;
+            label14.Text = "Nhắc sau:";
             // 
-            // guna2ComboBox1
+            // ZaloChat_btn_start
             // 
-            guna2ComboBox1.BackColor = Color.Transparent;
-            guna2ComboBox1.BorderRadius = 15;
-            guna2ComboBox1.CustomizableEdges = customizableEdges9;
-            guna2ComboBox1.DrawMode = DrawMode.OwnerDrawFixed;
-            guna2ComboBox1.DropDownHeight = 200;
-            guna2ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            guna2ComboBox1.DropDownWidth = 160;
-            guna2ComboBox1.FocusedColor = Color.FromArgb(94, 148, 255);
-            guna2ComboBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2ComboBox1.Font = new Font("Segoe UI", 10F);
-            guna2ComboBox1.ForeColor = Color.FromArgb(68, 88, 112);
-            guna2ComboBox1.IntegralHeight = false;
-            guna2ComboBox1.ItemHeight = 30;
-            guna2ComboBox1.Items.AddRange(new object[] { "Đăng ký chuyển hoàn", "Giao lại hàng", "Quét phát hàng" });
-            guna2ComboBox1.Location = new Point(194, 72);
-            guna2ComboBox1.Name = "guna2ComboBox1";
-            guna2ComboBox1.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            guna2ComboBox1.Size = new Size(185, 36);
-            guna2ComboBox1.Sorted = true;
-            guna2ComboBox1.TabIndex = 2;
-            guna2ComboBox1.TextAlign = HorizontalAlignment.Center;
-            // 
-            // btn_ZaloChat_batDau
-            // 
-            btn_ZaloChat_batDau.BorderRadius = 20;
-            btn_ZaloChat_batDau.CustomBorderColor = Color.FromArgb(0, 192, 0);
-            btn_ZaloChat_batDau.CustomizableEdges = customizableEdges11;
-            btn_ZaloChat_batDau.DisabledState.BorderColor = Color.DarkGray;
-            btn_ZaloChat_batDau.DisabledState.CustomBorderColor = Color.DarkGray;
-            btn_ZaloChat_batDau.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            btn_ZaloChat_batDau.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btn_ZaloChat_batDau.FillColor = Color.White;
-            btn_ZaloChat_batDau.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic);
-            btn_ZaloChat_batDau.ForeColor = Color.Black;
-            btn_ZaloChat_batDau.Location = new Point(10, 9);
-            btn_ZaloChat_batDau.Name = "btn_ZaloChat_batDau";
-            btn_ZaloChat_batDau.ShadowDecoration.CustomizableEdges = customizableEdges12;
-            btn_ZaloChat_batDau.Size = new Size(170, 48);
-            btn_ZaloChat_batDau.TabIndex = 0;
-            btn_ZaloChat_batDau.Text = "Bắt đầu Bot";
+            ZaloChat_btn_start.BorderRadius = 20;
+            ZaloChat_btn_start.CustomBorderColor = Color.FromArgb(0, 192, 0);
+            ZaloChat_btn_start.CustomizableEdges = customizableEdges11;
+            ZaloChat_btn_start.DisabledState.BorderColor = Color.DarkGray;
+            ZaloChat_btn_start.DisabledState.CustomBorderColor = Color.DarkGray;
+            ZaloChat_btn_start.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            ZaloChat_btn_start.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            ZaloChat_btn_start.FillColor = Color.White;
+            ZaloChat_btn_start.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic);
+            ZaloChat_btn_start.ForeColor = Color.Black;
+            ZaloChat_btn_start.Location = new Point(11, 12);
+            ZaloChat_btn_start.Name = "ZaloChat_btn_start";
+            ZaloChat_btn_start.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            ZaloChat_btn_start.Size = new Size(170, 48);
+            ZaloChat_btn_start.TabIndex = 0;
+            ZaloChat_btn_start.Text = "Bắt đầu Bot";
             // 
             // guna2Panel3
             // 
             guna2Panel3.BorderColor = Color.White;
             guna2Panel3.BorderRadius = 15;
             guna2Panel3.BorderThickness = 3;
-            guna2Panel3.Controls.Add(guna2Panel5);
             guna2Panel3.Controls.Add(guna2CirclePictureBox2);
             guna2Panel3.Controls.Add(linkLabel2);
-            guna2Panel3.CustomizableEdges = customizableEdges18;
+            guna2Panel3.CustomizableEdges = customizableEdges16;
             guna2Panel3.Dock = DockStyle.Top;
             guna2Panel3.Location = new Point(0, 0);
             guna2Panel3.Name = "guna2Panel3";
-            guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges19;
+            guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges17;
             guna2Panel3.Size = new Size(386, 52);
             guna2Panel3.TabIndex = 1;
-            // 
-            // guna2Panel5
-            // 
-            guna2Panel5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            guna2Panel5.BackColor = Color.FromArgb(128, 128, 255);
-            guna2Panel5.Controls.Add(customButton2);
-            guna2Panel5.Controls.Add(label13);
-            guna2Panel5.CustomizableEdges = customizableEdges15;
-            guna2Panel5.Location = new Point(227, 5);
-            guna2Panel5.Name = "guna2Panel5";
-            guna2Panel5.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            guna2Panel5.Size = new Size(136, 36);
-            guna2Panel5.TabIndex = 11;
-            // 
-            // customButton2
-            // 
-            customButton2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            customButton2.AutoSize = true;
-            customButton2.FlatAppearance.BorderSize = 0;
-            customButton2.FlatStyle = FlatStyle.Flat;
-            customButton2.Location = new Point(88, 11);
-            customButton2.MinimumSize = new Size(45, 22);
-            customButton2.Name = "customButton2";
-            customButton2.OffBackColor = Color.Gray;
-            customButton2.OffToggleColor = Color.Gainsboro;
-            customButton2.OnBackColor = Color.FromArgb(192, 255, 192);
-            customButton2.OnToggleColor = Color.Lime;
-            customButton2.Size = new Size(45, 22);
-            customButton2.TabIndex = 0;
-            customButton2.UseVisualStyleBackColor = true;
-            // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic);
-            label13.Location = new Point(5, 11);
-            label13.Name = "label13";
-            label13.Size = new Size(77, 23);
-            label13.TabIndex = 8;
-            label13.Text = "Tự động:";
             // 
             // guna2CirclePictureBox2
             // 
             guna2CirclePictureBox2.ImageRotate = 0F;
             guna2CirclePictureBox2.Location = new Point(11, 11);
             guna2CirclePictureBox2.Name = "guna2CirclePictureBox2";
-            guna2CirclePictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges17;
+            guna2CirclePictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges15;
             guna2CirclePictureBox2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CirclePictureBox2.Size = new Size(32, 32);
             guna2CirclePictureBox2.TabIndex = 9;
@@ -860,25 +839,25 @@ namespace AutoJMS
             // guna2Panel6
             // 
             guna2Panel6.Controls.Add(guna2GradientPanel2);
-            guna2Panel6.CustomizableEdges = customizableEdges27;
+            guna2Panel6.CustomizableEdges = customizableEdges25;
             guna2Panel6.Dock = DockStyle.Fill;
             guna2Panel6.Location = new Point(3, 3);
             guna2Panel6.Name = "guna2Panel6";
-            guna2Panel6.ShadowDecoration.CustomizableEdges = customizableEdges28;
+            guna2Panel6.ShadowDecoration.CustomizableEdges = customizableEdges26;
             guna2Panel6.Size = new Size(386, 674);
             guna2Panel6.TabIndex = 0;
             // 
             // guna2GradientPanel2
             // 
             guna2GradientPanel2.Controls.Add(tableLayoutPanel5);
-            guna2GradientPanel2.CustomizableEdges = customizableEdges25;
+            guna2GradientPanel2.CustomizableEdges = customizableEdges23;
             guna2GradientPanel2.Dock = DockStyle.Fill;
             guna2GradientPanel2.FillColor = Color.FromArgb(128, 128, 255);
             guna2GradientPanel2.FillColor2 = Color.FromArgb(255, 192, 192);
             guna2GradientPanel2.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
             guna2GradientPanel2.Location = new Point(0, 0);
             guna2GradientPanel2.Name = "guna2GradientPanel2";
-            guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges24;
             guna2GradientPanel2.Size = new Size(386, 674);
             guna2GradientPanel2.TabIndex = 1;
             // 
@@ -904,7 +883,7 @@ namespace AutoJMS
             // 
             btn_CheckUpdate.Anchor = AnchorStyles.Top;
             btn_CheckUpdate.BorderRadius = 15;
-            btn_CheckUpdate.CustomizableEdges = customizableEdges22;
+            btn_CheckUpdate.CustomizableEdges = customizableEdges20;
             btn_CheckUpdate.DisabledState.BorderColor = Color.DarkGray;
             btn_CheckUpdate.DisabledState.CustomBorderColor = Color.DarkGray;
             btn_CheckUpdate.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -914,7 +893,7 @@ namespace AutoJMS
             btn_CheckUpdate.ForeColor = Color.Black;
             btn_CheckUpdate.Location = new Point(26, 163);
             btn_CheckUpdate.Name = "btn_CheckUpdate";
-            btn_CheckUpdate.ShadowDecoration.CustomizableEdges = customizableEdges23;
+            btn_CheckUpdate.ShadowDecoration.CustomizableEdges = customizableEdges21;
             btn_CheckUpdate.Size = new Size(147, 34);
             btn_CheckUpdate.TabIndex = 0;
             btn_CheckUpdate.Text = "Check Update";
@@ -951,7 +930,7 @@ namespace AutoJMS
             guna2CirclePictureBox1.InitialImage = null;
             guna2CirclePictureBox1.Location = new Point(60, 3);
             guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges22;
             guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CirclePictureBox1.Size = new Size(80, 80);
             guna2CirclePictureBox1.TabIndex = 1;
@@ -1875,14 +1854,12 @@ namespace AutoJMS
             pnl_ZaloChat_Main.ResumeLayout(false);
             guna2GradientPanel1.ResumeLayout(false);
             guna2Panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)guna2DataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)zaloChat_DataView).EndInit();
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
             guna2Panel2.ResumeLayout(false);
             guna2Panel3.ResumeLayout(false);
             guna2Panel3.PerformLayout();
-            guna2Panel5.ResumeLayout(false);
-            guna2Panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox2).EndInit();
             tab_About.ResumeLayout(false);
             guna2Panel6.ResumeLayout(false);
@@ -2062,18 +2039,15 @@ namespace AutoJMS
         private Guna.UI2.WinForms.Guna2Panel guna2Panel3;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
-        private Guna.UI2.WinForms.Guna2Button btn_ZaloChat_batDau;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox1;
+        private Guna.UI2.WinForms.Guna2Button ZaloChat_btn_start;
+        private Guna.UI2.WinForms.Guna2Button zaloChat_btn_Refesh;
+        private Guna.UI2.WinForms.Guna2ComboBox zaloChat_selectStatus;
         private Label label12;
         private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel1;
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox2;
         private LinkLabel linkLabel2;
-        private Label label13;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel4;
-        private Guna.UI2.WinForms.Guna2DataGridView guna2DataGridView1;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel5;
+        private Guna.UI2.WinForms.Guna2DataGridView zaloChat_DataView;
         private CustomControl.CustomButton customButton1;
         private TabPage tab_About;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel6;
@@ -2083,6 +2057,8 @@ namespace AutoJMS
         private TableLayoutPanel tableLayoutPanel5;
         private Label lbl_version;
         private Label label3;
-        private CustomControl.CustomButton customButton2;
+        private Guna.UI2.WinForms.Guna2ComboBox zaloChat_selectTimeRemind;
+        private Label label14;
+        private ProgressBar progressBar1;
     }
 }
