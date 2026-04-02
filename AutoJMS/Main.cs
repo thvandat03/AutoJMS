@@ -1,4 +1,5 @@
 using AutoJMS.Data;
+using AutoUpdaterDotNET;
 using DocumentFormat.OpenXml.Drawing.Charts;
 using Microsoft.Web.WebView2.Core;
 using System;
@@ -6,13 +7,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AutoUpdaterDotNET;
-using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace AutoJMS
 {
@@ -30,7 +32,11 @@ namespace AutoJMS
         private PrintService _printService;
         private ZaloChatService _zaloChatService;
         private System.Windows.Forms.Timer _queueTimer;
-        private int _originalPnlLeftWidth = 0;
+        private BindingSource _zaloBindingSource = new BindingSource();
+        private int _originalPnlLeftWidth = 260;
+        private bool isZaloBotRunning = false;
+        private System.Windows.Forms.Timer timer_AutoUpdateStatus;
+
 
         public Main()
         {
@@ -40,10 +46,10 @@ namespace AutoJMS
             string versionText = $"Phiên bản: v{appVersion}";
             lbl_version.Text = versionText;
             lbl_version.ForeColor = System.Drawing.Color.Red;
-            lbl_version.Visible = true; 
-            lbl_version.BringToFront(); 
-        
-        cb_SheetName.SelectedItem = _settings.DefaultSheet;
+            lbl_version.Visible = true;
+            lbl_version.BringToFront();
+
+            cb_SheetName.SelectedItem = _settings.DefaultSheet;
             ckb_UseSheet.Checked = _settings.UseSheetByDefault;
             _originalPnlLeftWidth = pnl_Left.Width;
             num_Row.Value = _settings.DefaultRowCount;
@@ -53,6 +59,8 @@ namespace AutoJMS
             _queueTimer.Interval = 30000; // 30 giây check 1 lần
             _queueTimer.Tick += async (s, e) => await ProcessDirectTrackingAsync();
             _queueTimer.Start();
+            InitStatusTimer();
+
 
             btn_DKCH1.Visible = true;
             btn_DKCH2.Visible = true;
@@ -102,26 +110,22 @@ namespace AutoJMS
         }
         private async Task ProcessDirectTrackingAsync()
         {
-            _queueTimer.Stop(); // Tạm dừng timer
+            _queueTimer.Stop();
             try
             {
                 string spreadsheetId = GoogleSheetService.DATA_SPREADSHEET_ID;
 
-                // 1. Đọc giá trị tại ô C5 của sheet PHATLAI
-                string c5Value = "";
+                // 1. Kiểm tra lệnh RUN ở C5
                 var c5Data = GoogleSheetService.ReadRange(spreadsheetId, "PHATLAI!C5");
-                if (c5Data != null && c5Data.Count > 0 && c5Data[0].Count > 0)
-                {
-                    c5Value = c5Data[0][0].ToString().Trim().ToUpper();
-                }
+                string c5Value = (c5Data != null && c5Data.Count > 0 && c5Data[0].Count > 0)
+                    ? c5Data[0][0].ToString().Trim().ToUpper()
+                    : "";
 
-                // 2. Nếu có lệnh RUN
                 if (c5Value == "RUN")
                 {
-                    // Chuyển C5 thành PROCESSING để khóa lệnh, tránh timer vòng sau chạy trùng
                     GoogleSheetService.UpdateCell(spreadsheetId, "PHATLAI!C5", "PROCESSING");
 
-                    // 3. Đọc toàn bộ danh sách mã đơn ở cột A (từ A2 trở xuống)
+                    // Đọc danh sách từ cột A
                     var columnAData = GoogleSheetService.ReadRange(spreadsheetId, "PHATLAI!A2:A");
                     List<string> waybills = new List<string>();
 
@@ -129,44 +133,45 @@ namespace AutoJMS
                     {
                         foreach (var row in columnAData)
                         {
-                            if (row.Count > 0 && !string.IsNullOrWhiteSpace(row[0].ToString()))
-                            {
+                            if (row.Count > 0 && !string.IsNullOrWhiteSpace(row[0]?.ToString()))
                                 waybills.Add(row[0].ToString().Trim());
-                            }
                         }
                     }
 
-                    // 4. Bắt đầu xử lý Tracking nếu có mã đơn
                     if (waybills.Count > 0)
                     {
                         string waybillsText = string.Join("\n", waybills);
 
-                        // Chạy API Tracking ngầm
+                        // Tracking
                         await _trackingService.SearchTrackingAsync(waybillsText, false);
                         var results = _trackingService.GetAllRows();
 
-                        // Chuẩn bị dữ liệu ghi lên BUMP
+                        // Ghi kết quả vào BUMP
                         var sheetData = new List<IList<object>>();
                         foreach (var item in results)
                         {
                             sheetData.Add(new List<object>()
                     {
-                        item.WaybillNo, item.TrangThaiHienTai, item.ThaoTacCuoi,
-                        item.ThoiGianThaoTac, item.ThoiGianYeuCauPhatLai, item.NhanVienKienVanDe 
-                        // Bạn có thể thêm các trường khác nếu BUMP có nhiều cột hơn
+                        item.WaybillNo,
+                        item.TrangThaiHienTai,
+                        item.ThaoTacCuoi,
+                        item.ThoiGianThaoTac,
+                        item.ThoiGianYeuCauPhatLai,
+                        item.NhanVienKienVanDe
                     });
                         }
-
-                        // 5. Ghi dữ liệu đè lên sheet BUMP
                         GoogleSheetService.UpdateBumpSheet(sheetData, spreadsheetId, "BUMP!A2");
-                        string targetSheetName = "BUMP";
 
+                        // === PHẦN MỚI: COPY danh sách vừa tracking vào cột B2:B ===
+                        var bValues = new List<IList<object>>();
+                        foreach (var wb in waybills)
+                        {
+                            bValues.Add(new List<object> { wb });
+                        }
+                        GoogleSheetService.UpdateBumpSheet(bValues, spreadsheetId, "PHATLAI!B2");
 
-                        // Bước 3.2: GHI ĐÈ DỮ LIỆU MỚI (Bắt đầu từ ô A1 vì đã có chứa Header)
-                        GoogleSheetService.UpdateBumpSheet(sheetData, spreadsheetId, $"{targetSheetName}!A2");
                     }
 
-                    // 6. Hoàn tất quá trình, đánh dấu C5 thành DONE (hoặc bạn có thể set nó thành ô trống "")
                     GoogleSheetService.UpdateCell(spreadsheetId, "PHATLAI!C5", "DONE");
                 }
             }
@@ -176,7 +181,7 @@ namespace AutoJMS
             }
             finally
             {
-                _queueTimer.Start(); // Chạy lại timer
+                _queueTimer.Start();
             }
         }
         private void ApplyZoomFactor()
@@ -214,6 +219,7 @@ namespace AutoJMS
         }
 
         private bool _isZaloLoaded = false;
+        private bool _zaloServiceInitialized = false;
 
         private async void Tab_Control_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -260,7 +266,7 @@ namespace AutoJMS
                 {
                     if (pnl_ZaloChatz != null)
                     {
-                        pnl_Left.Width = 400; // Kéo giãn panel trái
+                        pnl_Left.Width = 400;
                         if (pnl_ZaloChatz.Parent != panel_Main_act) pnl_ZaloChatz.Parent = panel_Main_act;
                         pnl_ZaloChatz.Visible = true;
                         pnl_ZaloChatz.BringToFront();
@@ -271,6 +277,29 @@ namespace AutoJMS
                             btn_FocusMode.Visible = true;
                             btn_FocusMode.BringToFront();
                         }
+                    }
+
+                    // === LUÔN SETUP GRID NGAY KHI MỞ TAB (để header hiện liền) ===
+                    if (!_isZaloLoaded)
+                    {
+                        zaloChat_DataView.AutoGenerateColumns = false;
+                        UniformHeaderColor();
+                        EnableDoubleBufferedForGunaGrid();
+                        try
+                        {
+                            await Main_ZaloChat.EnsureCoreWebView2Async();
+                            Main_ZaloChat.CoreWebView2.Navigate("https://chat.zalo.me/index.html");
+                            Main_ZaloChat.NavigationCompleted += ZaloNavigationCompletedHandler;
+                            _isZaloLoaded = true;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Lỗi khởi tạo Zalo Web: " + ex.Message);
+                        }
+                    }
+                    else if (_zaloServiceInitialized && _zaloChatService != null)
+                    {
+                        await LoadZaloData();
                     }
                 }
             }
@@ -298,14 +327,6 @@ namespace AutoJMS
                         await Main_ZaloChat.EnsureCoreWebView2Async();
                         Main_ZaloChat.CoreWebView2.Navigate("https://chat.zalo.me/index.html");
 
-                        Main_ZaloChat.NavigationCompleted += (s, args) =>
-                        {
-                            if (_zaloChatService == null)
-                            {
-                                _zaloChatService = new ZaloChatService(Main_ZaloChat, appsScriptUrl);
-                                _zaloChatService.StartAutoReminder(5);
-                            }
-                        };
                         _isZaloLoaded = true;
                     }
                     catch (Exception ex)
@@ -315,7 +336,20 @@ namespace AutoJMS
                 }
             }
         }
+        private async void ZaloNavigationCompletedHandler(object sender, CoreWebView2NavigationCompletedEventArgs args)
+        {
+            if (_zaloChatService == null)
+            {
+                _zaloChatService = new ZaloChatService(Main_ZaloChat, appsScriptUrl);
+                // KHÔNG auto start reminder ở đây (để user bấm nút Start)
+            }
 
+            if (!_zaloServiceInitialized)
+            {
+                await LoadZaloData();           // Load dữ liệu lần đầu sau khi service sẵn sàng
+                _zaloServiceInitialized = true;
+            }
+        }
         private async void Main_Load(object sender, EventArgs e)
         {
             Version appVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
@@ -332,7 +366,9 @@ namespace AutoJMS
             {
                 if (args.IsSuccess) ApplyZoomFactor();
             };
+
         }
+        
 
         private void CoreWebView2_WebResourceRequested(object sender, CoreWebView2WebResourceRequestedEventArgs e)
         {
@@ -548,6 +584,7 @@ namespace AutoJMS
                     // Bước 3.2: GHI ĐÈ DỮ LIỆU MỚI (Bắt đầu từ ô A1 vì đã có chứa Header)
                     GoogleSheetService.UpdateBumpSheet(sheetData, spreadsheetId, $"{targetSheetName}!A1");
                 });
+
 
                 MessageBox.Show("Đã tải lên thành công!", "Hoàn tất", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -825,5 +862,279 @@ namespace AutoJMS
             AutoUpdater.ExecutablePath = "AutoJMS.exe";
             AutoUpdater.Start(xmlUrl);
         }
+
+
+        private void InitStatusTimer()
+        {
+            timer_AutoUpdateStatus = new System.Windows.Forms.Timer();
+            timer_AutoUpdateStatus.Interval = 30 * 60 * 1000; // 30 phút
+            timer_AutoUpdateStatus.Tick += async (s, e) => await ProcessPhatLaiReTrackAsync();
+        }
+
+        private void ZaloChat_btn_start_Click(object sender, EventArgs e)
+        {
+            if (_zaloChatService == null || !_zaloServiceInitialized)
+            {
+                MessageBox.Show("Zalo Chat chưa sẵn sàng.\nVui lòng chờ Zalo Web load xong.",
+                                "Chưa sẵn sàng", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!isZaloBotRunning)
+            {
+                // Kiểm tra thời gian nhắc nhở
+                if (zaloChat_selectTimeRemind.SelectedItem == null ||
+                    string.IsNullOrWhiteSpace(zaloChat_selectTimeRemind.Text))
+                {
+                    MessageBox.Show("Chưa chọn thời gian nhắc lại", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string timeText = zaloChat_selectTimeRemind.Text.Trim();
+                string numberStr = Regex.Match(timeText, @"\d+").Value;
+
+                if (!int.TryParse(numberStr, out int timeValue) || timeValue <= 0)
+                {
+                    MessageBox.Show("Định dạng thời gian không hợp lệ!", "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                int intervalSeconds = timeText.ToLower().Contains("giây") ? timeValue : timeValue * 60;
+
+                // === BẮT ĐẦU CẢ HAI TIMER ===
+                _zaloChatService.StartAutoReminder(intervalSeconds);
+                timer_AutoUpdateStatus.Start();                    // ← Timer tracking cột B
+
+                isZaloBotRunning = true;
+                ZaloChat_btn_start.Text = "Dừng";
+                Console.WriteLine("[ZaloBot] ✅ Đã khởi động cả 2 timer (Remind + Tracking cột B)");
+            }
+            else
+            {
+                // DỪNG CẢ HAI TIMER
+                _zaloChatService.StopAutoReminder();
+                timer_AutoUpdateStatus.Stop();
+
+                isZaloBotRunning = false;
+                ZaloChat_btn_start.Text = "Bắt đầu - Bot";
+                Console.WriteLine("[ZaloBot] ⛔ Đã dừng cả 2 timer");
+            }
+        }
+        // Khai báo biến toàn cục ở đầu file Main.cs
+        private List<Reminder> _allZaloReminders = new List<Reminder>();
+
+        // --- Hãy sửa lại hàm tải dữ liệu của bạn để gán biến này ---
+        private void PopulateZaloStatusCombo()
+        {
+            if (zaloChat_selectStatus == null || _allZaloReminders == null) return;
+
+            var unique = _allZaloReminders
+                .Where(r => !string.IsNullOrWhiteSpace(r.trangThai))
+                .Select(r => r.trangThai.Trim())
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .OrderBy(s => s)
+                .ToList();
+
+            zaloChat_selectStatus.Items.Clear();
+            zaloChat_selectStatus.Items.Add("Tất cả");
+
+            foreach (var s in unique)
+                zaloChat_selectStatus.Items.Add(s);
+
+            zaloChat_selectStatus.SelectedIndex = 0;
+        }
+        /// <summary>
+        /// Buộc tất cả header cột cùng màu
+        /// </summary>
+        private void UniformHeaderColor()
+        {
+            var style = zaloChat_DataView.ColumnHeadersDefaultCellStyle;
+
+            style.BackColor = Color.FromArgb(0, 122, 204); 
+            style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+        }
+        private async Task LoadZaloData()
+        {
+            if (_zaloChatService == null) return;
+
+            // Tạm dừng vẽ để tránh flicker
+            zaloChat_DataView.SuspendLayout();
+
+            try
+            {
+                // === BẮT BUỘC TẮT AutoGenerateColumns ===
+                zaloChat_DataView.AutoGenerateColumns = false;
+                UniformHeaderColor();
+                _allZaloReminders = await _zaloChatService.GetDataFromSheetAsync();
+
+                if (_allZaloReminders.Count == 0)
+                {
+                    _zaloBindingSource.DataSource = null;
+                    zaloChat_DataView.DataSource = null;
+                    return;
+                }
+
+                PopulateZaloStatusCombo();
+
+                _zaloBindingSource.DataSource = _allZaloReminders;
+                zaloChat_DataView.DataSource = _zaloBindingSource;
+
+                zaloChat_DataView.Refresh();
+                zaloChat_DataView.Update();
+            }
+            finally
+            {
+                zaloChat_DataView.ResumeLayout(true);
+            }
+
+            Console.WriteLine($"[Zalo] Load thành công {_allZaloReminders.Count} vận đơn");
+        }
+        /// <summary>
+        /// Bật DoubleBuffered cho Guna2DataGridView (tăng tốc vẽ, giảm flicker)
+        /// </summary>
+        private void EnableDoubleBufferedForGunaGrid()
+        {
+            try
+            {
+                // Reflection để bật DoubleBuffered (Guna2 không expose public)
+                var dgvType = zaloChat_DataView.GetType();
+                var prop = dgvType.GetProperty("DoubleBuffered",
+                            System.Reflection.BindingFlags.NonPublic |
+                            System.Reflection.BindingFlags.Instance);
+
+                prop?.SetValue(zaloChat_DataView, true);
+
+                Console.WriteLine("[Zalo Performance] ✅ DoubleBuffered đã bật cho zaloChat_DataView");
+            }
+            catch
+            {
+                // Fallback nếu reflection lỗi
+                zaloChat_DataView.GetType().GetProperty("DoubleBuffered")?
+                    .SetValue(zaloChat_DataView, true);
+            }
+        }
+        private void FilterZaloGrid()
+        {
+            if (_allZaloReminders == null || zaloChat_DataView == null) return;
+
+            string selected = zaloChat_selectStatus?.Text?.Trim() ?? "Tất cả";
+
+            List<Reminder> listToShow = (string.IsNullOrWhiteSpace(selected) || selected == "Tất cả")
+                ? _allZaloReminders
+                : _allZaloReminders.Where(r =>
+                    !string.IsNullOrEmpty(r.trangThai) &&
+                    r.trangThai.IndexOf(selected, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+
+            zaloChat_DataView.DataSource = null;        // Reset hoàn toàn
+            zaloChat_DataView.DataSource = listToShow;
+
+            zaloChat_DataView.Refresh();
+            zaloChat_DataView.Update();
+
+            Console.WriteLine($"[Zalo] Grid hiển thị {listToShow.Count} dòng (filter: {selected})");
+        }
+        private void zaloChat_selectStatus_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Chỉ filter khi đã có dữ liệu
+            if (_allZaloReminders != null && _allZaloReminders.Count > 0)
+            {
+                FilterZaloGrid();
+            }
+        }
+        private async void zaloChat_btn_Refesh_Click(object sender, EventArgs e)
+        {
+            zaloChat_btn_Refesh.Enabled = false;
+            zaloChat_btn_Refesh.Text = "Đang Tracking...";
+
+            try
+            {
+                // Tracking NGAY từ cột B
+                await ProcessPhatLaiReTrackAsync();
+
+                // Load lại dữ liệu mới nhất vào Grid Zalo
+                await LoadZaloData();
+
+                Console.WriteLine("[Zalo] ✅ Làm mới hoàn tất: Đã tracking cột B và load grid");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi khi làm mới: {ex.Message}", "Lỗi",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                zaloChat_btn_Refesh.Enabled = true;
+                zaloChat_btn_Refesh.Text = "Làm mới";
+            }
+        }
+        private async Task ProcessPhatLaiReTrackAsync()
+        {
+            try
+            {
+                string spreadsheetId = GoogleSheetService.DATA_SPREADSHEET_ID;
+
+                var bData = GoogleSheetService.ReadRange(spreadsheetId, "PHATLAI!B2:B");
+                List<string> waybills = new List<string>();
+
+                if (bData != null)
+                {
+                    foreach (var row in bData)
+                    {
+                        if (row.Count > 0 && !string.IsNullOrWhiteSpace(row[0]?.ToString()))
+                            waybills.Add(row[0].ToString().Trim());
+                    }
+                }
+
+                if (waybills.Count == 0)
+                {
+                    Console.WriteLine("[PHATLAI] Cột B trống → bỏ qua.");
+                    return;
+                }
+
+                Console.WriteLine($"[PHATLAI] Tracking ngay {waybills.Count} đơn từ cột B...");
+
+                string waybillsText = string.Join("\n", waybills);
+                await _trackingService.SearchTrackingAsync(waybillsText, false);
+
+                var results = _trackingService.GetAllRows();
+
+                var sheetData = new List<IList<object>>();
+                foreach (var item in results)
+                {
+                    sheetData.Add(new List<object>()
+            {
+                item.WaybillNo, item.TrangThaiHienTai, item.ThaoTacCuoi,
+                item.ThoiGianThaoTac, item.ThoiGianYeuCauPhatLai, item.NhanVienKienVanDe
+            });
+                }
+
+                GoogleSheetService.UpdateBumpSheet(sheetData, spreadsheetId, "BUMP!A2");
+
+                Console.WriteLine($"[PHATLAI] Hoàn tất tracking cột B và update BUMP");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[PHATLAI ReTrack] Lỗi: {ex.Message}");
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
