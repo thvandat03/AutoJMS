@@ -90,9 +90,10 @@ namespace AutoJMS
             btn_ZaloChat_batDau = new Guna.UI2.WinForms.Guna2Button();
             guna2Panel3 = new Guna.UI2.WinForms.Guna2Panel();
             guna2Panel5 = new Guna.UI2.WinForms.Guna2Panel();
+            customButton2 = new AutoJMS.CustomControl.CustomButton();
+            label13 = new Label();
             guna2CirclePictureBox2 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             linkLabel2 = new LinkLabel();
-            label13 = new Label();
             tab_About = new TabPage();
             guna2Panel6 = new Guna.UI2.WinForms.Guna2Panel();
             guna2GradientPanel2 = new Guna.UI2.WinForms.Guna2GradientPanel();
@@ -175,7 +176,6 @@ namespace AutoJMS
             btn_TimKiem = new Button();
             pnl_Webview = new Panel();
             Main_Webview = new Microsoft.Web.WebView2.WinForms.WebView2();
-            customButton2 = new AutoJMS.CustomControl.CustomButton();
             pnl_Left.SuspendLayout();
             Tab_Control.SuspendLayout();
             Tab_DKCH.SuspendLayout();
@@ -276,7 +276,7 @@ namespace AutoJMS
             Tab_DKCH.Location = new Point(4, 29);
             Tab_DKCH.Name = "Tab_DKCH";
             Tab_DKCH.Padding = new Padding(3);
-            Tab_DKCH.Size = new Size(252, 680);
+            Tab_DKCH.Size = new Size(392, 680);
             Tab_DKCH.TabIndex = 0;
             Tab_DKCH.Text = "ĐKCH";
             Tab_DKCH.UseVisualStyleBackColor = true;
@@ -515,7 +515,7 @@ namespace AutoJMS
             Tab_NangCao.Location = new Point(4, 29);
             Tab_NangCao.Name = "Tab_NangCao";
             Tab_NangCao.Padding = new Padding(3);
-            Tab_NangCao.Size = new Size(252, 680);
+            Tab_NangCao.Size = new Size(392, 680);
             Tab_NangCao.TabIndex = 1;
             Tab_NangCao.Text = "Nâng cao";
             Tab_NangCao.UseVisualStyleBackColor = true;
@@ -796,6 +796,33 @@ namespace AutoJMS
             guna2Panel5.Size = new Size(136, 36);
             guna2Panel5.TabIndex = 11;
             // 
+            // customButton2
+            // 
+            customButton2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            customButton2.AutoSize = true;
+            customButton2.FlatAppearance.BorderSize = 0;
+            customButton2.FlatStyle = FlatStyle.Flat;
+            customButton2.Location = new Point(88, 11);
+            customButton2.MinimumSize = new Size(45, 22);
+            customButton2.Name = "customButton2";
+            customButton2.OffBackColor = Color.Gray;
+            customButton2.OffToggleColor = Color.Gainsboro;
+            customButton2.OnBackColor = Color.FromArgb(192, 255, 192);
+            customButton2.OnToggleColor = Color.Lime;
+            customButton2.Size = new Size(45, 22);
+            customButton2.TabIndex = 0;
+            customButton2.UseVisualStyleBackColor = true;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic);
+            label13.Location = new Point(5, 11);
+            label13.Name = "label13";
+            label13.Size = new Size(77, 23);
+            label13.TabIndex = 8;
+            label13.Text = "Tự động:";
+            // 
             // guna2CirclePictureBox2
             // 
             guna2CirclePictureBox2.ImageRotate = 0F;
@@ -819,23 +846,13 @@ namespace AutoJMS
             linkLabel2.TabStop = true;
             linkLabel2.Text = "linkLabel";
             // 
-            // label13
-            // 
-            label13.AutoSize = true;
-            label13.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic);
-            label13.Location = new Point(5, 11);
-            label13.Name = "label13";
-            label13.Size = new Size(77, 23);
-            label13.TabIndex = 8;
-            label13.Text = "Tự động:";
-            // 
             // tab_About
             // 
             tab_About.Controls.Add(guna2Panel6);
             tab_About.Location = new Point(4, 29);
             tab_About.Name = "tab_About";
             tab_About.Padding = new Padding(3);
-            tab_About.Size = new Size(252, 680);
+            tab_About.Size = new Size(392, 680);
             tab_About.TabIndex = 3;
             tab_About.Text = "About";
             tab_About.UseVisualStyleBackColor = true;
@@ -848,7 +865,7 @@ namespace AutoJMS
             guna2Panel6.Location = new Point(3, 3);
             guna2Panel6.Name = "guna2Panel6";
             guna2Panel6.ShadowDecoration.CustomizableEdges = customizableEdges28;
-            guna2Panel6.Size = new Size(246, 674);
+            guna2Panel6.Size = new Size(386, 674);
             guna2Panel6.TabIndex = 0;
             // 
             // guna2GradientPanel2
@@ -862,7 +879,7 @@ namespace AutoJMS
             guna2GradientPanel2.Location = new Point(0, 0);
             guna2GradientPanel2.Name = "guna2GradientPanel2";
             guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges26;
-            guna2GradientPanel2.Size = new Size(246, 674);
+            guna2GradientPanel2.Size = new Size(386, 674);
             guna2GradientPanel2.TabIndex = 1;
             // 
             // tableLayoutPanel5
@@ -1829,23 +1846,6 @@ namespace AutoJMS
             Main_Webview.Size = new Size(862, 713);
             Main_Webview.TabIndex = 0;
             Main_Webview.ZoomFactor = 1D;
-            // 
-            // customButton2
-            // 
-            customButton2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            customButton2.AutoSize = true;
-            customButton2.FlatAppearance.BorderSize = 0;
-            customButton2.FlatStyle = FlatStyle.Flat;
-            customButton2.Location = new Point(88, 11);
-            customButton2.MinimumSize = new Size(45, 22);
-            customButton2.Name = "customButton2";
-            customButton2.OffBackColor = Color.Gray;
-            customButton2.OffToggleColor = Color.Gainsboro;
-            customButton2.OnBackColor = Color.FromArgb(192, 255, 192);
-            customButton2.OnToggleColor = Color.Lime;
-            customButton2.Size = new Size(45, 22);
-            customButton2.TabIndex = 0;
-            customButton2.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
