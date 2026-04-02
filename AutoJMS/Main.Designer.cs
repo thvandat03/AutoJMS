@@ -41,11 +41,14 @@ namespace AutoJMS
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             pnl_Left = new Panel();
@@ -92,7 +95,12 @@ namespace AutoJMS
             label13 = new Label();
             tab_About = new TabPage();
             guna2Panel6 = new Guna.UI2.WinForms.Guna2Panel();
+            guna2GradientPanel2 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            tableLayoutPanel5 = new TableLayoutPanel();
             btn_CheckUpdate = new Guna.UI2.WinForms.Guna2Button();
+            lbl_version = new Label();
+            label3 = new Label();
+            guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             panel_Main_act = new Panel();
             btn_FocusMode = new Button();
             pnl_ZaloChatz = new Panel();
@@ -187,6 +195,9 @@ namespace AutoJMS
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox2).BeginInit();
             tab_About.SuspendLayout();
             guna2Panel6.SuspendLayout();
+            guna2GradientPanel2.SuspendLayout();
+            tableLayoutPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox1).BeginInit();
             panel_Main_act.SuspendLayout();
             pnl_ZaloChatz.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Main_ZaloChat).BeginInit();
@@ -237,7 +248,7 @@ namespace AutoJMS
             pnl_Left.Dock = DockStyle.Left;
             pnl_Left.Location = new Point(0, 0);
             pnl_Left.Name = "pnl_Left";
-            pnl_Left.Size = new Size(400, 713);
+            pnl_Left.Size = new Size(260, 713);
             pnl_Left.TabIndex = 0;
             // 
             // Tab_Control
@@ -250,7 +261,7 @@ namespace AutoJMS
             Tab_Control.Location = new Point(0, 0);
             Tab_Control.Name = "Tab_Control";
             Tab_Control.SelectedIndex = 0;
-            Tab_Control.Size = new Size(400, 713);
+            Tab_Control.Size = new Size(260, 713);
             Tab_Control.TabIndex = 0;
             Tab_Control.SelectedIndexChanged += Tab_Control_SelectedIndexChanged;
             Tab_Control.TabIndexChanged += Tab_Control_SelectedIndexChanged;
@@ -263,7 +274,7 @@ namespace AutoJMS
             Tab_DKCH.Location = new Point(4, 29);
             Tab_DKCH.Name = "Tab_DKCH";
             Tab_DKCH.Padding = new Padding(3);
-            Tab_DKCH.Size = new Size(392, 680);
+            Tab_DKCH.Size = new Size(252, 680);
             Tab_DKCH.TabIndex = 0;
             Tab_DKCH.Text = "ĐKCH";
             Tab_DKCH.UseVisualStyleBackColor = true;
@@ -502,7 +513,7 @@ namespace AutoJMS
             Tab_NangCao.Location = new Point(4, 29);
             Tab_NangCao.Name = "Tab_NangCao";
             Tab_NangCao.Padding = new Padding(3);
-            Tab_NangCao.Size = new Size(392, 680);
+            Tab_NangCao.Size = new Size(252, 680);
             Tab_NangCao.TabIndex = 1;
             Tab_NangCao.Text = "Nâng cao";
             Tab_NangCao.UseVisualStyleBackColor = true;
@@ -533,7 +544,7 @@ namespace AutoJMS
             Tab_ZaloChat.Location = new Point(4, 29);
             Tab_ZaloChat.Name = "Tab_ZaloChat";
             Tab_ZaloChat.Padding = new Padding(3);
-            Tab_ZaloChat.Size = new Size(392, 680);
+            Tab_ZaloChat.Size = new Size(252, 680);
             Tab_ZaloChat.TabIndex = 2;
             Tab_ZaloChat.Text = "ZaloChat";
             Tab_ZaloChat.UseVisualStyleBackColor = true;
@@ -544,7 +555,7 @@ namespace AutoJMS
             pnl_ZaloChat_Main.Dock = DockStyle.Fill;
             pnl_ZaloChat_Main.Location = new Point(3, 3);
             pnl_ZaloChat_Main.Name = "pnl_ZaloChat_Main";
-            pnl_ZaloChat_Main.Size = new Size(386, 674);
+            pnl_ZaloChat_Main.Size = new Size(246, 674);
             pnl_ZaloChat_Main.TabIndex = 0;
             // 
             // guna2GradientPanel1
@@ -561,7 +572,7 @@ namespace AutoJMS
             guna2GradientPanel1.Location = new Point(0, 0);
             guna2GradientPanel1.Name = "guna2GradientPanel1";
             guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges21;
-            guna2GradientPanel1.Size = new Size(386, 674);
+            guna2GradientPanel1.Size = new Size(246, 674);
             guna2GradientPanel1.TabIndex = 0;
             // 
             // guna2Panel4
@@ -572,7 +583,7 @@ namespace AutoJMS
             guna2Panel4.Location = new Point(0, 282);
             guna2Panel4.Name = "guna2Panel4";
             guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2Panel4.Size = new Size(386, 392);
+            guna2Panel4.Size = new Size(246, 392);
             guna2Panel4.TabIndex = 4;
             // 
             // guna2DataGridView1
@@ -603,7 +614,7 @@ namespace AutoJMS
             guna2DataGridView1.Name = "guna2DataGridView1";
             guna2DataGridView1.RowHeadersVisible = false;
             guna2DataGridView1.RowHeadersWidth = 51;
-            guna2DataGridView1.Size = new Size(386, 392);
+            guna2DataGridView1.Size = new Size(246, 392);
             guna2DataGridView1.TabIndex = 0;
             guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
             guna2DataGridView1.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -640,7 +651,7 @@ namespace AutoJMS
             guna2Panel1.Location = new Point(0, 173);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            guna2Panel1.Size = new Size(386, 109);
+            guna2Panel1.Size = new Size(246, 109);
             guna2Panel1.TabIndex = 3;
             // 
             // label12
@@ -669,7 +680,7 @@ namespace AutoJMS
             guna2Panel2.Location = new Point(0, 53);
             guna2Panel2.Name = "guna2Panel2";
             guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges14;
-            guna2Panel2.Size = new Size(386, 120);
+            guna2Panel2.Size = new Size(246, 120);
             guna2Panel2.TabIndex = 2;
             // 
             // guna2Button1
@@ -768,7 +779,7 @@ namespace AutoJMS
             guna2Panel3.Location = new Point(0, 0);
             guna2Panel3.Name = "guna2Panel3";
             guna2Panel3.ShadowDecoration.CustomizableEdges = customizableEdges19;
-            guna2Panel3.Size = new Size(386, 53);
+            guna2Panel3.Size = new Size(246, 53);
             guna2Panel3.TabIndex = 1;
             // 
             // guna2Panel5
@@ -820,39 +831,110 @@ namespace AutoJMS
             tab_About.Location = new Point(4, 29);
             tab_About.Name = "tab_About";
             tab_About.Padding = new Padding(3);
-            tab_About.Size = new Size(392, 680);
+            tab_About.Size = new Size(252, 680);
             tab_About.TabIndex = 3;
             tab_About.Text = "About";
             tab_About.UseVisualStyleBackColor = true;
             // 
             // guna2Panel6
             // 
-            guna2Panel6.Controls.Add(btn_CheckUpdate);
-            guna2Panel6.CustomizableEdges = customizableEdges24;
+            guna2Panel6.Controls.Add(guna2GradientPanel2);
+            guna2Panel6.CustomizableEdges = customizableEdges27;
             guna2Panel6.Dock = DockStyle.Fill;
             guna2Panel6.Location = new Point(3, 3);
             guna2Panel6.Name = "guna2Panel6";
-            guna2Panel6.ShadowDecoration.CustomizableEdges = customizableEdges25;
-            guna2Panel6.Size = new Size(386, 674);
+            guna2Panel6.ShadowDecoration.CustomizableEdges = customizableEdges28;
+            guna2Panel6.Size = new Size(246, 674);
             guna2Panel6.TabIndex = 0;
+            // 
+            // guna2GradientPanel2
+            // 
+            guna2GradientPanel2.Controls.Add(tableLayoutPanel5);
+            guna2GradientPanel2.CustomizableEdges = customizableEdges25;
+            guna2GradientPanel2.Dock = DockStyle.Fill;
+            guna2GradientPanel2.FillColor = Color.FromArgb(128, 128, 255);
+            guna2GradientPanel2.FillColor2 = Color.FromArgb(255, 192, 192);
+            guna2GradientPanel2.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
+            guna2GradientPanel2.Location = new Point(0, 0);
+            guna2GradientPanel2.Name = "guna2GradientPanel2";
+            guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            guna2GradientPanel2.Size = new Size(246, 674);
+            guna2GradientPanel2.TabIndex = 1;
+            // 
+            // tableLayoutPanel5
+            // 
+            tableLayoutPanel5.ColumnCount = 1;
+            tableLayoutPanel5.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel5.Controls.Add(btn_CheckUpdate, 0, 3);
+            tableLayoutPanel5.Controls.Add(lbl_version, 0, 2);
+            tableLayoutPanel5.Controls.Add(label3, 0, 1);
+            tableLayoutPanel5.Controls.Add(guna2CirclePictureBox1, 0, 0);
+            tableLayoutPanel5.Location = new Point(5, 3);
+            tableLayoutPanel5.Name = "tableLayoutPanel5";
+            tableLayoutPanel5.RowCount = 4;
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
+            tableLayoutPanel5.Size = new Size(200, 200);
+            tableLayoutPanel5.TabIndex = 4;
             // 
             // btn_CheckUpdate
             // 
+            btn_CheckUpdate.Anchor = AnchorStyles.Top;
             btn_CheckUpdate.BorderRadius = 15;
             btn_CheckUpdate.CustomizableEdges = customizableEdges22;
             btn_CheckUpdate.DisabledState.BorderColor = Color.DarkGray;
             btn_CheckUpdate.DisabledState.CustomBorderColor = Color.DarkGray;
             btn_CheckUpdate.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             btn_CheckUpdate.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            btn_CheckUpdate.Font = new Font("Segoe UI", 9F);
-            btn_CheckUpdate.ForeColor = Color.White;
-            btn_CheckUpdate.Location = new Point(61, 41);
+            btn_CheckUpdate.FillColor = Color.White;
+            btn_CheckUpdate.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            btn_CheckUpdate.ForeColor = Color.Black;
+            btn_CheckUpdate.Location = new Point(26, 163);
             btn_CheckUpdate.Name = "btn_CheckUpdate";
             btn_CheckUpdate.ShadowDecoration.CustomizableEdges = customizableEdges23;
-            btn_CheckUpdate.Size = new Size(225, 56);
+            btn_CheckUpdate.Size = new Size(147, 34);
             btn_CheckUpdate.TabIndex = 0;
             btn_CheckUpdate.Text = "Check Update";
             btn_CheckUpdate.Click += btn_CheckUpdate_Click;
+            // 
+            // lbl_version
+            // 
+            lbl_version.Anchor = AnchorStyles.Left;
+            lbl_version.AutoSize = true;
+            lbl_version.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            lbl_version.ForeColor = Color.White;
+            lbl_version.Location = new Point(3, 133);
+            lbl_version.Name = "lbl_version";
+            lbl_version.Size = new Size(0, 23);
+            lbl_version.TabIndex = 3;
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Top;
+            label3.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(18, 100);
+            label3.Name = "label3";
+            label3.Size = new Size(163, 24);
+            label3.TabIndex = 2;
+            label3.Text = "Phiên bản hiện tại: ";
+            // 
+            // guna2CirclePictureBox1
+            // 
+            guna2CirclePictureBox1.Anchor = AnchorStyles.Top;
+            guna2CirclePictureBox1.FillColor = Color.FromArgb(128, 128, 255);
+            guna2CirclePictureBox1.Image = (Image)resources.GetObject("guna2CirclePictureBox1.Image");
+            guna2CirclePictureBox1.ImageRotate = 0F;
+            guna2CirclePictureBox1.InitialImage = null;
+            guna2CirclePictureBox1.Location = new Point(60, 3);
+            guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
+            guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            guna2CirclePictureBox1.Size = new Size(80, 80);
+            guna2CirclePictureBox1.TabIndex = 1;
+            guna2CirclePictureBox1.TabStop = false;
             // 
             // panel_Main_act
             // 
@@ -862,9 +944,9 @@ namespace AutoJMS
             panel_Main_act.Controls.Add(pnl_TraHanhTrinh);
             panel_Main_act.Controls.Add(pnl_Webview);
             panel_Main_act.Dock = DockStyle.Fill;
-            panel_Main_act.Location = new Point(400, 0);
+            panel_Main_act.Location = new Point(260, 0);
             panel_Main_act.Name = "panel_Main_act";
-            panel_Main_act.Size = new Size(862, 713);
+            panel_Main_act.Size = new Size(1002, 713);
             panel_Main_act.TabIndex = 1;
             // 
             // btn_FocusMode
@@ -884,7 +966,7 @@ namespace AutoJMS
             pnl_ZaloChatz.Dock = DockStyle.Fill;
             pnl_ZaloChatz.Location = new Point(0, 0);
             pnl_ZaloChatz.Name = "pnl_ZaloChatz";
-            pnl_ZaloChatz.Size = new Size(862, 713);
+            pnl_ZaloChatz.Size = new Size(1002, 713);
             pnl_ZaloChatz.TabIndex = 1;
             // 
             // Main_ZaloChat
@@ -895,7 +977,7 @@ namespace AutoJMS
             Main_ZaloChat.Dock = DockStyle.Fill;
             Main_ZaloChat.Location = new Point(0, 0);
             Main_ZaloChat.Name = "Main_ZaloChat";
-            Main_ZaloChat.Size = new Size(862, 713);
+            Main_ZaloChat.Size = new Size(1002, 713);
             Main_ZaloChat.TabIndex = 0;
             Main_ZaloChat.ZoomFactor = 1D;
             // 
@@ -905,7 +987,7 @@ namespace AutoJMS
             pnl_InChuyenHoan.Dock = DockStyle.Fill;
             pnl_InChuyenHoan.Location = new Point(0, 0);
             pnl_InChuyenHoan.Name = "pnl_InChuyenHoan";
-            pnl_InChuyenHoan.Size = new Size(862, 713);
+            pnl_InChuyenHoan.Size = new Size(1002, 713);
             pnl_InChuyenHoan.TabIndex = 0;
             // 
             // pnl_InChuyenHoanControl
@@ -914,7 +996,7 @@ namespace AutoJMS
             pnl_InChuyenHoanControl.Dock = DockStyle.Fill;
             pnl_InChuyenHoanControl.Location = new Point(0, 0);
             pnl_InChuyenHoanControl.Name = "pnl_InChuyenHoanControl";
-            pnl_InChuyenHoanControl.Size = new Size(862, 713);
+            pnl_InChuyenHoanControl.Size = new Size(1002, 713);
             pnl_InChuyenHoanControl.TabIndex = 0;
             // 
             // splitContainer1
@@ -933,8 +1015,8 @@ namespace AutoJMS
             // 
             splitContainer1.Panel2.Controls.Add(panel12);
             splitContainer1.Panel2.Controls.Add(pnl_InPreviewControl);
-            splitContainer1.Size = new Size(862, 713);
-            splitContainer1.SplitterDistance = 743;
+            splitContainer1.Size = new Size(1002, 713);
+            splitContainer1.SplitterDistance = 863;
             splitContainer1.SplitterWidth = 5;
             splitContainer1.TabIndex = 0;
             // 
@@ -947,7 +1029,7 @@ namespace AutoJMS
             panel14.Dock = DockStyle.Fill;
             panel14.Location = new Point(0, 59);
             panel14.Name = "panel14";
-            panel14.Size = new Size(743, 654);
+            panel14.Size = new Size(863, 654);
             panel14.TabIndex = 1;
             // 
             // panel19
@@ -956,7 +1038,7 @@ namespace AutoJMS
             panel19.Dock = DockStyle.Fill;
             panel19.Location = new Point(0, 187);
             panel19.Name = "panel19";
-            panel19.Size = new Size(743, 467);
+            panel19.Size = new Size(863, 467);
             panel19.TabIndex = 4;
             // 
             // print_OptionWaybill
@@ -976,7 +1058,7 @@ namespace AutoJMS
             print_OptionWaybill.RowHeadersVisible = false;
             print_OptionWaybill.RowHeadersWidth = 51;
             print_OptionWaybill.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            print_OptionWaybill.Size = new Size(743, 467);
+            print_OptionWaybill.Size = new Size(863, 467);
             print_OptionWaybill.TabIndex = 0;
             // 
             // panel18
@@ -989,7 +1071,7 @@ namespace AutoJMS
             panel18.Dock = DockStyle.Top;
             panel18.Location = new Point(0, 152);
             panel18.Name = "panel18";
-            panel18.Size = new Size(743, 35);
+            panel18.Size = new Size(863, 35);
             panel18.TabIndex = 3;
             // 
             // print_SelectAll
@@ -1008,7 +1090,7 @@ namespace AutoJMS
             // 
             label10.Anchor = AnchorStyles.Right;
             label10.AutoSize = true;
-            label10.Location = new Point(629, 9);
+            label10.Location = new Point(749, 9);
             label10.Name = "label10";
             label10.Size = new Size(33, 20);
             label10.TabIndex = 0;
@@ -1020,7 +1102,7 @@ namespace AutoJMS
             label11.Anchor = AnchorStyles.Right;
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            label11.Location = new Point(584, 8);
+            label11.Location = new Point(704, 8);
             label11.Name = "label11";
             label11.Size = new Size(49, 20);
             label11.TabIndex = 0;
@@ -1031,7 +1113,7 @@ namespace AutoJMS
             // 
             label9.Anchor = AnchorStyles.Right;
             label9.AutoSize = true;
-            label9.Location = new Point(698, 9);
+            label9.Location = new Point(818, 9);
             label9.Name = "label9";
             label9.Size = new Size(33, 20);
             label9.TabIndex = 0;
@@ -1043,7 +1125,7 @@ namespace AutoJMS
             label8.Anchor = AnchorStyles.Right;
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            label8.Location = new Point(655, 8);
+            label8.Location = new Point(775, 8);
             label8.Name = "label8";
             label8.Size = new Size(48, 20);
             label8.TabIndex = 0;
@@ -1056,7 +1138,7 @@ namespace AutoJMS
             groupBox2.Dock = DockStyle.Top;
             groupBox2.Location = new Point(0, 0);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(743, 152);
+            groupBox2.Size = new Size(863, 152);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
             // 
@@ -1073,7 +1155,7 @@ namespace AutoJMS
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Absolute, 120F));
-            tableLayoutPanel3.Size = new Size(737, 126);
+            tableLayoutPanel3.Size = new Size(857, 126);
             tableLayoutPanel3.TabIndex = 0;
             // 
             // panel11
@@ -1083,7 +1165,7 @@ namespace AutoJMS
             panel11.Dock = DockStyle.Fill;
             panel11.Location = new Point(3, 3);
             panel11.Name = "panel11";
-            panel11.Size = new Size(162, 120);
+            panel11.Size = new Size(189, 120);
             panel11.TabIndex = 0;
             // 
             // print_Input
@@ -1093,7 +1175,7 @@ namespace AutoJMS
             print_Input.Location = new Point(0, 20);
             print_Input.Name = "print_Input";
             print_Input.ScrollBars = RichTextBoxScrollBars.ForcedVertical;
-            print_Input.Size = new Size(162, 100);
+            print_Input.Size = new Size(189, 100);
             print_Input.TabIndex = 1;
             print_Input.Text = "";
             // 
@@ -1111,9 +1193,9 @@ namespace AutoJMS
             // 
             panel13.Controls.Add(tableLayoutPanel4);
             panel13.Dock = DockStyle.Fill;
-            panel13.Location = new Point(171, 3);
+            panel13.Location = new Point(198, 3);
             panel13.Name = "panel13";
-            panel13.Size = new Size(563, 120);
+            panel13.Size = new Size(656, 120);
             panel13.TabIndex = 1;
             // 
             // tableLayoutPanel4
@@ -1130,7 +1212,7 @@ namespace AutoJMS
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 1;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Size = new Size(563, 120);
+            tableLayoutPanel4.Size = new Size(656, 120);
             tableLayoutPanel4.TabIndex = 0;
             // 
             // panel15
@@ -1140,7 +1222,7 @@ namespace AutoJMS
             panel15.Dock = DockStyle.Fill;
             panel15.Location = new Point(3, 3);
             panel15.Name = "panel15";
-            panel15.Size = new Size(181, 114);
+            panel15.Size = new Size(212, 114);
             panel15.TabIndex = 0;
             // 
             // groupBox6
@@ -1149,7 +1231,7 @@ namespace AutoJMS
             groupBox6.Dock = DockStyle.Top;
             groupBox6.Location = new Point(0, 59);
             groupBox6.Name = "groupBox6";
-            groupBox6.Size = new Size(181, 59);
+            groupBox6.Size = new Size(212, 59);
             groupBox6.TabIndex = 0;
             groupBox6.TabStop = false;
             groupBox6.Text = "Tên nhân viên nhận hàng:";
@@ -1162,7 +1244,7 @@ namespace AutoJMS
             print_pickerName.Location = new Point(3, 23);
             print_pickerName.Multiline = true;
             print_pickerName.Name = "print_pickerName";
-            print_pickerName.Size = new Size(175, 33);
+            print_pickerName.Size = new Size(206, 33);
             print_pickerName.TabIndex = 0;
             print_pickerName.Text = "0355520331";
             print_pickerName.TextAlign = HorizontalAlignment.Center;
@@ -1173,7 +1255,7 @@ namespace AutoJMS
             groupBox3.Dock = DockStyle.Top;
             groupBox3.Location = new Point(0, 0);
             groupBox3.Name = "groupBox3";
-            groupBox3.Size = new Size(181, 59);
+            groupBox3.Size = new Size(212, 59);
             groupBox3.TabIndex = 0;
             groupBox3.TabStop = false;
             groupBox3.Text = "Thời gian nhận từ:";
@@ -1186,7 +1268,7 @@ namespace AutoJMS
             print_pickTimeFrom.Location = new Point(3, 23);
             print_pickTimeFrom.Margin = new Padding(5);
             print_pickTimeFrom.Name = "print_pickTimeFrom";
-            print_pickTimeFrom.Size = new Size(175, 27);
+            print_pickTimeFrom.Size = new Size(206, 27);
             print_pickTimeFrom.TabIndex = 3;
             print_pickTimeFrom.Value = new DateTime(2026, 3, 16, 0, 0, 0, 0);
             // 
@@ -1195,9 +1277,9 @@ namespace AutoJMS
             panel16.Controls.Add(groupBox7);
             panel16.Controls.Add(groupBox4);
             panel16.Dock = DockStyle.Fill;
-            panel16.Location = new Point(190, 3);
+            panel16.Location = new Point(221, 3);
             panel16.Name = "panel16";
-            panel16.Size = new Size(181, 114);
+            panel16.Size = new Size(212, 114);
             panel16.TabIndex = 1;
             // 
             // groupBox7
@@ -1206,7 +1288,7 @@ namespace AutoJMS
             groupBox7.Dock = DockStyle.Top;
             groupBox7.Location = new Point(0, 59);
             groupBox7.Name = "groupBox7";
-            groupBox7.Size = new Size(181, 59);
+            groupBox7.Size = new Size(212, 59);
             groupBox7.TabIndex = 0;
             groupBox7.TabStop = false;
             groupBox7.Text = "Tên KH/ Mã KH:";
@@ -1219,7 +1301,7 @@ namespace AutoJMS
             print_KHCode.Location = new Point(3, 23);
             print_KHCode.Multiline = true;
             print_KHCode.Name = "print_KHCode";
-            print_KHCode.Size = new Size(175, 33);
+            print_KHCode.Size = new Size(206, 33);
             print_KHCode.TabIndex = 0;
             print_KHCode.Text = "0355520331";
             print_KHCode.TextAlign = HorizontalAlignment.Center;
@@ -1230,7 +1312,7 @@ namespace AutoJMS
             groupBox4.Dock = DockStyle.Top;
             groupBox4.Location = new Point(0, 0);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(181, 59);
+            groupBox4.Size = new Size(212, 59);
             groupBox4.TabIndex = 0;
             groupBox4.TabStop = false;
             groupBox4.Text = "Thời gian nhận đến:";
@@ -1243,7 +1325,7 @@ namespace AutoJMS
             print_pickTimeTo.Location = new Point(3, 23);
             print_pickTimeTo.Margin = new Padding(5);
             print_pickTimeTo.Name = "print_pickTimeTo";
-            print_pickTimeTo.Size = new Size(175, 27);
+            print_pickTimeTo.Size = new Size(206, 27);
             print_pickTimeTo.TabIndex = 3;
             print_pickTimeTo.Value = new DateTime(2026, 3, 16, 0, 0, 0, 0);
             // 
@@ -1252,9 +1334,9 @@ namespace AutoJMS
             panel17.Controls.Add(groupBox8);
             panel17.Controls.Add(groupBox5);
             panel17.Dock = DockStyle.Fill;
-            panel17.Location = new Point(377, 3);
+            panel17.Location = new Point(439, 3);
             panel17.Name = "panel17";
-            panel17.Size = new Size(183, 114);
+            panel17.Size = new Size(214, 114);
             panel17.TabIndex = 2;
             // 
             // groupBox8
@@ -1263,7 +1345,7 @@ namespace AutoJMS
             groupBox8.Dock = DockStyle.Top;
             groupBox8.Location = new Point(0, 59);
             groupBox8.Name = "groupBox8";
-            groupBox8.Size = new Size(183, 59);
+            groupBox8.Size = new Size(214, 59);
             groupBox8.TabIndex = 0;
             groupBox8.TabStop = false;
             groupBox8.Text = "SĐT người nhận:";
@@ -1276,7 +1358,7 @@ namespace AutoJMS
             print_ReceivePhoneNum.Location = new Point(3, 23);
             print_ReceivePhoneNum.Multiline = true;
             print_ReceivePhoneNum.Name = "print_ReceivePhoneNum";
-            print_ReceivePhoneNum.Size = new Size(177, 33);
+            print_ReceivePhoneNum.Size = new Size(208, 33);
             print_ReceivePhoneNum.TabIndex = 0;
             print_ReceivePhoneNum.Text = "0355520331";
             print_ReceivePhoneNum.TextAlign = HorizontalAlignment.Center;
@@ -1287,7 +1369,7 @@ namespace AutoJMS
             groupBox5.Dock = DockStyle.Top;
             groupBox5.Location = new Point(0, 0);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(183, 59);
+            groupBox5.Size = new Size(214, 59);
             groupBox5.TabIndex = 0;
             groupBox5.TabStop = false;
             groupBox5.Text = "SĐT người gửi:";
@@ -1300,7 +1382,7 @@ namespace AutoJMS
             print_SendPhoneNum.Location = new Point(3, 23);
             print_SendPhoneNum.Multiline = true;
             print_SendPhoneNum.Name = "print_SendPhoneNum";
-            print_SendPhoneNum.Size = new Size(177, 33);
+            print_SendPhoneNum.Size = new Size(208, 33);
             print_SendPhoneNum.TabIndex = 0;
             print_SendPhoneNum.Text = "0355520331";
             print_SendPhoneNum.TextAlign = HorizontalAlignment.Center;
@@ -1320,7 +1402,7 @@ namespace AutoJMS
             pnl_InControl.Dock = DockStyle.Top;
             pnl_InControl.Location = new Point(0, 0);
             pnl_InControl.Name = "pnl_InControl";
-            pnl_InControl.Size = new Size(743, 59);
+            pnl_InControl.Size = new Size(863, 59);
             pnl_InControl.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -1343,17 +1425,17 @@ namespace AutoJMS
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(743, 59);
+            tableLayoutPanel2.Size = new Size(863, 59);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // print_InReverse
             // 
             print_InReverse.Dock = DockStyle.Fill;
             print_InReverse.Font = new Font("Segoe UI", 7.8F);
-            print_InReverse.Location = new Point(624, 11);
+            print_InReverse.Location = new Point(722, 11);
             print_InReverse.Margin = new Padding(5, 11, 5, 11);
             print_InReverse.Name = "print_InReverse";
-            print_InReverse.Size = new Size(114, 37);
+            print_InReverse.Size = new Size(136, 37);
             print_InReverse.TabIndex = 5;
             print_InReverse.Text = "In reverse";
             print_InReverse.UseVisualStyleBackColor = true;
@@ -1363,10 +1445,10 @@ namespace AutoJMS
             // 
             print_InLaiDon.Dock = DockStyle.Fill;
             print_InLaiDon.Font = new Font("Segoe UI", 7.8F);
-            print_InLaiDon.Location = new Point(502, 11);
+            print_InLaiDon.Location = new Point(581, 11);
             print_InLaiDon.Margin = new Padding(5, 11, 5, 11);
             print_InLaiDon.Name = "print_InLaiDon";
-            print_InLaiDon.Size = new Size(112, 37);
+            print_InLaiDon.Size = new Size(131, 37);
             print_InLaiDon.TabIndex = 4;
             print_InLaiDon.Text = "In lại đơn";
             print_InLaiDon.UseVisualStyleBackColor = true;
@@ -1376,10 +1458,10 @@ namespace AutoJMS
             // 
             print_InChuyenTiep.Dock = DockStyle.Fill;
             print_InChuyenTiep.Font = new Font("Segoe UI", 7.8F);
-            print_InChuyenTiep.Location = new Point(371, 11);
+            print_InChuyenTiep.Location = new Point(428, 11);
             print_InChuyenTiep.Margin = new Padding(5, 11, 5, 11);
             print_InChuyenTiep.Name = "print_InChuyenTiep";
-            print_InChuyenTiep.Size = new Size(121, 37);
+            print_InChuyenTiep.Size = new Size(143, 37);
             print_InChuyenTiep.TabIndex = 3;
             print_InChuyenTiep.Text = "In chuyển tiếp";
             print_InChuyenTiep.UseVisualStyleBackColor = true;
@@ -1389,10 +1471,10 @@ namespace AutoJMS
             // 
             print_InChuyenHoan.Dock = DockStyle.Fill;
             print_InChuyenHoan.Font = new Font("Segoe UI", 7.8F);
-            print_InChuyenHoan.Location = new Point(249, 11);
+            print_InChuyenHoan.Location = new Point(287, 11);
             print_InChuyenHoan.Margin = new Padding(5, 11, 5, 11);
             print_InChuyenHoan.Name = "print_InChuyenHoan";
-            print_InChuyenHoan.Size = new Size(112, 37);
+            print_InChuyenHoan.Size = new Size(131, 37);
             print_InChuyenHoan.TabIndex = 2;
             print_InChuyenHoan.Text = "In hoàn";
             print_InChuyenHoan.UseVisualStyleBackColor = true;
@@ -1402,10 +1484,10 @@ namespace AutoJMS
             // 
             print_LamMoi.Dock = DockStyle.Fill;
             print_LamMoi.Font = new Font("Segoe UI", 7.8F);
-            print_LamMoi.Location = new Point(127, 11);
+            print_LamMoi.Location = new Point(146, 11);
             print_LamMoi.Margin = new Padding(5, 11, 5, 11);
             print_LamMoi.Name = "print_LamMoi";
-            print_LamMoi.Size = new Size(112, 37);
+            print_LamMoi.Size = new Size(131, 37);
             print_LamMoi.TabIndex = 1;
             print_LamMoi.Text = "Làm mới";
             print_LamMoi.UseVisualStyleBackColor = true;
@@ -1418,7 +1500,7 @@ namespace AutoJMS
             print_TimKiem.Location = new Point(5, 11);
             print_TimKiem.Margin = new Padding(5, 11, 5, 11);
             print_TimKiem.Name = "print_TimKiem";
-            print_TimKiem.Size = new Size(112, 37);
+            print_TimKiem.Size = new Size(131, 37);
             print_TimKiem.TabIndex = 0;
             print_TimKiem.Text = "Tìm kiếm";
             print_TimKiem.UseVisualStyleBackColor = true;
@@ -1431,7 +1513,7 @@ namespace AutoJMS
             panel12.Dock = DockStyle.Fill;
             panel12.Location = new Point(0, 59);
             panel12.Name = "panel12";
-            panel12.Size = new Size(114, 654);
+            panel12.Size = new Size(134, 654);
             panel12.TabIndex = 1;
             // 
             // print_Preview
@@ -1442,7 +1524,7 @@ namespace AutoJMS
             print_Preview.Dock = DockStyle.Fill;
             print_Preview.Location = new Point(0, 0);
             print_Preview.Name = "print_Preview";
-            print_Preview.Size = new Size(110, 650);
+            print_Preview.Size = new Size(130, 650);
             print_Preview.TabIndex = 0;
             print_Preview.ZoomFactor = 1D;
             // 
@@ -1452,7 +1534,7 @@ namespace AutoJMS
             pnl_InPreviewControl.Dock = DockStyle.Top;
             pnl_InPreviewControl.Location = new Point(0, 0);
             pnl_InPreviewControl.Name = "pnl_InPreviewControl";
-            pnl_InPreviewControl.Size = new Size(114, 59);
+            pnl_InPreviewControl.Size = new Size(134, 59);
             pnl_InPreviewControl.TabIndex = 0;
             // 
             // groupBox1
@@ -1461,7 +1543,7 @@ namespace AutoJMS
             groupBox1.Dock = DockStyle.Fill;
             groupBox1.Location = new Point(0, 0);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(114, 59);
+            groupBox1.Size = new Size(134, 59);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "PREVIEW";
@@ -1728,7 +1810,7 @@ namespace AutoJMS
             pnl_Webview.Dock = DockStyle.Fill;
             pnl_Webview.Location = new Point(0, 0);
             pnl_Webview.Name = "pnl_Webview";
-            pnl_Webview.Size = new Size(862, 713);
+            pnl_Webview.Size = new Size(1002, 713);
             pnl_Webview.TabIndex = 2;
             // 
             // Main_Webview
@@ -1740,7 +1822,7 @@ namespace AutoJMS
             Main_Webview.Dock = DockStyle.Fill;
             Main_Webview.Location = new Point(0, 0);
             Main_Webview.Name = "Main_Webview";
-            Main_Webview.Size = new Size(862, 713);
+            Main_Webview.Size = new Size(1002, 713);
             Main_Webview.TabIndex = 0;
             Main_Webview.ZoomFactor = 1D;
             // 
@@ -1781,6 +1863,10 @@ namespace AutoJMS
             ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox2).EndInit();
             tab_About.ResumeLayout(false);
             guna2Panel6.ResumeLayout(false);
+            guna2GradientPanel2.ResumeLayout(false);
+            tableLayoutPanel5.ResumeLayout(false);
+            tableLayoutPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)guna2CirclePictureBox1).EndInit();
             panel_Main_act.ResumeLayout(false);
             pnl_ZaloChatz.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)Main_ZaloChat).EndInit();
@@ -1969,5 +2055,10 @@ namespace AutoJMS
         private TabPage tab_About;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel6;
         private Guna.UI2.WinForms.Guna2Button btn_CheckUpdate;
+        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel2;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
+        private TableLayoutPanel tableLayoutPanel5;
+        private Label lbl_version;
+        private Label label3;
     }
 }

@@ -1,13 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<Deterministic>false</Deterministic>
+		<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+
+		<Version>1.0.$([System.DateTime]::Now.ToString("yyMM")).$([System.DateTime]::Now.ToString("dd"))</Version>
+		<AssemblyVersion>1.0.$([System.DateTime]::Now.ToString("yyMM")).$([System.DateTime]::Now.ToString("dd"))</AssemblyVersion>
+		<FileVersion>1.0.$([System.DateTime]::Now.ToString("yyMM")).$([System.DateTime]::Now.ToString("dd"))</FileVersion>
+
+	</PropertyGroup>
 
   <ItemGroup>
     <Content Include="favicon.ico" />

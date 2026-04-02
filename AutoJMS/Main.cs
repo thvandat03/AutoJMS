@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
+using System.Reflection;
 
 namespace AutoJMS
 {
@@ -35,8 +36,19 @@ namespace AutoJMS
         {
             InitializeComponent();
             _settings = SettingsManager.Load();
+            Version appVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            string versionText = $"Phiên bản: v{appVersion}";
 
-            cb_SheetName.SelectedItem = _settings.DefaultSheet;
+            // 3. HIỂN THỊ MESSAGEBOX ĐỂ TEST (Debug)
+            //MessageBox.Show("Số phiên bản lấy được là: " + versionText, "Test Version");
+
+            // 4. Ép Label hiển thị bằng code (tránh lỗi Design)
+            lbl_version.Text = versionText;
+            lbl_version.ForeColor = System.Drawing.Color.Red; // Ép màu đỏ chót cho dễ nhìn
+            lbl_version.Visible = true; // Ép hiện
+            lbl_version.BringToFront(); // Ép nổi lên trên cùng mọi panel khác
+        
+        cb_SheetName.SelectedItem = _settings.DefaultSheet;
             ckb_UseSheet.Checked = _settings.UseSheetByDefault;
             _originalPnlLeftWidth = pnl_Left.Width;
             num_Row.Value = _settings.DefaultRowCount;
@@ -311,6 +323,8 @@ namespace AutoJMS
 
         private async void Main_Load(object sender, EventArgs e)
         {
+            Version appVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            lbl_version.Text = $"Phiên bản: v{appVersion}";
             await Main_Webview.EnsureCoreWebView2Async(null);
             await print_Preview.EnsureCoreWebView2Async(); string
             userDataFolder = Path.Combine(Application.StartupPath, "ZaloProfile");
@@ -810,6 +824,8 @@ namespace AutoJMS
 
         private void btn_CheckUpdate_Click(object sender, EventArgs e)
         {
+            AutoUpdater.ShowSkipButton = false;
+            AutoUpdater.ReportErrors = true;
             string xmlUrl = "https://raw.githubusercontent.com/thvandat03/AutoJMS/refs/heads/master/AutoJMS/update.xml";
             AutoUpdater.ExecutablePath = "AutoJMS.exe";
             AutoUpdater.Start(xmlUrl);
