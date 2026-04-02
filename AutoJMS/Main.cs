@@ -1,4 +1,5 @@
 using AutoJMS.Data;
+using DocumentFormat.OpenXml.Drawing.Charts;
 using Microsoft.Web.WebView2.Core;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 
 namespace AutoJMS
 {
@@ -806,20 +808,11 @@ namespace AutoJMS
             }
         }
 
-        private void btn_Debug_Click(object sender, EventArgs e)
+        private void btn_CheckUpdate_Click(object sender, EventArgs e)
         {
-            try
-            {
-                // Thử đọc 1 ô dữ liệu bất kỳ thay vì thao tác XÓA (Clear)
-                string spreadsheetId = GoogleSheetService.DATA_SPREADSHEET_ID;
-                var data = GoogleSheetService.ReadRange(spreadsheetId, "A1:B2");
-
-                MessageBox.Show("ĐỌC DỮ LIỆU THÀNH CÔNG!\nChữ ký JSON hoàn toàn hợp lệ.", "Debug Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"LỖI CHỮ KÝ HOẶC KẾT NỐI:\n{ex.Message}", "Debug Result", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            string xmlUrl = "https://raw.githubusercontent.com/thvandat03/AutoJMS/refs/heads/master/AutoJMS/update.xml";
+            AutoUpdater.ExecutablePath = "AutoJMS.exe";
+            AutoUpdater.Start(xmlUrl);
         }
     }
 }
