@@ -221,13 +221,19 @@ namespace AutoJMS
     /// Model hứng dữ liệu JSON từ Google Apps Script
     /// </summary>
     public class Reminder
+{
+    public int row { get; set; }
+    public string maDon { get; set; }
+    public string nhanVien { get; set; }
+    public string trangThai { get; set; }
+    public int soLanNhac { get; set; }
+    public string thoiGianNhac { get; set; }
+
+    // THÊM ĐOẠN NÀY: Vô hiệu hóa vĩnh viễn lỗi in tên Class
+    public override string ToString()
     {
-        // LƯU Ý: Phải có chữ 'public', kiểu dữ liệu, tên biến, và { get; set; } viết liền nhau
-        public int row { get; set; }
-        public string maDon { get; set; }
-        public string nhanVien { get; set; }
-        public string trangThai { get; set; }
-        public int soLanNhac { get; set; }
-        public string thoiGianNhac { get; set; }
+        // Nếu lỡ bị in ra, nó sẽ in ra Trạng thái hoặc Mã đơn thay vì tên Class
+        return !string.IsNullOrEmpty(trangThai) ? trangThai : "Chưa có dữ liệu";
     }
+}
 }

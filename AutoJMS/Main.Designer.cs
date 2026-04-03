@@ -17,6 +17,7 @@ namespace AutoJMS
 
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
@@ -77,6 +78,7 @@ namespace AutoJMS
             guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
             panel2 = new Panel();
             zaloChat_DataView = new Guna.UI2.WinForms.Guna2DataGridView();
+            reminderBindingSource = new BindingSource(components);
             panel1 = new Panel();
             guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             zaloChat_lbl_kienVanDe = new Label();
@@ -175,6 +177,7 @@ namespace AutoJMS
             btn_TimKiem = new Button();
             pnl_Webview = new Panel();
             Main_Webview = new Microsoft.Web.WebView2.WinForms.WebView2();
+            reminderBindingSource1 = new BindingSource(components);
             pnl_Left.SuspendLayout();
             Tab_Control.SuspendLayout();
             Tab_DKCH.SuspendLayout();
@@ -189,6 +192,7 @@ namespace AutoJMS
             guna2GradientPanel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)zaloChat_DataView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)reminderBindingSource).BeginInit();
             guna2Panel1.SuspendLayout();
             guna2Panel2.SuspendLayout();
             guna2Panel3.SuspendLayout();
@@ -240,6 +244,7 @@ namespace AutoJMS
             tableLayoutPanel1.SuspendLayout();
             pnl_Webview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Main_Webview).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)reminderBindingSource1).BeginInit();
             SuspendLayout();
             // 
             // pnl_Left
@@ -593,6 +598,7 @@ namespace AutoJMS
             zaloChat_DataView.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = Color.White;
             zaloChat_DataView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            zaloChat_DataView.AutoGenerateColumns = false;
             zaloChat_DataView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(100, 88, 255);
@@ -604,6 +610,7 @@ namespace AutoJMS
             zaloChat_DataView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             zaloChat_DataView.ColumnHeadersHeight = 22;
             zaloChat_DataView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            zaloChat_DataView.DataSource = reminderBindingSource;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
@@ -746,7 +753,7 @@ namespace AutoJMS
             zaloChat_selectStatus.FocusedColor = Color.FromArgb(94, 148, 255);
             zaloChat_selectStatus.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             zaloChat_selectStatus.Font = new Font("Segoe UI", 10F);
-            zaloChat_selectStatus.ForeColor = Color.FromArgb(68, 88, 112);
+            zaloChat_selectStatus.ForeColor = Color.DimGray;
             zaloChat_selectStatus.IntegralHeight = false;
             zaloChat_selectStatus.ItemHeight = 30;
             zaloChat_selectStatus.Items.AddRange(new object[] { "Đăng ký chuyển hoàn", "Giao lại hàng", "Quét phát hàng" });
@@ -1900,6 +1907,7 @@ namespace AutoJMS
             guna2GradientPanel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)zaloChat_DataView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)reminderBindingSource).EndInit();
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
             guna2Panel2.ResumeLayout(false);
@@ -1961,6 +1969,7 @@ namespace AutoJMS
             tableLayoutPanel1.ResumeLayout(false);
             pnl_Webview.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)Main_Webview).EndInit();
+            ((System.ComponentModel.ISupportInitialize)reminderBindingSource1).EndInit();
             ResumeLayout(false);
         }
 
@@ -2107,5 +2116,13 @@ namespace AutoJMS
         private Label zaloChat_lbl_kienVanDe;
         private Panel panel1;
         private Guna.UI2.WinForms.Guna2DataGridView zaloChat_DataView;
+        private BindingSource reminderBindingSource;
+        private DataGridViewTextBoxColumn rowDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn maDonDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn nhanVienDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn trangThaiDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn soLanNhacDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn thoiGianNhacDataGridViewTextBoxColumn;
+        private BindingSource reminderBindingSource1;
     }
 }
