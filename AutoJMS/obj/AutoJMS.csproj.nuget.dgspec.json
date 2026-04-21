@@ -1,0 +1,102 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Cshap\\Final\\AutoJMS\\AutoJMS\\AutoJMS.csproj": {}
+  },
+  "projects": {
+    "D:\\Cshap\\Final\\AutoJMS\\AutoJMS\\AutoJMS.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Cshap\\Final\\AutoJMS\\AutoJMS\\AutoJMS.csproj",
+        "projectName": "AutoJMS",
+        "projectPath": "D:\\Cshap\\Final\\AutoJMS\\AutoJMS\\AutoJMS.csproj",
+        "packagesPath": "C:\\Users\\DAT\\.nuget\\packages\\",
+        "outputPath": "D:\\Cshap\\Final\\AutoJMS\\AutoJMS\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\DAT\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows": {
+            "framework": "net8.0-windows7.0",
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.200"
+      },
+      "frameworks": {
+        "net8.0-windows": {
+          "framework": "net8.0-windows7.0",
+          "targetAlias": "net8.0-windows",
+          "dependencies": {
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.105.0, )"
+            },
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.73.0, )"
+            },
+            "Google.Apis.Sheets.v4": {
+              "target": "Package",
+              "version": "[1.73.0.4061, )"
+            },
+            "Microsoft.Web.WebView2": {
+              "target": "Package",
+              "version": "[1.0.3912.50, )"
+            },
+            "SunnyUI": {
+              "target": "Package",
+              "version": "[3.9.5, )"
+            },
+            "SunnyUI.Common": {
+              "target": "Package",
+              "version": "[3.9.5, )"
+            },
+            "System.Management": {
+              "target": "Package",
+              "version": "[10.0.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

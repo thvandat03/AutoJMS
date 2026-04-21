@@ -1,0 +1,11 @@
+{
+  "ZoomFactor": 1,
+  "DefaultUrl": "https://jms.jtexpress.vn",
+  "LastAuthToken": "",
+  "DownloadFolder": "",
+  "DefaultSheet": "DKCH",
+  "UseSheetByDefault": false,
+  "AutoRefreshToken": true,
+  "LastMode": "DKCH1",
+  "DefaultRowCount": 1
+}
