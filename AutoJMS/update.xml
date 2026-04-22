@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <item>
-    <version>1.0.2604.3</version> <url>https://github.com/thvandat03/AutoJMS/releases/download/v1.1/update_v1.rar</url>
-    <changelog>https://raw.githubusercontent.com/thvandat03/AutoJMS/refs/heads/master/AutoJMS/changelog.txt</changelog>
-    <mandatory>false</mandatory>
+  <version>1.0.2604.4</version>
+  <url>https://github.com/thvandat03/AutoJMS/releases/download/v1.0.2604.4/AutoJMS-1.0.2604.4.zip</url>
+  <changelog>https://raw.githubusercontent.com/thvandat03/AutoJMS/master/AutoJMS/changelog.txt</changelog>
+  <mandatory>false</mandatory>
 </item>
