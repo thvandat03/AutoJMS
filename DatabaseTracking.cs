@@ -4,75 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace AutoJMS
 {
-    // =====================================================================
-    // CÁC CLASS MODEL HỨNG DỮ LIỆU JSON TỪ API JMS
-    // Vẫn giữ lại thẻ Obfuscation để .NET Reactor biết đường bỏ qua, 
-    // tránh lỗi mã hóa làm hỏng cấu trúc JSON.
-    // =====================================================================
-
-    [System.Reflection.Obfuscation(Exclude = true, ApplyToMembers = true)]
-    public class WaybillHistoryResponse
-    {
-        [JsonPropertyName("succ")]
-        public bool succ { get; set; }
-
-        [JsonPropertyName("msg")]
-        public string? msg { get; set; }
-
-        [JsonPropertyName("data")]
-        public List<WaybillHistoryItem> data { get; set; } = new();
-    }
-
-    [System.Reflection.Obfuscation(Exclude = true, ApplyToMembers = true)]
-    public class WaybillHistoryItem
-    {
-        [JsonPropertyName("keyword")]
-        public string? keyword { get; set; }
-
-        [JsonPropertyName("billCode")]
-        public string? billCode { get; set; }
-
-        [JsonPropertyName("billcode")]
-        public string? billcode { get; set; }
-
-        [JsonPropertyName("details")]
-        public List<WaybillDetail> details { get; set; } = new();
-    }
-
-    [System.Reflection.Obfuscation(Exclude = true, ApplyToMembers = true)]
-    public class WaybillDetail
-    {
-        [JsonPropertyName("time")]
-        public string? time { get; set; }
-
-        [JsonPropertyName("action")]
-        public string? action { get; set; }
-
-        [JsonPropertyName("siteCode")]
-        public string? siteCode { get; set; }
-
-        [JsonPropertyName("siteName")]
-        public string? siteName { get; set; }
-
-        [JsonPropertyName("operatorName")]
-        public string? operatorName { get; set; }
-
-        [JsonPropertyName("remark")]
-        public string? remark { get; set; }
-
-        [JsonPropertyName("desc")]
-        public string? desc { get; set; }
-    }
-
-    // =====================================================================
-    // CÔNG NHÂN CHẠY NGẦM: TRACKING HÀNH TRÌNH TỪ JMS
-    // =====================================================================
 
     public static class DatabaseTracking
     {
@@ -214,6 +150,7 @@ namespace AutoJMS
 
             var json = await res.Content.ReadAsStringAsync(ct);
 
+            // Tận dụng Model từ TrackingService
             var result = JsonSerializer.Deserialize<WaybillHistoryResponse>(
                 json,
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
@@ -222,7 +159,7 @@ namespace AutoJMS
 
             foreach (var item in result.data)
             {
-                var wb = item.keyword ?? item.billCode ?? item.billcode ?? string.Empty;
+                var wb = item.keyword ?? item.billCode ?? string.Empty;
                 
                 if (string.IsNullOrWhiteSpace(wb)) continue;
 
@@ -238,8 +175,7 @@ namespace AutoJMS
             Dictionary<string, WaybillDbModel> dict,
             CancellationToken ct)
         {
-            // Placeholder: Bạn có thể implement logic lấy chi tiết đơn (người gửi, người nhận) ở đây
-            // Hoặc bỏ qua nếu đã lấy đủ thông tin từ hành trình.
+            // Placeholder nếu sau này bạn muốn tra cứu thêm thông tin chi tiết (người gửi/nhận)
             await Task.CompletedTask;
         }
 
@@ -256,6 +192,7 @@ namespace AutoJMS
             // Lấy dòng hành trình mới nhất (nằm ở cuối list)
             var last = details.Last();
 
+            // Ánh xạ linh hoạt theo cấu trúc JSON của API
             row.ThaoTacCuoi = last.action ?? last.desc ?? last.remark ?? row.ThaoTacCuoi;
             
             // Tìm trạng thái "Kiện vấn đề"
