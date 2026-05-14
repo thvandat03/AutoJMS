@@ -1,0 +1,16 @@
+{
+  "ZoomFactor": 1,
+  "DefaultUrl": "https://jms.jtexpress.vn",
+  "LastAuthToken": "",
+  "DownloadFolder": "",
+  "DefaultSheet": "DKCH",
+  "UseSheetByDefault": false,
+  "AutoRefreshToken": true,
+  "LastMode": "DKCH1",
+  "DefaultRowCount": 1,
+  "PrinterName": "",
+  "paperWidth": 762,
+  "paperHeight": 762,
+  "KeepRecentPdfCount": 10,
+  "PrintLogRetentionDays": 1
+}
