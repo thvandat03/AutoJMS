@@ -1,4 +1,4 @@
-﻿using AutoJMS.Data;
+using AutoJMS.Data;
 using ClosedXML.Excel;
 using Sunny.UI;
 using System;
@@ -23,19 +23,28 @@ namespace AutoJMS
         private readonly BindingSource _bindingSource = new BindingSource();
         private readonly string _exportFolder;
         private readonly HttpClient _httpClient;
-        private readonly SemaphoreSlim _semaphore;
 
         private readonly UIProcessBar _progressBar;
         private int _totalItems;
         private int _completedItems;
+        private int _lastPercent = -1;
 
         private readonly List<TrackingRow> _allRows = new List<TrackingRow>();
         private readonly Dictionary<string, TrackingRow> _rowDict = new Dictionary<string, TrackingRow>(StringComparer.OrdinalIgnoreCase);
+        
+        // 1. CHỐNG RACE CONDITION (BẢO VỆ GHI DỮ LIỆU)
+        private readonly object _rowLock = new object();
+        
+        // 2. CHỐNG LAG UI (CHỈ RESIZE GRID 1 LẦN)
+        private bool _columnsResized = false;
+
         private string _currentSortColumn = string.Empty;
         private ListSortDirection _currentSortDirection = ListSortDirection.Ascending;
 
-        private const int BatchSize = 40;
-        private const int MaxConcurrency = 8;
+        // 3. CHUẨN HÓA BATCHING & CONCURRENCY
+        private const int BatchSize = 25;
+        private const int MaxConcurrency = 4;
+        private const int MaxRetry = 3;
 
         public WaybillTrackingService(DataGridView dataGrid, UIProcessBar progressBar = null)
         {
@@ -47,13 +56,23 @@ namespace AutoJMS
 
             _displayTable = CreateDataTable();
 
-            _httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(60) };
-            _semaphore = new SemaphoreSlim(MaxConcurrency, MaxConcurrency);
+            // 4. TĂNG TỐC HTTP MẠNH MẼ VỚI SOCKETS HTTP HANDLER
+            var handler = new SocketsHttpHandler
+            {
+                PooledConnectionLifetime = TimeSpan.FromMinutes(10),
+                PooledConnectionIdleTimeout = TimeSpan.FromMinutes(5),
+                MaxConnectionsPerServer = 50,
+                EnableMultipleHttp2Connections = true
+            };
+
+            _httpClient = new HttpClient(handler)
+            {
+                Timeout = TimeSpan.FromSeconds(30)
+            };
 
             SetupDataGridViewBinding();
             InitProgressControls();
 
-            // Gán DataSource một lần duy nhất
             _bindingSource.DataSource = _displayTable;
             _dataGrid.DataSource = _bindingSource;
         }
@@ -66,12 +85,14 @@ namespace AutoJMS
             _dataGrid.AllowUserToAddRows = false;
             _dataGrid.AllowUserToDeleteRows = false;
             _dataGrid.ReadOnly = true;
-            _dataGrid.AllowUserToDeleteRows = false;
             _dataGrid.AllowUserToResizeRows = false;
             _dataGrid.RowHeadersVisible = false;
             _dataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             _dataGrid.MultiSelect = false;
-            _dataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            
+            // Xóa tự động Resize theo từng Cell (Rất nặng)
+            _dataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None; 
+            
             _dataGrid.ColumnHeaderMouseClick += DataGrid_ColumnHeaderMouseClick;
             _dataGrid.Columns.Clear();
             _dataGrid.Columns.AddRange(new DataGridViewColumn[]
@@ -110,14 +131,17 @@ namespace AutoJMS
                 return;
             }
 
-            // Đồng bộ DataTable từ danh sách _allRows
             SyncDisplayTableFromAllRows();
 
-            // Áp dụng lại sắp xếp hiện tại nếu có
             if (!string.IsNullOrEmpty(_currentSortColumn))
                 ApplyCurrentSort();
 
-            _dataGrid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            if (!_columnsResized)
+            {
+                _columnsResized = true;
+                _dataGrid.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
+            }
+
             UpdateColumnSortGlyphs();
         }
 
@@ -169,6 +193,7 @@ namespace AutoJMS
         {
             _totalItems = total;
             _completedItems = 0;
+            _lastPercent = -1;
             UpdateProgress(0);
         }
 
@@ -176,7 +201,12 @@ namespace AutoJMS
         {
             int current = Interlocked.Add(ref _completedItems, increment);
             int percent = _totalItems > 0 ? (current * 100 / _totalItems) : 0;
-            UpdateProgress(percent);
+            
+            if (percent != _lastPercent)
+            {
+                _lastPercent = percent;
+                UpdateProgress(percent);
+            }
         }
 
         private void UpdateProgress(int percent)
@@ -247,6 +277,9 @@ namespace AutoJMS
         {
             if (string.IsNullOrEmpty(Main.CapturedAuthToken)) return;
 
+            // 5. YIELD NGAY TỪ ĐẦU ĐỂ KHÔNG BLOCK UI KHI BỊ MINIMIZE
+            await Task.Yield();
+
             var waybillList = ExtractWaybills(waybillsText);
             if (waybillList.Count == 0)
             {
@@ -258,29 +291,26 @@ namespace AutoJMS
 
             _allRows.Clear();
             _rowDict.Clear();
+            _columnsResized = false; // Đặt lại cờ resize khi bắt đầu tra cứu mới
 
             var codesToQuery = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            var mapping001 = new Dictionary<string, string>();
+            var mapping001 = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
             foreach (var wb in waybillList)
             {
                 string code = wb.Trim().ToUpper();
                 codesToQuery.Add(code);
 
-                // 1. KHỞI TẠO DỮ LIỆU HIỂN THỊ (UI)
                 var row = new TrackingRow { WaybillNo = code };
-                _allRows.Add(row);    // Cho hiện lên Grid
-                _rowDict[code] = row; // Để hứng data API
+                _allRows.Add(row);
+                _rowDict[code] = row;
 
-                // 2. XỬ LÝ MÃ CÓ ĐUÔI (Bao quát mọi đuôi chứa dấu trừ, không chỉ -001)
                 if (code.Contains("-"))
                 {
-                    string original = code.Split('-')[0]; // Lấy mã gốc
-                    codesToQuery.Add(original);           // Ép API tra cứu thêm mã gốc
-                    mapping001[code] = original;          // Lưu lại để lát nữa copy data
+                    string original = code.Split('-')[0];
+                    codesToQuery.Add(original);
+                    mapping001[code] = original;
 
-                    // BÍ QUYẾT TÀNG HÌNH: Khởi tạo hàng ẩn để hứng data cho mã gốc
-                    // Khác biệt: CÓ đưa vào _rowDict, NHƯNG KHÔNG đưa vào _allRows
                     if (!_rowDict.ContainsKey(original))
                     {
                         _rowDict[original] = new TrackingRow { WaybillNo = original };
@@ -288,16 +318,23 @@ namespace AutoJMS
                 }
             }
 
-            if (updateMainGrid)
-            {
-                _displayTable.Rows.Clear();
-            }
+            if (updateMainGrid) _displayTable.Rows.Clear();
 
-            // Gửi tra cứu API song song (Tốc độ bàn thờ)
+            // Gọi API song song
             await ProcessTrackingBatchesAsync(codesToQuery.ToList());
             await ProcessOrderDetailBatchesAsync(codesToQuery.ToList());
 
-            // 3. COPY DỮ LIỆU TỪ MÃ TÀNG HÌNH SANG MÃ HIỂN THỊ
+            // 6. VERIFY: QUÉT LẠI CÁC ĐƠN BỊ TRẮNG DATA (RẤT QUAN TRỌNG)
+            var missing = _allRows.Where(x => string.IsNullOrWhiteSpace(x.TrangThaiHienTai))
+                                  .Select(x => x.WaybillNo)
+                                  .ToList();
+            if (missing.Count > 0)
+            {
+                await ProcessTrackingBatchesAsync(missing);
+                await ProcessOrderDetailBatchesAsync(missing);
+            }
+
+            // Đồng bộ dữ liệu mã gốc sang mã hậu tố
             foreach (var kvp in mapping001)
             {
                 string codeWithDash = kvp.Key;
@@ -305,12 +342,12 @@ namespace AutoJMS
 
                 if (_rowDict.TryGetValue(originalCode, out var srcRow) && _rowDict.TryGetValue(codeWithDash, out var destRow))
                 {
-                    
+                    lock (_rowLock)
+                    {
                         destRow.NhanVienNhanHang = srcRow.NhanVienNhanHang ?? "";
-                    
-
-                    if (string.IsNullOrEmpty(destRow.TenNguoiGui)) destRow.TenNguoiGui = srcRow.TenNguoiGui ?? "";
-                    if (string.IsNullOrEmpty(destRow.DiaChiLayHang)) destRow.DiaChiLayHang = srcRow.DiaChiLayHang ?? "";
+                        if (string.IsNullOrEmpty(destRow.TenNguoiGui)) destRow.TenNguoiGui = srcRow.TenNguoiGui ?? "";
+                        if (string.IsNullOrEmpty(destRow.DiaChiLayHang)) destRow.DiaChiLayHang = srcRow.DiaChiLayHang ?? "";
+                    }
                 }
             }
 
@@ -333,19 +370,38 @@ namespace AutoJMS
 
         private async Task ProcessTrackingBatchesAsync(List<string> waybills)
         {
-            var batches = waybills.Chunk(BatchSize).ToList();
+            var batches = waybills.Distinct(StringComparer.OrdinalIgnoreCase).Chunk(BatchSize).ToList();
+
+            // ĐÃ XÓA TOÀN BỘ SEMAPHORE
             await Parallel.ForEachAsync(batches, new ParallelOptions { MaxDegreeOfParallelism = MaxConcurrency }, async (batch, ct) =>
             {
-                await _semaphore.WaitAsync(ct);
-                try { await CallTrackingBatchAsync(batch); ReportProgress(batch.Length); }
-                finally { _semaphore.Release(); }
+                await CallTrackingBatchWithRetryAsync(batch.ToList(), ct);
+                ReportProgress(batch.Length);
             });
+        }
+
+        private async Task CallTrackingBatchWithRetryAsync(List<string> batch, CancellationToken ct)
+        {
+            for (int retry = 1; retry <= MaxRetry; retry++)
+            {
+                try
+                {
+                    await CallTrackingBatchAsync(batch);
+                    return;
+                }
+                catch
+                {
+                    if (retry >= MaxRetry) return;
+                    await Task.Delay(1000 * retry, ct);
+                }
+            }
         }
 
         private async Task CallTrackingBatchAsync(IEnumerable<string> batch)
         {
             var url = AppConfig.Current.BuildJmsApiUrl("operatingplatform/podTracking/inner/query/keywordList");
             var payload = new { keywordList = batch, trackingTypeEnum = "WAYBILL", countryId = "1" };
+            
             var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json")
@@ -355,75 +411,76 @@ namespace AutoJMS
             request.Headers.Add("langType", "VN");
             request.Headers.Add("routeName", "trackingExpress");
 
-            try
+            // Cấu hình False để chạy thoát khỏi SyncContext của UI
+            var response = await _httpClient.SendAsync(request).ConfigureAwait(false);
+            
+            if (response.IsSuccessStatusCode)
             {
-                var response = await _httpClient.SendAsync(request);
-                var json = await response.Content.ReadAsStringAsync();
-                if (response.IsSuccessStatusCode)
+                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var result = JsonSerializer.Deserialize<WaybillHistoryResponse>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                
+                if (result?.succ == true && result.data != null)
                 {
-                    var result = JsonSerializer.Deserialize<WaybillHistoryResponse>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                    if (result?.succ == true && result.data != null)
+                    foreach (var item in result.data)
                     {
-                        foreach (var item in result.data)
-                        {
-                            string wb = item.keyword ?? item.billCode ?? "";
-                            if (!string.IsNullOrEmpty(wb)) ProcessTrackingData(wb, item);
-                        }
+                        string wb = item.keyword ?? item.billCode ?? "";
+                        if (!string.IsNullOrEmpty(wb)) ProcessTrackingData(wb, item);
                     }
                 }
             }
-            catch { }
+            else
+            {
+                // Quăng lỗi để kích hoạt vòng lặp Retry ở hàm mẹ
+                throw new Exception("HTTP Lỗi");
+            }
         }
 
         private void ProcessTrackingData(string waybill, WaybillData wd)
         {
-            if (string.IsNullOrEmpty(waybill) || !_rowDict.TryGetValue(waybill, out var row)) return;
-            var details = wd.details ?? new List<WaybillDetail>();
-            if (details.Count == 0) return;
+            if (string.IsNullOrEmpty(waybill)) return;
 
-            row.DauChuyenHoan = details.Any(d => d.status == "已审核") ? "Có" : "Không";
-
-            var staffNameFisrt = details
-                .Where(d => (d.scanTypeName?.Contains("Nhận hàng") == true || d.scanTypeName?.Contains("Lấy hàng") == true || d.status == "已揽件") &&
-                            (!string.IsNullOrEmpty(d.staffName) || !string.IsNullOrEmpty(d.scanByName)))
-                .OrderBy(d => DateTime.TryParse(!string.IsNullOrEmpty(d.uploadTime) ? d.uploadTime : (d.scanTime ?? "9999-12-31"), out DateTime dt) ? dt : DateTime.MaxValue)
-                .FirstOrDefault();
-            if (staffNameFisrt != null) row.NhanVienNhanHang = staffNameFisrt.staffName ?? staffNameFisrt.scanByName ?? "";
-
-            var giaoLaiGanNhat = details.Where(d => d.scanTypeName != null && d.scanTypeName.Contains("Giao lại hàng"))
-                .OrderByDescending(d => DateTime.TryParse(d.uploadTime ?? d.scanTime ?? "", out DateTime dt) ? dt : DateTime.MinValue).FirstOrDefault();
-            row.ThoiGianYeuCauPhatLai = giaoLaiGanNhat?.remark2 ?? "";
-
-            var vanDe = details.Where(d => d.scanTypeName?.Contains("vấn đề") == true || d.scanTypeName?.Contains("Kiện vấn đề") == true)
-                .OrderByDescending(d => DateTime.TryParse(d.uploadTime ?? d.scanTime ?? "", out DateTime dt) ? dt : DateTime.MinValue).FirstOrDefault();
-            if (vanDe != null)
+            lock (_rowLock)
             {
-                row.NhanVienKienVanDe = vanDe.scanByName ?? "";
-                row.NguyenNhanKienVanDe = vanDe.remark1 ?? "";
-            }
+                if (!_rowDict.TryGetValue(waybill, out var row)) return;
 
-            WaybillDetail latest = null;
-            DateTime maxTime = DateTime.MinValue;
-            foreach (var d in details)
-            {
-                string type = d.scanTypeName ?? "";
-                if (type == "Kiểm tra hàng tồn kho" || type.Contains("Lịch sử cuộc gọi") || type.Contains("cuộc gọi-phát")) continue;
-                string timeStr = d.uploadTime ?? d.scanTime;
-                if (string.IsNullOrEmpty(timeStr)) continue;
-                if (DateTime.TryParse(timeStr, out DateTime dt) && dt > maxTime)
+                var details = wd.details ?? new List<WaybillDetail>();
+                if (details.Count == 0) return;
+
+                row.DauChuyenHoan = details.Any(d => d.status == "已审核") ? "Có" : "Không";
+
+                var staffNameFisrt = details
+                    .Where(d => (d.scanTypeName?.Contains("Nhận hàng") == true || d.scanTypeName?.Contains("Lấy hàng") == true || d.status == "已揽件") &&
+                                (!string.IsNullOrEmpty(d.staffName) || !string.IsNullOrEmpty(d.scanByName)))
+                    .OrderBy(d => DateTime.TryParse(!string.IsNullOrEmpty(d.uploadTime) ? d.uploadTime : (d.scanTime ?? "9999-12-31"), out DateTime dt) ? dt : DateTime.MaxValue)
+                    .FirstOrDefault();
+                if (staffNameFisrt != null) row.NhanVienNhanHang = staffNameFisrt.staffName ?? staffNameFisrt.scanByName ?? "";
+
+                var giaoLaiGanNhat = details.Where(d => d.scanTypeName != null && d.scanTypeName.Contains("Giao lại hàng"))
+                    .OrderByDescending(d => DateTime.TryParse(d.uploadTime ?? d.scanTime ?? "", out DateTime dt) ? dt : DateTime.MinValue).FirstOrDefault();
+                row.ThoiGianYeuCauPhatLai = giaoLaiGanNhat?.remark2 ?? "";
+
+                var vanDe = details.Where(d => d.scanTypeName?.Contains("vấn đề") == true || d.scanTypeName?.Contains("Kiện vấn đề") == true)
+                    .OrderByDescending(d => DateTime.TryParse(d.uploadTime ?? d.scanTime ?? "", out DateTime dt) ? dt : DateTime.MinValue).FirstOrDefault();
+                if (vanDe != null)
                 {
-                    maxTime = dt;
-                    latest = d;
+                    row.NhanVienKienVanDe = vanDe.scanByName ?? "";
+                    row.NguyenNhanKienVanDe = vanDe.remark1 ?? "";
                 }
-            }
-            latest ??= details.LastOrDefault();
-            if (latest != null)
-            {
-                row.TrangThaiHienTai = latest.waybillTrackingContent ?? "";
-                row.ThaoTacCuoi = latest.scanTypeName ?? "";
-                row.ThoiGianThaoTac = latest.uploadTime ?? latest.scanTime ?? "";
-                row.BuuCucThaoTac = latest.scanNetworkName ?? "";
-                row.NguoiThaoTac = latest.scanByName ?? "";
+
+                var latest = details.OrderByDescending(d =>
+                {
+                    DateTime.TryParse(d.uploadTime ?? d.scanTime, out var dt);
+                    return dt;
+                }).FirstOrDefault();
+
+                if (latest != null)
+                {
+                    row.TrangThaiHienTai = latest.waybillTrackingContent ?? "";
+                    row.ThaoTacCuoi = latest.scanTypeName ?? "";
+                    row.ThoiGianThaoTac = latest.uploadTime ?? latest.scanTime ?? "";
+                    row.BuuCucThaoTac = latest.scanNetworkName ?? "";
+                    row.NguoiThaoTac = latest.scanByName ?? "";
+                }
             }
         }
 
@@ -431,10 +488,26 @@ namespace AutoJMS
         {
             await Parallel.ForEachAsync(waybills, new ParallelOptions { MaxDegreeOfParallelism = MaxConcurrency }, async (waybill, ct) =>
             {
-                await _semaphore.WaitAsync(ct);
-                try { await CallOrderDetailAsync(waybill); ReportProgress(1); }
-                finally { _semaphore.Release(); }
+                await CallOrderDetailWithRetryAsync(waybill, ct);
+                ReportProgress(1);
             });
+        }
+
+        private async Task CallOrderDetailWithRetryAsync(string waybill, CancellationToken ct)
+        {
+            for (int retry = 1; retry <= MaxRetry; retry++)
+            {
+                try
+                {
+                    await CallOrderDetailAsync(waybill);
+                    return;
+                }
+                catch
+                {
+                    if (retry >= MaxRetry) return;
+                    await Task.Delay(1000 * retry, ct);
+                }
+            }
         }
 
         private async Task CallOrderDetailAsync(string waybill)
@@ -450,41 +523,50 @@ namespace AutoJMS
             request.Headers.Add("langType", "VN");
             request.Headers.Add("routeName", "trackingExpress");
 
-            try
+            var response = await _httpClient.SendAsync(request).ConfigureAwait(false);
+            
+            if (response.IsSuccessStatusCode)
             {
-                var response = await _httpClient.SendAsync(request);
-                var json = await response.Content.ReadAsStringAsync();
-                if (response.IsSuccessStatusCode)
+                var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var result = JsonSerializer.Deserialize<OrderDetailResponse>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                if (result?.succ == true && result.data?.details != null)
                 {
-                    var result = JsonSerializer.Deserialize<OrderDetailResponse>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                    if (result?.succ == true && result.data?.details != null)
-                        UpdateOrderDetail(waybill, result.data.details);
+                    UpdateOrderDetail(waybill, result.data.details);
                 }
             }
-            catch { }
+            else
+            {
+                throw new Exception("HTTP Lỗi");
+            }
         }
 
         private void UpdateOrderDetail(string waybill, OrderDetailInfo info)
         {
-            if (string.IsNullOrEmpty(waybill) || !_rowDict.TryGetValue(waybill, out var row)) return;
-            if (string.IsNullOrEmpty(row.NhanVienNhanHang)) row.NhanVienNhanHang = info.staffName ?? "";
-            row.DiaChiLayHang = info.senderDetailedAddress ?? "";
-            row.ThoiGianNhanHang = info.pickTime ?? "";
-            row.NoiDungHangHoa = info.goodsName ?? "";
-            row.CODThucTe = info.codMoney ?? "";
-            row.TenNguoiGui = info.customerName ?? "";
-            row.TrongLuong = info.packageChargeWeight?.ToString() ?? "";
-            row.PTTT = info.paymentModeName ?? "";
-            row.DiaChiNhanHang = info.receiverDetailedAddress ?? "";
-            row.Phuong = info.destinationName ?? "";
+            if (string.IsNullOrEmpty(waybill)) return;
 
-            if (!string.IsNullOrEmpty(info.terminalDispatchCode))
+            lock (_rowLock)
             {
-                var parts = info.terminalDispatchCode.Split('-');
-                row.MaDoan1 = parts.Length > 0 ? parts[0] : "";
-                row.MaDoan2 = parts.Length > 1 ? parts[1] : "";
-                row.MaDoan3 = parts.Length > 2 ? parts[2] : "";
-                row.MaDoanFull = info.terminalDispatchCode;
+                if (!_rowDict.TryGetValue(waybill, out var row)) return;
+
+                row.NhanVienNhanHang = string.IsNullOrEmpty(row.NhanVienNhanHang) ? (info.staffName ?? "") : row.NhanVienNhanHang;
+                row.DiaChiLayHang = info.senderDetailedAddress ?? "";
+                row.ThoiGianNhanHang = info.pickTime ?? "";
+                row.NoiDungHangHoa = info.goodsName ?? "";
+                row.CODThucTe = info.codMoney ?? "";
+                row.TenNguoiGui = info.customerName ?? "";
+                row.TrongLuong = info.packageChargeWeight?.ToString() ?? "";
+                row.PTTT = info.paymentModeName ?? "";
+                row.DiaChiNhanHang = info.receiverDetailedAddress ?? "";
+                row.Phuong = info.destinationName ?? "";
+
+                if (!string.IsNullOrEmpty(info.terminalDispatchCode))
+                {
+                    var parts = info.terminalDispatchCode.Split('-');
+                    row.MaDoan1 = parts.Length > 0 ? parts[0] : "";
+                    row.MaDoan2 = parts.Length > 1 ? parts[1] : "";
+                    row.MaDoan3 = parts.Length > 2 ? parts[2] : "";
+                    row.MaDoanFull = info.terminalDispatchCode;
+                }
             }
         }
 
@@ -512,7 +594,6 @@ namespace AutoJMS
                 return;
             }
 
-            // Ánh xạ tên cột DataGridView sang tên cột trong DataTable (đã được đặt tên tiếng Việt)
             string columnName = _currentSortColumn switch
             {
                 "Mã vận đơn" => "Mã vận đơn",
@@ -571,6 +652,7 @@ namespace AutoJMS
             _currentSortDirection = ListSortDirection.Ascending;
             _bindingSource.Sort = string.Empty;
             _bindingSource.ResetBindings(false);
+            _columnsResized = false;
             foreach (DataGridViewColumn col in _dataGrid.Columns)
                 col.HeaderCell.SortGlyphDirection = SortOrder.None;
             if (_progressBar != null) _progressBar.Visible = false;
@@ -588,7 +670,7 @@ namespace AutoJMS
             using var sfd = new SaveFileDialog
             {
                 Filter = "Excel Files (*.xlsx)|*.xlsx",
-                FileName = $"Trạng thái vận đơn__{DateTime.Now:HH-mm-ss  dd/MM/yyyy}.xlsx",
+                FileName = $"Trạng thái vận đơn__{DateTime.Now:HH-mm-ss  dd-MM-yyyy}.xlsx",
                 InitialDirectory = _exportFolder
             };
 
@@ -602,8 +684,6 @@ namespace AutoJMS
 
                 var table = ws.Cell(1, 1).InsertTable(exportTable, "TrackingTable", true);
 
-
-                // === FORMAT HEADER ===
                 ws.Range(1, 1, table.RowCount() + 1, table.ColumnCount()).Clear(XLClearOptions.AllFormats);
                 var headerRow = table.HeadersRow();
                 headerRow.Style.Fill.BackgroundColor = XLColor.FromTheme(XLThemeColor.Accent1, 0.2);
@@ -641,13 +721,6 @@ namespace AutoJMS
             }
         }
 
-
-        /// <summary>
-        /// 
-        ///
-        //
-
-        ////
         // ====================== EXPORT CHIA CHỨC NĂNG (btn_Export_Spe) ======================
         public void ExportSpecial()
         {
@@ -660,7 +733,7 @@ namespace AutoJMS
             using var sfd = new SaveFileDialog
             {
                 Filter = "Excel Files (*.xlsx)|*.xlsx",
-                FileName = $"Trạng thái vận đơn__{DateTime.Now:HH-mm-ss  dd/MM/yyyy}.xlsx",
+                FileName = $"Trạng thái vận đơn__{DateTime.Now:HH-mm-ss  dd-MM-yyyy}.xlsx",
                 InitialDirectory = _exportFolder
             };
 
@@ -670,7 +743,6 @@ namespace AutoJMS
             {
                 using var wb = new XLWorkbook();
 
-                // ==================== SHEET 1: PHÁT HÀNG ====================
                 var phatHangRows = _allRows.Where(r => r.DauChuyenHoan != "Có").ToList();
                 if (phatHangRows.Any())
                 {
@@ -680,7 +752,6 @@ namespace AutoJMS
                     ApplyHeaderStyle(ws, table);
                 }
 
-                // ==================== SHEET 2: HOÀN PHÁT ====================
                 var hoanPhatRows = _allRows.Where(r => r.DauChuyenHoan == "Có").ToList();
                 if (hoanPhatRows.Any())
                 {
@@ -755,7 +826,6 @@ namespace AutoJMS
 
             ws.Columns().AdjustToContents();
         }
-
 
         public List<TrackingRow> GetAllRows() => _allRows ?? new List<TrackingRow>();
 
@@ -846,7 +916,8 @@ namespace AutoJMS
         }
     }
 
-    // Các class hỗ trợ giữ nguyên
+    // Các class Model giữ nguyên...
+    [System.Reflection.Obfuscation(Exclude = true, ApplyToMembers = true)]
     public class TrackingRow
     {
         public string WaybillNo { get; set; }
@@ -879,12 +950,14 @@ namespace AutoJMS
         public string InHoanScanTime { get; set; }
     }
 
+    [System.Reflection.Obfuscation(Exclude = true, ApplyToMembers = true)]
     public class WaybillHistoryResponse
     {
         public bool succ { get; set; }
         public List<WaybillData> data { get; set; }
     }
 
+    [System.Reflection.Obfuscation(Exclude = true, ApplyToMembers = true)]
     public class WaybillData
     {
         public string keyword { get; set; }
@@ -892,6 +965,7 @@ namespace AutoJMS
         public List<WaybillDetail> details { get; set; }
     }
 
+    [System.Reflection.Obfuscation(Exclude = true, ApplyToMembers = true)]
     public class WaybillDetail
     {
         public string status { get; set; }
@@ -906,17 +980,20 @@ namespace AutoJMS
         public string waybillTrackingContent { get; set; }
     }
 
+    [System.Reflection.Obfuscation(Exclude = true, ApplyToMembers = true)]
     public class OrderDetailResponse
     {
         public bool succ { get; set; }
         public OrderDetailData data { get; set; }
     }
 
+    [System.Reflection.Obfuscation(Exclude = true, ApplyToMembers = true)]
     public class OrderDetailData
     {
         public OrderDetailInfo details { get; set; }
     }
 
+    [System.Reflection.Obfuscation(Exclude = true, ApplyToMembers = true)]
     public class OrderDetailInfo
     {
         public string staffName { get; set; }
