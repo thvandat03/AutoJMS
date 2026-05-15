@@ -20,6 +20,8 @@ namespace AutoJMS
         public string PrinterName { get; set; } = "";
         public int PaperWidth { get; set; } = 762;  
         public int PaperHeight { get; set; } = 762; 
+        
+        public string LicenseKey { get; set; } = ""; 
     }
 
     public static class SettingsManager
@@ -42,8 +44,11 @@ namespace AutoJMS
                 {
                     string protectedJson = File.ReadAllText(ConfigPath);
                     string json = SecureConfigCrypto.UnprotectString(protectedJson, BuildSettingsSecret());
-                    var loaded = JsonSerializer.Deserialize<AppSettings>(json, JsonOptions);
-                    return Normalize(loaded ?? settings);
+                    if (!string.IsNullOrWhiteSpace(json))
+                    {
+                        var loaded = JsonSerializer.Deserialize<AppSettings>(json, JsonOptions);
+                        return Normalize(loaded ?? settings);
+                    }
                 }
                 catch
                 {

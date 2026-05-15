@@ -8,8 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
 	<ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
 	<ApplicationIcon>favicon.ico</ApplicationIcon>
-	<AssemblyVersion>1.2605.1</AssemblyVersion>
-	<FileVersion>1.2605.1</FileVersion>
+	<Version>1.26.05.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -42,7 +41,7 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

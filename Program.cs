@@ -16,6 +16,7 @@ using Microsoft.Win32;
 
 namespace AutoJMS
 {
+    [System.Reflection.Obfuscation(Exclude = true, ApplyToMembers = true)]
     static class Program
     {
         [DllImport("user32.dll")] private static extern bool SetProcessDPIAware();
@@ -34,10 +35,10 @@ namespace AutoJMS
         [STAThread]
         static void Main()
         {
-#if !DEBUG
+
             if (Debugger.IsAttached || IsDebuggerPresent())
                 Environment.Exit(0);
-#endif
+
 
             Application.SetHighDpiMode(HighDpiMode.DpiUnaware);
             Application.EnableVisualStyles();

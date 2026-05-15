@@ -13,7 +13,6 @@ namespace AutoJMS
         public string DataSpreadsheetId { get; set; } = "";
         public string GoogleSheetUrl { get; set; } = "";
         public string LicenseSpreadsheetId { get; set; } = "";
-        public string LicenseSheetName { get; set; } = "LICENSE";
         public string AppsScriptUrl { get; set; } = "";
         public string GoogleServiceAccountJson { get; set; } = "";
         public string GoogleCredentialPath { get; set; } = "service_account.json";
@@ -21,6 +20,8 @@ namespace AutoJMS
         public string JmsApiBaseUrl { get; set; } = "https://jmsgw.jtexpress.vn";
         public string InternetCheckUrl { get; set; } = "http://clients3.google.com/generate_204";
         public string UpdateXmlUrl { get; set; } = "";
+        public string ActionSiteCode { get; set; } = "";
+        public string LicenseKey { get; set; } = "";
 
         public void Normalize()
         {
@@ -30,9 +31,6 @@ namespace AutoJMS
 
             if (string.IsNullOrWhiteSpace(InternetCheckUrl))
                 InternetCheckUrl = "http://clients3.google.com/generate_204";
-
-            if (string.IsNullOrWhiteSpace(LicenseSheetName))
-                LicenseSheetName = "LICENSE";
 
             if (!string.IsNullOrWhiteSpace(GoogleSheetUrl) && string.IsNullOrWhiteSpace(DataSpreadsheetId))
                 DataSpreadsheetId = ExtractSpreadsheetId(GoogleSheetUrl);
@@ -54,7 +52,6 @@ namespace AutoJMS
             DataSpreadsheetId = Pick(source.DataSpreadsheetId, DataSpreadsheetId);
             GoogleSheetUrl = Pick(source.GoogleSheetUrl, GoogleSheetUrl);
             LicenseSpreadsheetId = Pick(source.LicenseSpreadsheetId, LicenseSpreadsheetId);
-            LicenseSheetName = Pick(source.LicenseSheetName, LicenseSheetName);
             AppsScriptUrl = Pick(source.AppsScriptUrl, AppsScriptUrl);
             GoogleServiceAccountJson = Pick(source.GoogleServiceAccountJson, GoogleServiceAccountJson);
             GoogleCredentialPath = Pick(source.GoogleCredentialPath, GoogleCredentialPath);
@@ -62,6 +59,10 @@ namespace AutoJMS
             JmsApiBaseUrl = Pick(source.JmsApiBaseUrl, JmsApiBaseUrl);
             InternetCheckUrl = Pick(source.InternetCheckUrl, InternetCheckUrl);
             UpdateXmlUrl = Pick(source.UpdateXmlUrl, UpdateXmlUrl);
+
+            ActionSiteCode = Pick(source.ActionSiteCode, ActionSiteCode);
+            LicenseKey = Pick(source.LicenseKey, LicenseKey);
+
             Normalize();
         }
 
@@ -102,9 +103,20 @@ namespace AutoJMS
 
             if (File.Exists(SecureConfigPath))
             {
-                string protectedJson = File.ReadAllText(SecureConfigPath);
-                string json = SecureConfigCrypto.UnprotectString(protectedJson, secret);
-                config = JsonSerializer.Deserialize<AppRuntimeConfig>(json, JsonOptions) ?? new AppRuntimeConfig();
+                try
+                {
+                    string protectedJson = File.ReadAllText(SecureConfigPath);
+                    string json = SecureConfigCrypto.UnprotectString(protectedJson, secret);
+                    if (!string.IsNullOrWhiteSpace(json))
+                    {
+                        config = JsonSerializer.Deserialize<AppRuntimeConfig>(json, JsonOptions) ?? new AppRuntimeConfig();
+                    }
+                }
+                catch
+                {
+                    // Nếu giải mã thất bại (VD: đem sang máy khác chạy), tạo mới cấu hình
+                    config = new AppRuntimeConfig();
+                }
             }
 
             ApplyEnvironment(config);
@@ -129,9 +141,13 @@ namespace AutoJMS
             if (string.IsNullOrWhiteSpace(_lastSecret))
                 _lastSecret = ResolveSecret(Environment.MachineName);
 
-            string json = JsonSerializer.Serialize(_current, JsonOptions);
-            string protectedJson = SecureConfigCrypto.ProtectString(json, _lastSecret);
-            File.WriteAllText(SecureConfigPath, protectedJson);
+            try
+            {
+                string json = JsonSerializer.Serialize(_current, JsonOptions);
+                string protectedJson = SecureConfigCrypto.ProtectString(json, _lastSecret);
+                File.WriteAllText(SecureConfigPath, protectedJson);
+            }
+            catch { }
         }
 
         private static string ResolveSecret(string machineKey)
@@ -150,7 +166,6 @@ namespace AutoJMS
             Apply("AUTOJMS_DATA_SPREADSHEET_ID", value => config.DataSpreadsheetId = value);
             Apply("AUTOJMS_GOOGLE_SHEET_URL", value => config.GoogleSheetUrl = value);
             Apply("AUTOJMS_LICENSE_SPREADSHEET_ID", value => config.LicenseSpreadsheetId = value);
-            Apply("AUTOJMS_LICENSE_SHEET_NAME", value => config.LicenseSheetName = value);
             Apply("AUTOJMS_APPS_SCRIPT_URL", value => config.AppsScriptUrl = value);
             Apply("AUTOJMS_GOOGLE_SERVICE_ACCOUNT_JSON", value => config.GoogleServiceAccountJson = value);
             Apply("AUTOJMS_GOOGLE_CREDENTIAL_PATH", value => config.GoogleCredentialPath = value);

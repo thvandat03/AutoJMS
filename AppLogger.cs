@@ -6,14 +6,10 @@ namespace AutoJMS
 {
     public static class AppLogger
     {
-        // Thư mục chứa file log (Nằm cạnh file .exe)
         private static readonly string LogDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs");
-        
-        // Khóa đồng bộ chống đụng độ khi nhiều luồng cùng ghi log một lúc
+
         private static readonly object _lockObj = new object();
-        
-        // Cấu hình số ngày giữ lại log
-        private const int KeepLogsDays = 15; 
+        private const int KeepLogsDays = 30;
 
         static AppLogger()
         {
@@ -29,13 +25,13 @@ namespace AutoJMS
 
         public static void Info(string message) => WriteLog("INFO", message);
         public static void Warning(string message) => WriteLog("WARN", message);
-        
+
         public static void Error(string message, Exception ex = null)
         {
             string fullMessage = message;
             if (ex != null)
                 fullMessage += $"\nException: {ex.Message}\nStackTrace: {ex.StackTrace}";
-                
+
             WriteLog("ERROR", fullMessage);
         }
 
@@ -44,7 +40,7 @@ namespace AutoJMS
             string fullMessage = message;
             if (ex != null)
                 fullMessage += $"\nException: {ex.Message}\nStackTrace: {ex.StackTrace}";
-                
+
             WriteLog("FATAL", fullMessage);
         }
 
@@ -52,9 +48,9 @@ namespace AutoJMS
         {
             try
             {
-                // File log tự động cắt theo ngày (VD: AppLog_20260508.txt)
-                string logFile = Path.Combine(LogDirectory, $"AppLog_{DateTime.Now:yyyyMMdd}.txt");
-                
+                // Đã đổi định dạng file thành debug_[Ngày].log để mỗi ngày có 1 file riêng
+                string logFile = Path.Combine(LogDirectory, $"debug_{DateTime.Now:yyyyMMdd}.log");
+
                 // Cấu trúc chuẩn 1 dòng log
                 string logEntry = $"[{DateTime.Now:HH:mm:ss.fff}] [{level}] {message}{Environment.NewLine}";
 
@@ -65,18 +61,18 @@ namespace AutoJMS
             }
             catch
             {
-                // Nguyên tắc tối thượng của Logger: Bản thân bộ ghi log lỗi thì không được làm sập App
+      
             }
         }
 
         private static void CleanupOldLogs()
         {
-            // Chạy dọn rác ở luồng ngầm, không làm chậm quá trình khởi động
             Task.Run(() =>
             {
                 try
                 {
-                    var files = new DirectoryInfo(LogDirectory).GetFiles("AppLog_*.txt");
+                    // Lọc theo định dạng tên file debug mới
+                    var files = new DirectoryInfo(LogDirectory).GetFiles("debug_*.log");
                     DateTime cutoff = DateTime.Now.Date.AddDays(-KeepLogsDays);
 
                     foreach (var file in files)

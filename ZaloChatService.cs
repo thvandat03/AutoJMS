@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
-using System.Text.Json.Serialization; 
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -23,10 +23,7 @@ namespace AutoJMS
             _webView = webView;
             _appsScriptUrl = appsScriptUrl;
             _httpClient = new HttpClient();
-
             _timer = new System.Windows.Forms.Timer();
-            // Timer này có thể dùng để gọi API Bot tương lai
-            // Hiện tại Main.cs đang chịu trách nhiệm lấy Data
         }
 
         public void StartAutoReminder(int intervalMinutes = 5)
@@ -39,6 +36,29 @@ namespace AutoJMS
         public void StopAutoReminder()
         {
             _timer.Stop();
+        }
+
+        // =========================================================================
+        // ĐÂY LÀ HÀM BỊ THIẾU ĐÃ ĐƯỢC BỔ SUNG LẠI
+        // Dùng để lấy danh sách mã vận đơn từ Google Sheet "PHATLAI!A2:A"
+        // =========================================================================
+        public static async Task<List<string>> GetWaybillsFromPhatLaiAsync()
+        {
+            try
+            {
+                var data = await GoogleSheetService.ReadRangeAsync(GoogleSheetService.DATA_SPREADSHEET_ID, "PHATLAI!A2:A");
+                if (data == null) return new List<string>();
+
+                return data.SelectMany(row => row)
+                           .Select(cell => cell?.ToString()?.Trim())
+                           .Where(s => !string.IsNullOrEmpty(s))
+                           .Distinct(StringComparer.OrdinalIgnoreCase)
+                           .ToList();
+            }
+            catch
+            {
+                return new List<string>();
+            }
         }
 
         public async Task<bool> SendZaloMessage(string message)
@@ -136,6 +156,7 @@ namespace AutoJMS
         }
     }
 
+    [System.Reflection.Obfuscation(Exclude = true, ApplyToMembers = true)]
     public class Reminder
     {
         [JsonPropertyName("row")] public int row { get; set; }

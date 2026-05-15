@@ -32,16 +32,10 @@ namespace AutoJMS
             {
                 if (e.RowIndex >= 0 && _grid.Columns[e.ColumnIndex].Name == "Select")
                 {
-                    // Lấy ô hiện tại
                     var cell = _grid.Rows[e.RowIndex].Cells[e.ColumnIndex];
-
-                    // Lấy trạng thái hiện tại (nếu null thì coi như false)
                     bool isChecked = cell.Value != DBNull.Value && (bool)cell.Value;
-
-                    // Đảo ngược trạng thái và gán lại
                     cell.Value = !isChecked;
 
-                    // Ép Grid chốt dữ liệu xuống DataTable ngay lập tức
                     _grid.EndEdit();
                     UpdateStatsAndVisibility();
                 }
@@ -54,25 +48,50 @@ namespace AutoJMS
             RebuildTable();
         }
 
+        // 1. HÀM MỚI: Xóa sạch trạng thái chọn ngầm của WinForms
+        public void ClearGridSelection()
+        {
+            if (_grid.InvokeRequired)
+            {
+                _grid.Invoke(new Action(ClearGridSelection));
+                return;
+            }
+
+            _grid.ClearSelection();
+            _grid.CurrentCell = null;
+
+            foreach (DataGridViewRow row in _grid.Rows)
+            {
+                row.Selected = false;
+            }
+
+            // Ép bỏ tick toàn bộ checkbox trong DataTable
+            foreach (DataRow row in _displayTable.Rows)
+            {
+                row["Select"] = false;
+            }
+
+            UpdateStatsAndVisibility();
+            _grid.Refresh();
+        }
+
         public void Reset()
         {
             _trackingService.ClearData();
             _currentMode = PrintMode.InHoan;
             _displayTable.Rows.Clear();
             _displayTable.Columns.Clear();
+            ClearGridSelection(); // Gọi thêm Clear
             RebuildTable();
-            UpdateStatsAndVisibility();
         }
-        // CÁI LOA PHÁT THANH: Bắn tín hiệu (Số đã chọn, Tổng số) ra ngoài Form chính
+
         public event Action<int, int> OnPrintStatsChanged;
 
-        // HÀM TỔNG QUẢN: Đếm số lượng, Ẩn/Hiện GridView và phát loa thông báo
         private void UpdateStatsAndVisibility()
         {
             int total = _displayTable.Rows.Count;
             int selected = 0;
 
-            // Đếm số lượng dòng đang được đánh dấu tick
             foreach (DataRow row in _displayTable.Rows)
             {
                 if (row["Select"] != DBNull.Value && (bool)row["Select"])
@@ -81,24 +100,23 @@ namespace AutoJMS
                 }
             }
 
-            // Tự động Tắt/Bật GridView
             if (_grid.InvokeRequired)
                 _grid.Invoke(new Action(() => _grid.Visible = total > 0));
             else
                 _grid.Visible = total > 0;
 
-            // Bắn tín hiệu ra ngoài để Form chính cập nhật 2 cái Label
             OnPrintStatsChanged?.Invoke(selected, total);
         }
+
         private void SetupGrid()
         {
             _grid.AllowUserToAddRows = false;
             _grid.AllowUserToDeleteRows = false;
             _grid.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            _grid.EditMode = DataGridViewEditMode.EditOnEnter; // Quan trọng để click phát ăn ngay
+            _grid.EditMode = DataGridViewEditMode.EditOnEnter;
             _grid.RowHeadersVisible = false;
             _grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            _grid.AutoGenerateColumns = true; // Để DataTable tự sinh cột
+            _grid.AutoGenerateColumns = true;
 
             DisableSorting();
         }
@@ -115,9 +133,9 @@ namespace AutoJMS
                 {
                     col.HeaderText = "Chọn";
                     col.Width = 50;
+                    col.ReadOnly = false; // Đảm bảo cột Select có thể sửa được bằng click
                 }
 
-                // Căn giữa các cột số lượng và mã
                 switch (col.Name)
                 {
                     case "Select":
@@ -149,7 +167,6 @@ namespace AutoJMS
                 _displayTable.Columns.Clear();
                 _displayTable.Rows.Clear();
 
-                // ĐỊNH NGHĨA CỘT SELECT TRONG DATATABLE (ĐÂY LÀ NƠI DUY NHẤT TẠO CHECKBOX)
                 _displayTable.Columns.Add("Select", typeof(bool));
 
                 switch (_currentMode)
@@ -215,7 +232,6 @@ namespace AutoJMS
 
                 foreach (var r in rows)
                 {
-                    // KIỂM TRA TRẠNG THÁI "KÝ NHẬN CPN" VÀ THÊM -001
                     string finalWaybill = r.WaybillNo;
                     bool isKyNhanCPN = (r.TrangThaiHienTai?.Contains("Ký nhận CPN") == true) ||
                                        (r.ThaoTacCuoi?.Contains("Ký nhận CPN") == true);
@@ -225,13 +241,13 @@ namespace AutoJMS
                         finalWaybill += "-001";
                     }
 
-                    // Thay vì dùng r.WaybillNo gốc, ta dùng finalWaybill đã được xử lý
+                    // 2. CHUYỂN TRUE THÀNH FALSE: Ngừng tự động Tick để chống in nhầm
                     object[] rowData = _currentMode switch
                     {
-                        PrintMode.InHoan => new object[] { true, finalWaybill, r.ThaoTacCuoi, r.RebackStatus, r.PrintCount, r.NewTerminalDispatchCode ?? "", string.IsNullOrEmpty(r.InHoanScanTime) ? "" : r.InHoanScanTime, printerName },
-                        PrintMode.InChuyenTiep => new object[] { true, finalWaybill, r.ThaoTacCuoi, 1, "", r.DiaChiNhanHang ?? "", r.MaDoanFull ?? "", now, printerName },
-                        PrintMode.InLaiDon => new object[] { true, finalWaybill, 1, r.NoiDungHangHoa ?? "", r.MaDoanFull ?? "" },
-                        PrintMode.InReverse => new object[] { true, finalWaybill, r.NhanVienNhanHang ?? "", r.DiaChiLayHang ?? "", r.TenNguoiGui ?? "", r.ThoiGianNhanHang ?? "", 1, r.NoiDungHangHoa ?? "", r.MaDoanFull ?? "" },
+                        PrintMode.InHoan => new object[] { false, finalWaybill, r.ThaoTacCuoi, r.RebackStatus, r.PrintCount, r.NewTerminalDispatchCode ?? "", string.IsNullOrEmpty(r.InHoanScanTime) ? "" : r.InHoanScanTime, printerName },
+                        PrintMode.InChuyenTiep => new object[] { false, finalWaybill, r.ThaoTacCuoi, 1, "", r.DiaChiNhanHang ?? "", r.MaDoanFull ?? "", now, printerName },
+                        PrintMode.InLaiDon => new object[] { false, finalWaybill, 1, r.NoiDungHangHoa ?? "", r.MaDoanFull ?? "" },
+                        PrintMode.InReverse => new object[] { false, finalWaybill, r.NhanVienNhanHang ?? "", r.DiaChiLayHang ?? "", r.TenNguoiGui ?? "", r.ThoiGianNhanHang ?? "", 1, r.NoiDungHangHoa ?? "", r.MaDoanFull ?? "" },
                         _ => null
                     };
 
@@ -253,11 +269,22 @@ namespace AutoJMS
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
         }
 
+        // 3. XÓA SẠCH DỮ LIỆU CŨ TRƯỚC KHI TÌM KIẾM
         public async System.Threading.Tasks.Task SearchAndLoadAsync(string waybillsText, PrintMode mode)
         {
             _currentMode = mode;
+
+            // Xóa rỗng Tracking cũ để không bị dính mã cũ
+            _trackingService.ClearData();
+
             await _trackingService.SearchTrackingAsync(waybillsText, updateMainGrid: false);
             RebuildTable();
+
+            // Nếu tìm xong không có kết quả hợp lệ => Clear Selection
+            if (_displayTable.Rows.Count == 0)
+            {
+                ClearGridSelection();
+            }
         }
 
         public void SelectAll(bool isChecked)
@@ -271,19 +298,35 @@ namespace AutoJMS
             UpdateStatsAndVisibility();
         }
 
+        // 4. LỌC NGHIÊM NGẶT CÁC MÃ ĐƠN HỢP LỆ VÀ XÓA RÁC
         public List<string> GetSelectedWaybills()
         {
             _grid.EndEdit();
             var list = new List<string>();
+
             foreach (DataRow row in _displayTable.Rows)
             {
-                if (row["Select"] != DBNull.Value && (bool)row["Select"])
-                {
-                    var wb = row["Mã vận đơn"]?.ToString();
-                    if (!string.IsNullOrEmpty(wb)) list.Add(wb);
-                }
+                bool isChecked = row["Select"] != DBNull.Value && Convert.ToBoolean(row["Select"]);
+                if (!isChecked) continue;
+
+                string wb = row["Mã vận đơn"]?.ToString()?.Trim();
+
+                // Chặn null, rỗng, hoặc quá ngắn
+                if (string.IsNullOrWhiteSpace(wb) || wb.Length < 5) continue;
+
+                // Chỉ nhận A-Z, 0-9 và dấu gạch ngang '-', chặn ký tự rác/đặc biệt
+                bool isValid = wb.All(c => char.IsLetterOrDigit(c) || c == '-');
+                if (!isValid) continue;
+
+                list.Add(wb);
             }
-            return list;
+
+            if (list.Count == 0)
+            {
+                ClearGridSelection();
+            }
+
+            return list.Distinct(StringComparer.OrdinalIgnoreCase).ToList();
         }
 
         public PrintMode CurrentMode => _currentMode;
