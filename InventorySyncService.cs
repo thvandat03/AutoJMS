@@ -17,26 +17,19 @@ namespace AutoJMS
             Timeout = TimeSpan.FromSeconds(60)
         };
 
-        private const int LeaseSeconds = 1800; // 30 phút
+        private const int LeaseSeconds = 1800;
         private const int PageSize = 100;
         private const int MaxRetriesPerPage = 3;
 
-        // Lưu ý: Thay đổi ActionSiteCode này theo mã bưu cục thực tế của bạn
-        private static string GetActionSiteCode()
-        {
-            return "214A02";
-        }
+        private static string GetActionSiteCode() => "214A02";
 
         public static async Task RunInventorySyncAsync(CancellationToken ct = default)
         {
             var now = DateTime.Now;
-            
-            // Chỉ chạy đồng bộ Tồn kho trong khung giờ từ 7h sáng đến 12h trưa
             if (now.Hour < 7 || now.Hour > 12) return;
 
-            AppLogger.Info("[InventorySync] Kiểm tra Lease Lock...");
+            AppLogger.Info("[InventorySync] Kiểm tra lease lock...");
 
-            // 1. Thử xin quyền (Lock) từ Supabase Database
             bool acquired = await SupabaseDbService.TryAcquireInventoryLeaseAsync(LeaseSeconds);
             if (!acquired)
             {
@@ -44,27 +37,34 @@ namespace AutoJMS
                 return;
             }
 
-            AppLogger.Info("[InventorySync] Đã chiếm quyền. Bắt đầu kéo tồn kho JMS.");
+            AppLogger.Info("[InventorySync] Đã chiếm quyền. Bắt đầu kéo tồn kho.");
 
-            // 2. Kích hoạt luồng Heartbeat để liên tục gia hạn Lock khi đang chạy
-            using var heartbeatCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
-            var heartbeatTask = Task.Run(() => LeaseHeartbeatLoopAsync(heartbeatCts.Token), heartbeatCts.Token);
+            using var hardTimeoutCts = CancellationTokenSource.CreateLinkedTokenSource(ct);
+            hardTimeoutCts.CancelAfter(TimeSpan.FromMinutes(30));
+
+            using var leaseLostCts = new CancellationTokenSource();
+            using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(hardTimeoutCts.Token, leaseLostCts.Token);
+            var effectiveCt = linkedCts.Token;
+
+            var heartbeatTask = Task.Run(() => LeaseHeartbeatLoopAsync(leaseLostCts), CancellationToken.None);
 
             bool success = false;
 
             try
             {
-                // 3. Kéo toàn bộ danh sách Tồn kho (Có cơ chế Retry nếu rớt mạng)
-                List<string> inventoryWaybills = await FetchAllInventoryWaybillsWithRetryAsync(ct);
+                var inventoryWaybills = await FetchAllInventoryWaybillsWithRetryAsync(effectiveCt);
 
-                if (inventoryWaybills.Count > 0 && !ct.IsCancellationRequested)
+                if (inventoryWaybills.Count > 0 && !effectiveCt.IsCancellationRequested)
                 {
-                    // 4. Bơm danh sách lên Database (DB sẽ tự động chỉ thêm mã mới bằng ON CONFLICT DO NOTHING)
-                    int inserted = await SupabaseDbService.UpsertNewWaybillsOnlyAsync(inventoryWaybills);
+                    int inserted = await SupabaseDbService.InsertNewWaybillsOnlyAsync(inventoryWaybills);
                     AppLogger.Info($"[InventorySync] Hoàn tất. Lấy {inventoryWaybills.Count} mã, thêm mới {inserted} mã.");
                 }
 
                 success = true;
+            }
+            catch (OperationCanceledException)
+            {
+                AppLogger.Warning("[InventorySync] Sync bị hủy do timeout, stop request hoặc mất lease.");
             }
             catch (Exception ex)
             {
@@ -72,47 +72,40 @@ namespace AutoJMS
             }
             finally
             {
-                // 5. Ngắt luồng Heartbeat
-                heartbeatCts.Cancel();
-                try 
-                { 
-                    await heartbeatTask; 
-                } 
-                catch { }
+                leaseLostCts.Cancel();
 
-                // 6. Trả lại Lock cho hệ thống
+                try { await heartbeatTask; } catch { }
+
                 if (success)
-                {
                     await SupabaseDbService.CompleteInventorySyncAsync();
-                }
                 else
-                {
                     await SupabaseDbService.ReleaseInventoryLeaseAsync();
-                }
             }
         }
 
-        private static async Task LeaseHeartbeatLoopAsync(CancellationToken ct)
+        private static async Task LeaseHeartbeatLoopAsync(CancellationTokenSource leaseLostCts)
         {
             try
             {
-                while (!ct.IsCancellationRequested)
+                while (!leaseLostCts.IsCancellationRequested)
                 {
-                    // Đợi 1 phút rồi gia hạn Lock một lần
-                    await Task.Delay(TimeSpan.FromMinutes(1), ct);
-                    
-                    if (ct.IsCancellationRequested) break;
+                    await Task.Delay(TimeSpan.FromMinutes(1), leaseLostCts.Token);
+                    if (leaseLostCts.IsCancellationRequested) break;
 
-                    await SupabaseDbService.RefreshInventoryLeaseAsync(LeaseSeconds);
+                    bool ok = await SupabaseDbService.RefreshInventoryLeaseAsync(LeaseSeconds);
+                    if (!ok)
+                    {
+                        AppLogger.Error("[InventorySync] Mất lease, dừng worker.");
+                        leaseLostCts.Cancel();
+                        break;
+                    }
                 }
             }
-            catch (OperationCanceledException)
-            {
-                // Bỏ qua lỗi khi bị hủy task
-            }
+            catch (OperationCanceledException) { }
             catch (Exception ex)
             {
-                AppLogger.Warning($"[InventorySync] Heartbeat lỗi: {ex.Message}");
+                AppLogger.Error("[InventorySync] Heartbeat lỗi", ex);
+                leaseLostCts.Cancel();
             }
         }
 
@@ -121,9 +114,7 @@ namespace AutoJMS
             var waybills = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
             if (string.IsNullOrWhiteSpace(Main.CapturedAuthToken))
-            {
                 return waybills.ToList();
-            }
 
             string url = AppConfig.Current.BuildJmsApiUrl("businessindicator/bigdataReport/detail/take_ret_mon_detail_doris2");
             string actionSiteCode = GetActionSiteCode();
@@ -146,14 +137,9 @@ namespace AutoJMS
                     {
                         var payload = new Dictionary<string, object>
                         {
-                            { "current", currentPage },
-                            { "size", PageSize },
-                            { "dimension", "2" },
-                            { "isFlag", "1" },
-                            { "actionSiteCode", actionSiteCode },
-                            { "startDate", startDate },
-                            { "endDate", endDate },
-                            { "countryId", "1" }
+                            { "current", currentPage }, { "size", PageSize }, { "dimension", "2" },
+                            { "isFlag", "1" }, { "actionSiteCode", actionSiteCode },
+                            { "startDate", startDate }, { "endDate", endDate }, { "countryId", "1" }
                         };
 
                         var req = new HttpRequestMessage(HttpMethod.Post, url)
@@ -168,17 +154,13 @@ namespace AutoJMS
                         var json = await res.Content.ReadAsStringAsync(ct);
 
                         if (!res.IsSuccessStatusCode)
-                        {
                             throw new Exception($"HTTP {(int)res.StatusCode}");
-                        }
 
                         using var doc = JsonDocument.Parse(json);
                         var root = doc.RootElement;
 
                         if (!root.TryGetProperty("succ", out var succ) || !succ.GetBoolean())
-                        {
-                            throw new Exception("API JMS trả về succ=false (Có thể do Token hết hạn)");
-                        }
+                            throw new Exception("API trả về succ=false");
 
                         var data = root.GetProperty("data");
                         totalPages = data.GetProperty("pages").GetInt32();
@@ -189,9 +171,7 @@ namespace AutoJMS
                             {
                                 var code = billcodeProp.GetString();
                                 if (!string.IsNullOrWhiteSpace(code))
-                                {
                                     waybills.Add(code.Trim());
-                                }
                             }
                         }
 
@@ -201,21 +181,17 @@ namespace AutoJMS
                     {
                         if (retry >= MaxRetriesPerPage)
                         {
-                            AppLogger.Warning($"[InventorySync] Bỏ qua trang {currentPage} sau {retry} lần thử thất bại: {ex.Message}");
+                            AppLogger.Warning($"[InventorySync] Bỏ qua trang {currentPage} sau {retry} lần lỗi: {ex.Message}");
                             break;
                         }
 
-                        // Exponential backoff: Thời gian chờ tăng dần (2s, 4s, 6s...)
                         var delay = TimeSpan.FromSeconds(Math.Min(10, retry * 2));
-                        AppLogger.Warning($"[InventorySync] Lỗi trang {currentPage}. Thử lại {retry}/{MaxRetriesPerPage} sau {delay.TotalSeconds}s: {ex.Message}");
-                        
+                        AppLogger.Warning($"[InventorySync] Trang {currentPage} lỗi, thử lại {retry}/{MaxRetriesPerPage} sau {delay.TotalSeconds}s: {ex.Message}");
                         await Task.Delay(delay, ct);
                     }
                 }
 
                 currentPage++;
-                
-                // Throttling: Nghỉ 250ms giữa mỗi trang để không bị WAF của JMS block IP
                 await Task.Delay(250, ct);
             }
             while (currentPage <= totalPages && !ct.IsCancellationRequested);
